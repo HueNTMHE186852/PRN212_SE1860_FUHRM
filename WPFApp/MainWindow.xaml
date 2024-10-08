@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="Bisque">
+        <Grid HorizontalAlignment="Left" Width="652" Margin="150,0,0,0"
+              Background="AntiqueWhite"/>
 
     </Grid>
 </Window>
