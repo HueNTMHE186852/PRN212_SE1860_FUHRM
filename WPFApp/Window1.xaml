@@ -1,4 +1,4 @@
-﻿<Window x:Class="YourApp.MainWindow"
+﻿<Window x:Class="WPFApp.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="QLNV" Height="600" Width="1000">
@@ -26,7 +26,7 @@
                 <ListBoxItem Content="Bảng lương" />
                 <ListBoxItem Content="Dự án" />
                 <ListBoxItem Content="Nghỉ phép" />
-                <ListBoxItem Content="Báo cáo thống kê" Background="Magenta" Foreground="White"/>
+                <ListBoxItem Content="Báo cáo thống kê"/>
                 <ListBoxItem Content="Tra cứu thông tin" />
                 <ListBoxItem Content="Hệ thống" />
                 <ListBoxItem Content="Chat" />
@@ -59,7 +59,6 @@
 
             <!-- Main content (can be empty or have a logo) -->
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Source="logo.png" Width="200" />
             </StackPanel>
         </StackPanel>
 
