@@ -68,5 +68,18 @@ namespace DataAccessObjects
 
             }
         }
+
+        public static void UpdateDepartment(Department department)
+        {
+            try
+            {
+                using var db = new FuhrmContext();
+                db.Update(department);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 }
