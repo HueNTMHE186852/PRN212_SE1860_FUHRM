@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using BusinessObject;
 using Microsoft.Extensions.Configuration;
 
-namespace WPFApp.Models;
+namespace DataAccessObjects;
 
 public partial class FuhrmContext : DbContext
 {
