@@ -1,95 +1,104 @@
-﻿--CREATE DATABASE FUHRM;
+﻿CREATE DATABASE FUHRM;
+GO
 
 USE FUHRM;
+GO
 
 CREATE TABLE Roles (
     RoleID INT PRIMARY KEY IDENTITY(1,1),
-    RoleName NVARCHAR(MAX) NOT NULL
+    RoleName NVARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Accounts (
     AccountID INT PRIMARY KEY IDENTITY(1,1),
     Username NVARCHAR(255) NOT NULL UNIQUE,
-    Password NVARCHAR(MAX) NOT NULL,
-    RoleID INT FOREIGN KEY REFERENCES Roles(RoleID)
+    Password NVARCHAR(255) NOT NULL,
+    RoleID INT NOT NULL,
+    FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
 );
 
 CREATE TABLE Departments (
     DepartmentID INT PRIMARY KEY IDENTITY(1,1),
-    DepartmentName NVARCHAR(MAX) NOT NULL
+    DepartmentName NVARCHAR(100) NOT NULL,
+    CreateDate DATETIME DEFAULT GETDATE()
 );
 
--- Tạo bảng Positions
 CREATE TABLE Positions (
     PositionID INT PRIMARY KEY IDENTITY(1,1),
-    PositionName NVARCHAR(MAX) NOT NULL
+    PositionName NVARCHAR(100) NOT NULL
 );
 
--- Cập nhật bảng Employees
 CREATE TABLE Employees (
     EmployeeID INT PRIMARY KEY IDENTITY(1,1),
-    FullName NVARCHAR(MAX) NOT NULL,
+    FullName NVARCHAR(255) NOT NULL,
     DateOfBirth DATE NOT NULL,
-    Gender NVARCHAR(MAX) NOT NULL,
-    Address NVARCHAR(MAX) NOT NULL,
-    PhoneNumber NVARCHAR(MAX) NOT NULL,
-    DepartmentID INT FOREIGN KEY REFERENCES Departments(DepartmentID),
-    PositionID INT FOREIGN KEY REFERENCES Positions(PositionID),
-    AccountID INT FOREIGN KEY REFERENCES Accounts(AccountID),
+    Gender NVARCHAR(50) NOT NULL,
+    Address NVARCHAR(255) NOT NULL,
+    PhoneNumber NVARCHAR(20) NOT NULL,
+    DepartmentID INT NOT NULL,
+    PositionID INT NOT NULL,
+    AccountID INT NOT NULL,
     Salary FLOAT NOT NULL,
     StartDate DATE NOT NULL,
-    ProfilePicture NVARCHAR(MAX)
+    ProfilePicture NVARCHAR(255),
+    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID),
+    FOREIGN KEY (PositionID) REFERENCES Positions(PositionID),
+    FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
 );
 
 CREATE TABLE Salaries (
     SalaryID INT PRIMARY KEY IDENTITY(1,1),
-    EmployeeID INT FOREIGN KEY REFERENCES Employees(EmployeeID),
+    EmployeeID INT NOT NULL,
     BaseSalary FLOAT NOT NULL,
     Allowance FLOAT,
     Bonus FLOAT,
     Penalty FLOAT,
-    TotalIncome AS (BaseSalary + Allowance + Bonus - Penalty),
-    PaymentDate DATE NOT NULL
+    TotalIncome AS (BaseSalary + Allowance + Bonus - Penalty) PERSISTED,
+    PaymentDate DATE NOT NULL,
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
 );
 
 CREATE TABLE Attendances (
     AttendanceID INT PRIMARY KEY IDENTITY(1,1),
-    EmployeeID INT FOREIGN KEY REFERENCES Employees(EmployeeID),
+    EmployeeID INT NOT NULL,
     Date DATE NOT NULL,
-    Status NVARCHAR(MAX) NOT NULL,
-    OvertimeHours INT
+    Status NVARCHAR(50) NOT NULL,
+    OvertimeHours INT,
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
 );
 
 CREATE TABLE Notifications (
     NotificationID INT PRIMARY KEY IDENTITY(1,1),
-    Title NVARCHAR(MAX) NOT NULL,
+    Title NVARCHAR(255) NOT NULL,
     Content NVARCHAR(MAX) NOT NULL,
-    DepartmentID INT FOREIGN KEY REFERENCES Departments(DepartmentID),
-    CreatedDate DATETIME NOT NULL
+    DepartmentID INT NOT NULL,
+    CreatedDate DATETIME NOT NULL,
+    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
 
 CREATE TABLE ActivityLogs (
     ActivityLogID INT PRIMARY KEY IDENTITY(1,1),
-    AccountID INT FOREIGN KEY REFERENCES Accounts(AccountID),
-    Action NVARCHAR(MAX) NOT NULL,
-    Timestamp DATETIME NOT NULL
+    AccountID INT NOT NULL,
+    Action NVARCHAR(255) NOT NULL,
+    Timestamp DATETIME NOT NULL,
+    FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
 );
 
 CREATE TABLE LeaveRequests (
     LeaveRequestID INT PRIMARY KEY IDENTITY(1,1),
-    EmployeeID INT FOREIGN KEY REFERENCES Employees(EmployeeID),
-    LeaveType NVARCHAR(MAX) NOT NULL,
+    EmployeeID INT NOT NULL,
+    LeaveType NVARCHAR(100) NOT NULL,
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL,
-    Status NVARCHAR(MAX) NOT NULL
+    Status NVARCHAR(50) NOT NULL,
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
 );
 
 CREATE TABLE Backups (
     BackupID INT PRIMARY KEY IDENTITY(1,1),
     BackupDate DATETIME NOT NULL,
-    BackupFile NVARCHAR(MAX) NOT NULL
+    BackupFile NVARCHAR(255) NOT NULL
 );
-
 
 -- Chèn dữ liệu vào bảng Roles
 INSERT INTO Roles (RoleName) VALUES ('Admin');
@@ -143,7 +152,7 @@ VALUES (3, '2023-01-01', 'Absent', 0);
 
 -- Chèn dữ liệu vào bảng Notifications
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
-VALUES ('Meeting Reminder', 'Don\''t forget about the meeting tomorrow at 10 AM.', 1, '2023-01-01 09:00:00');
+VALUES ('Meeting Reminder', 'Don''t forget about the meeting tomorrow at 10 AM.', 1, '2023-01-01 09:00:00');
 
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
 VALUES ('Policy Update', 'Please review the updated company policies.', 2, '2023-01-02 10:00:00');

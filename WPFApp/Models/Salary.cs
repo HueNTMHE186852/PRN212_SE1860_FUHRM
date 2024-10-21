@@ -7,7 +7,7 @@ public partial class Salary
 {
     public int SalaryId { get; set; }
 
-    public int? EmployeeId { get; set; }
+    public int EmployeeId { get; set; }
 
     public double BaseSalary { get; set; }
 
@@ -21,5 +21,5 @@ public partial class Salary
 
     public DateOnly PaymentDate { get; set; }
 
-    public virtual Employee? Employee { get; set; }
+    public virtual Employee Employee { get; set; } = null!;
 }

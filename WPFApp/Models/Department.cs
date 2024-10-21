@@ -9,6 +9,8 @@ public partial class Department
 
     public string DepartmentName { get; set; } = null!;
 
+    public DateTime? CreateDate { get; set; }
+
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();

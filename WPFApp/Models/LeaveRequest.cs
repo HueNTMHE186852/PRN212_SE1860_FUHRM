@@ -7,7 +7,7 @@ public partial class LeaveRequest
 {
     public int LeaveRequestId { get; set; }
 
-    public int? EmployeeId { get; set; }
+    public int EmployeeId { get; set; }
 
     public string LeaveType { get; set; } = null!;
 
@@ -17,5 +17,5 @@ public partial class LeaveRequest
 
     public string Status { get; set; } = null!;
 
-    public virtual Employee? Employee { get; set; }
+    public virtual Employee Employee { get; set; } = null!;
 }

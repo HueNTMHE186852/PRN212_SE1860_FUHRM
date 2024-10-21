@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BusinessObject;
+namespace BusinessObjects;
 
 public partial class Account
 {
@@ -11,11 +11,11 @@ public partial class Account
 
     public string Password { get; set; } = null!;
 
-    public int? RoleId { get; set; }
+    public int RoleId { get; set; }
 
     public virtual ICollection<ActivityLog> ActivityLogs { get; set; } = new List<ActivityLog>();
 
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
-    public virtual Role? Role { get; set; }
+    public virtual Role Role { get; set; } = null!;
 }

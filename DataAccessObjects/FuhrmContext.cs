@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using BusinessObject;
+using BusinessObjects;
 using Microsoft.Extensions.Configuration;
 
 namespace DataAccessObjects;

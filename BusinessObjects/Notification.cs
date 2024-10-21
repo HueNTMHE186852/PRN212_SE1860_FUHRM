@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BusinessObject;
+namespace BusinessObjects;
 
 public partial class Notification
 {
@@ -11,9 +11,9 @@ public partial class Notification
 
     public string Content { get; set; } = null!;
 
-    public int? DepartmentId { get; set; }
+    public int DepartmentId { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
-    public virtual Department? Department { get; set; }
+    public virtual Department Department { get; set; } = null!;
 }
