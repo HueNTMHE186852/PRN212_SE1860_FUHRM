@@ -34,5 +34,10 @@ namespace WPFApp
             {
                 using var db = new FuhrmContext();
             }
+            catch (Exception ex)
+            {
+            }
         }
+    }
 }
+
