@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataAccessObjects;
+using Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +17,22 @@ using System.Windows.Shapes;
 namespace WPFApp
 {
     /// <summary>
-    /// Interaction logic for DepartmentWindow.xaml
+    /// Interaction logic for DepartmentManagement.xaml
     /// </summary>
-    public partial class DepartmentWindow : Window
+    public partial class DepartmentManagement : Window
     {
-        public DepartmentWindow()
+        FuhrmContext _context = new FuhrmContext();
+        DepartmentRepository _departmentRepository;
+        public DepartmentManagement()
         {
             InitializeComponent();
         }
-    }
+
+        private void LoadDepartments()
+        {
+            try
+            {
+                using var db = new FuhrmContext();
+            }
+        }
 }

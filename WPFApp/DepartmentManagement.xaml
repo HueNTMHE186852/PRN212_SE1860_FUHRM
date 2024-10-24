@@ -1,17 +1,17 @@
-﻿<Window x:Class="WPFApp.DepartmentWindow"
+﻿<Window x:Class="WPFApp.DepartmentManagement"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="DepartmentWindow" Height="450" Width="800">
+        Title="DepartmentManagement" Height="450" Width="800">
     <Grid>
 
         <Grid.ColumnDefinitions>
-     
+
             <ColumnDefinition Width="200"/>
-   
+
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -43,14 +43,15 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding DepartmentId}" Width="50"/>
-                        <GridViewColumn Header="Tên phòng ban" DisplayMemberBinding="{Binding DepartmentName}" Width="300"/>
-                        <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding CreateDate}" Width="200"/>
+                        <GridViewColumn Header="Tên phòng ban" DisplayMemberBinding="{Binding DepartmentName}" Width="250"/>
+                        <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding CreateDate}" Width="150"/>
+                        <GridViewColumn Header="Chức năng"  Width="100"/>
                     </GridView>
                 </ListView.View>
             </ListView>
 
         </StackPanel>
-        
+
         <StatusBar Grid.ColumnSpan="2" VerticalAlignment="Bottom">
             <StatusBarItem Content="Nhân viên: ADMIN"/>
             <StatusBarItem Content="Quyền hạn: Quản trị hệ thống"/>
