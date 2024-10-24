@@ -49,9 +49,9 @@
                         <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="1.3*"/>
                         <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="1.5*"/>
                         <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}" Width="2.4*"/>
-                        <DataGridTextColumn Header="Department" Binding="{Binding DepartmentName}" Width="2.*"/>
-                        <DataGridTextColumn Header="Position" Binding="{Binding PositionName}" Width="1.5*"/>
-                        <DataGridTextColumn Header="Role" Binding="{Binding RoleName}" Width="*" />
+                        <DataGridTextColumn Header="Department" Binding="{Binding Department.DepartmentName}" Width="2.*"/>
+                        <DataGridTextColumn Header="Position" Binding="{Binding Position.PositionName}" Width="1.5*"/>
+                        <DataGridTextColumn Header="Role" Binding="{Binding Account.Role.RoleName}" Width="*" />
                         <DataGridTextColumn Header="Image" Binding="{Binding ProfilePicture}" Width="1.3*" />
                         <DataGridTextColumn Header="Salary" Binding="{Binding Salary, StringFormat=C}" Width="1.2*"/>
                         <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='dd/MM/yyyy'}" Width="1.9*"/>
@@ -81,12 +81,19 @@
 
                 <TextBlock Text="Phone Number:"/>
                 <TextBox x:Name="PhoneNumberTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+                <TextBlock Text="Department:" />
+                
+                <ComboBox x:Name="DepartmentComboBox" Margin="0,0,0,10" DisplayMemberPath="DepartmentName"
+                  SelectedValuePath="DepartmentID" Background="#F0F0F0"/>
 
-                <TextBlock Text="Department:"/>
-                <TextBox x:Name="DepartmentTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+                <TextBlock Text="Position:" />
+                <ComboBox x:Name="PositionComboBox" Margin="0,0,0,10" DisplayMemberPath="PositionName"
+                  SelectedValuePath="PositionID" Background="#F0F0F0"/>
 
-                <TextBlock Text="Position:"/>
-                <TextBox x:Name="PositionTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+                <TextBlock Text="Role:" />
+                <ComboBox x:Name="RoleComboBox" Margin="0,0,0,10" DisplayMemberPath="RoleName"
+                 SelectedValuePath="RoleID" Background="#F0F0F0"/>
+
 
                 <TextBlock Text="Salary:"/>
                 <TextBox x:Name="SalaryTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>

@@ -24,9 +24,7 @@ public partial class Employee
     public int AccountId { get; set; }
 
     public double Salary { get; set; }
-    public String DepartmentName { get; set; }
-    public String RoleName { get; set; }
-    public String PositionName { get; set; }
+    
     public DateTime StartDate { get; set; }
 
     public string? ProfilePicture { get; set; }
