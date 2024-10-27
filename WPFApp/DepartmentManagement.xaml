@@ -5,55 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="DepartmentManagement" Height="450" Width="800">
+        Title="DepartmentManagement" Height="500" Width="900">
     <Grid>
-
         <Grid.ColumnDefinitions>
-
             <ColumnDefinition Width="200"/>
-
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Background="#F0F0F0" Grid.Column="0" VerticalAlignment="Stretch">
-            <TextBlock Text="QLNV" FontSize="20" FontWeight="Bold" Margin="10" Foreground="#333"/>
-            <ComboBox x:Name="UserTypeComboBox" SelectedIndex="0" Margin="10,0,10,10">
+        <StackPanel Background="#4A90E2" Grid.Column="0" VerticalAlignment="Stretch" Margin="0">
+            <TextBlock Text="Quản Lý Phòng Ban" FontSize="20" FontWeight="Bold" 
+                   Foreground="#FFFFFF" Height="28" Width="181"/>
+            <ComboBox x:Name="UserTypeComboBox" SelectedIndex="0" Margin="10,0,10,10" 
+                  Background="#F0F0F0" Foreground="#333">
                 <ComboBoxItem Content="ADMIN"/>
             </ComboBox>
-
             <ListBox x:Name="SideMenu" Margin="10" Background="Transparent" BorderThickness="0">
-                <ListBoxItem Content="Trang Chủ" />
-                <ListBoxItem Content="Nhân viên" />
-                <ListBoxItem Content="Bộ phận" />
-                <ListBoxItem Content="Chấm công" />
-                <ListBoxItem Content="Bảng lương" />
-                <ListBoxItem Content="Dự án" />
-                <ListBoxItem Content="Nghỉ phép" />
-                <ListBoxItem Content="Báo cáo thống kê"/>
-                <ListBoxItem Content="Tra cứu thông tin" />
-                <ListBoxItem Content="Hệ thống" />
-                <ListBoxItem Content="Chat" />
+                <ListBoxItem Content="Trang Chủ" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Nhân viên" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Bộ phận" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Chấm công" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Bảng lương" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Dự án" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Nghỉ phép" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Báo cáo thống kê" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Tra cứu thông tin" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Hệ thống" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Chat" Foreground="#FFFFFF" />
             </ListBox>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Margin="20">
-            <TextBlock Text="Danh sách Phòng ban" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <DataGrid Height="249">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="CourseId" Binding="{Binding CourseId}" Width="60" />
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="145" />
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="198" />
-                    <DataGridTextColumn Header="InstructorId" Binding="{Binding InstructorId}" Width="70" />
-                    <DataGridTextColumn Header="InstructorName" Binding="{Binding Instructor.Name}" Width="95" />
-                </DataGrid.Columns>
-            </DataGrid>
+        <StackPanel Grid.Column="1" Margin="20,20,20,20">
+            <TextBlock Text="Danh sách phòng ban" FontSize="18" FontWeight="Bold" 
+                   Margin="0,0,0,10" Foreground="#4A90E2"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <DataGrid x:Name="DepartmentDataGrid" AutoGenerateColumns="False" Height="150" 
+                      Margin="0,10,0,0" CanUserAddRows="False" Width="631"
+                      SelectionChanged="DepartmentDataGrid_SelectionChanged" 
+                      Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding DepartmentId}" Width="50"/>
+                        <DataGridTextColumn Header="Tên Phòng Ban" Binding="{Binding DepartmentName}" Width="290"/>
+                        <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreateDate, StringFormat='dd/MM/yyyy'}" Width="190"/>
+                        <DataGridTextColumn Header="Số nhân viên" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
 
+            <StackPanel Margin="0,10,0,0" Height="223">
+                <TextBlock Text="ID:"/>
+                <TextBox x:Name="DepartmentIdTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+                <TextBlock Text="Tên Bộ Phận:"/>
+                <TextBox x:Name="DepartmentNameTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <TextBlock Text="Ngày tạo:"/>
+                <DatePicker x:Name="CreateDatePicker" Margin="0,0,0,10"/>
+
+                <TextBlock Text="Số lượng nhân viên:"/>
+                <TextBox x:Name="EmployeeNumberTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button Content="Save Changes" Width="100" Margin="0,0,10,0" 
+                            Click="SaveChangesButton_Click" Background="#4A90E2" Foreground="White" Height="26"/>
+                    <Button Content="Close" Width="100" Click="CloseButton_Click" Background="#E94E77" Foreground="White"/>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
-
-        <StatusBar Grid.ColumnSpan="2" VerticalAlignment="Bottom">
-            <StatusBarItem Content="Nhân viên: ADMIN"/>
-            <StatusBarItem Content="Quyền hạn: Quản trị hệ thống"/>
-            <StatusBarItem Content="Ngày: 01/25/2024" HorizontalAlignment="Right"/>
-        </StatusBar>
     </Grid>
 </Window>

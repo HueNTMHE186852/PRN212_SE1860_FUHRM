@@ -16,9 +16,9 @@ namespace WPFApp
             {
                 switch (selectedItem.Content.ToString())
                 {
-                    //case "Nhân viên":
-                    //    MainContentFrame.Navigate(new EmployeeManagement());
-                    //    break;
+                    case "Nhân viên":
+                        MainContentFrame.Navigate(new EmployeeWindow());
+                        break;
                     case "Bộ phận":
                         MainContentFrame.Navigate(new DepartmentManagement());
                         break;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace WPFApp.Models;
 
@@ -37,10 +38,10 @@ public partial class FuhrmContext : DbContext
 
     public virtual DbSet<Salary> Salaries { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("server =LAPTOP-B7BG0NQ0\\MSSQLSERVER01; database = FUHRM;uid=sa;pwd=123;TrustServerCertificate=True;Trusted_Connection=True;");
-
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
+        var ConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("DefaultConnection");
+        optionsBuilder.UseSqlServer(ConnectionString);
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>

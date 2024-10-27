@@ -81,5 +81,21 @@ namespace DataAccessObjects
             {
             }
         }
+
+        public static int CountEmployees(int departmentId)
+        {
+            int count = 0;
+            try
+            {
+                using var db = new FuhrmContext();
+                count = db.Employees
+                    .Where(e => e.DepartmentId == departmentId)
+                    .Count();
+            }
+            catch (Exception ex)
+            {
+            }
+            return count;
+        }
     }
 }

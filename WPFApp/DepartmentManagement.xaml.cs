@@ -1,5 +1,4 @@
-﻿using DataAccessObjects;
-using Repositories;
+﻿using Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFApp.Models;
 
 namespace WPFApp
 {
@@ -30,20 +30,26 @@ namespace WPFApp
 
         private void LoadDepartments()
         {
-            try
-            {
-                using var db = new FuhrmContext();
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-    }
-}
-
             var departments = _departmentRepository.GetDepartments();
             DepartmentDataGrid.ItemsSource = departments;
+            DepartmentDataGrid.DisplayMemberPath = "DepartmentName";
+            DepartmentDataGrid.SelectedValuePath = "DepartmentId";
+        }
+
+        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DepartmentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }
 }
+
