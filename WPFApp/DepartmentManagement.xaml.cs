@@ -26,6 +26,8 @@ namespace WPFApp
         public DepartmentManagement()
         {
             InitializeComponent();
+            _departmentRepository = new DepartmentRepository();
+            LoadDepartments();
         }
 
         private void LoadDepartments()
@@ -43,7 +45,7 @@ namespace WPFApp
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
 
         private void DepartmentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

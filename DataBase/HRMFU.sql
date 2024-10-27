@@ -111,9 +111,9 @@ INSERT INTO Accounts (Username, Password, RoleID) VALUES ('manager', 'manager123
 INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee', 'employee123', 3);
 
 -- Chèn dữ liệu vào bảng Departments
-INSERT INTO Departments (DepartmentName) VALUES ('Human Resources');
-INSERT INTO Departments (DepartmentName) VALUES ('Finance');
-INSERT INTO Departments (DepartmentName) VALUES ('IT');
+INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('Human Resources', GETDATE());
+INSERT INTO Departments (DepartmentNam, CreateDatee) VALUES ('Finance', GETDATE());
+INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('IT', GETDATE());
 
 -- Chèn dữ liệu vào bảng Positions
 INSERT INTO Positions (PositionName) VALUES ('HR Manager');

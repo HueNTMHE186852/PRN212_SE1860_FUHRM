@@ -14,7 +14,7 @@ namespace Repositories
             => DepartmentDAO.GetDepartments();
         public void AddDepartment(Department department)
             => DepartmentDAO.AddDepartment(department);
-        public List<Department> SearchDepartment(string Name)
+        public List<Department>? SearchDepartment(string Name)
             => DepartmentDAO.SearchDepartment(Name);
         public void RemoveDepartment(Department department)
             => DepartmentDAO.RemoveDepartment(department);

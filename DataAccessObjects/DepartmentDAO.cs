@@ -38,7 +38,7 @@ namespace DataAccessObjects
             }
         }
 
-        public static List<Department> SearchDepartment(string Name)
+        public static List<Department>? SearchDepartment(string Name)
         {
             List<Department> list = new List<Department>();
             try
