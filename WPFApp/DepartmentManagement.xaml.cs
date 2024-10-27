@@ -30,6 +30,17 @@ namespace WPFApp
 
         private void LoadDepartments()
         {
+            try
+            {
+                using var db = new FuhrmContext();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+    }
+}
+
             var departments = _departmentRepository.GetDepartments();
             DepartmentDataGrid.ItemsSource = departments;
 
