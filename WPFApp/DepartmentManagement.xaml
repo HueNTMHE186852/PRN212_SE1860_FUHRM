@@ -38,17 +38,15 @@
 
         <StackPanel Grid.Column="1" Margin="20">
             <TextBlock Text="Danh sách Phòng ban" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-
-            <ListView x:Name="NotificationListView" Margin="0,10,0,10">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding DepartmentId}" Width="50"/>
-                        <GridViewColumn Header="Tên phòng ban" DisplayMemberBinding="{Binding DepartmentName}" Width="250"/>
-                        <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding CreateDate}" Width="150"/>
-                        <GridViewColumn Header="Chức năng"  Width="100"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <DataGrid Height="249">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="CourseId" Binding="{Binding CourseId}" Width="60" />
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="145" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="198" />
+                    <DataGridTextColumn Header="InstructorId" Binding="{Binding InstructorId}" Width="70" />
+                    <DataGridTextColumn Header="InstructorName" Binding="{Binding Instructor.Name}" Width="95" />
+                </DataGrid.Columns>
+            </DataGrid>
 
         </StackPanel>
 
