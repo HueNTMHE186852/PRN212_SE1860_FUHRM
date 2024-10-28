@@ -11,10 +11,7 @@ namespace DataAccessObjects
         {
             using (var context = new FuhrmContext())
             {
-                return context.Departments
-                    .Include(d => d.Employees)
-                    .Include(d => d.Notifications)
-                    .ToList();
+                return context.Departments.ToList();
             }
         }
 
