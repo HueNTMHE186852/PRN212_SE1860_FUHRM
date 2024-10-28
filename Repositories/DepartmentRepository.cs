@@ -20,7 +20,5 @@ namespace Repositories
             => DepartmentDAO.RemoveDepartment(department);
         public void UpdateDepartment(Department department)
             => DepartmentDAO.UpdateDepartment(department);
-        public int CountEmployees(int departmentId)
-            => DepartmentDAO.CountEmployees(departmentId);
     }
 }

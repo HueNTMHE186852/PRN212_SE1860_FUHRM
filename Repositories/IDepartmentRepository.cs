@@ -14,6 +14,5 @@ namespace Repositories
         List<Department>? SearchDepartment(string Name);
         void RemoveDepartment(Department department);
         void UpdateDepartment(Department department);
-        int CountEmployees(int departmentId);
     }
 }

@@ -36,21 +36,53 @@ namespace WPFApp
             DepartmentDataGrid.ItemsSource = departments;
             DepartmentDataGrid.DisplayMemberPath = "DepartmentName";
             DepartmentDataGrid.SelectedValuePath = "DepartmentId";
+            Clear();
         }
 
-        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedDepartment = DepartmentDataGrid.SelectedItem as Department;
+            
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+
+        }
+
+        private void Clear()
+        {
+            DepartmentIdTextBox.Text = string.Empty;
+            DepartmentNameTextBox.Text = string.Empty;
+            CreateDatePicker.Text = string.Empty;
+            NumberOfEmployeeTextBox.Text = string.Empty;
         }
 
         private void DepartmentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            MessageBox.Show("SelectionChanged event triggered."); // Debug message
 
+            if (DepartmentDataGrid.SelectedItem is Department selectedDepartment)
+            {
+                DepartmentIdTextBox.Text = selectedDepartment.DepartmentId.ToString();
+                DepartmentNameTextBox.Text = selectedDepartment.DepartmentName;
+                CreateDatePicker.SelectedDate = selectedDepartment.CreateDate;
+                NumberOfEmployeeTextBox.Text = selectedDepartment.NumberOfEmployee.ToString();
+            }
+            else
+            {
+                Clear();
+            }
         }
+
+
+
     }
+}
 

@@ -38,7 +38,8 @@ public partial class FuhrmContext : DbContext
 
     public virtual DbSet<Salary> Salaries { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
         var ConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("DefaultConnection");
         optionsBuilder.UseSqlServer(ConnectionString);
     }
@@ -46,9 +47,9 @@ public partial class FuhrmContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Accounts__349DA5865AB3F0EF");
+            entity.HasKey(e => e.AccountId).HasName("PK__Accounts__349DA5868772371C");
 
-            entity.HasIndex(e => e.Username, "UQ__Accounts__536C85E43D8251AC").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Accounts__536C85E42F4CB8C8").IsUnique();
 
             entity.Property(e => e.AccountId).HasColumnName("AccountID");
             entity.Property(e => e.Password).HasMaxLength(255);
@@ -63,7 +64,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<ActivityLog>(entity =>
         {
-            entity.HasKey(e => e.ActivityLogId).HasName("PK__Activity__19A9B78F474338B3");
+            entity.HasKey(e => e.ActivityLogId).HasName("PK__Activity__19A9B78F415E62D8");
 
             entity.Property(e => e.ActivityLogId).HasColumnName("ActivityLogID");
             entity.Property(e => e.AccountId).HasColumnName("AccountID");
@@ -78,7 +79,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<Attendance>(entity =>
         {
-            entity.HasKey(e => e.AttendanceId).HasName("PK__Attendan__8B69263C25C6F3C2");
+            entity.HasKey(e => e.AttendanceId).HasName("PK__Attendan__8B69263CD115891B");
 
             entity.Property(e => e.AttendanceId).HasColumnName("AttendanceID");
             entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
@@ -92,7 +93,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<Backup>(entity =>
         {
-            entity.HasKey(e => e.BackupId).HasName("PK__Backups__EB9069E238C99B47");
+            entity.HasKey(e => e.BackupId).HasName("PK__Backups__EB9069E2BA9FCC34");
 
             entity.Property(e => e.BackupId).HasColumnName("BackupID");
             entity.Property(e => e.BackupDate).HasColumnType("datetime");
@@ -101,7 +102,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<Department>(entity =>
         {
-            entity.HasKey(e => e.DepartmentId).HasName("PK__Departme__B2079BCD60019B60");
+            entity.HasKey(e => e.DepartmentId).HasName("PK__Departme__B2079BCD08A67643");
 
             entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
             entity.Property(e => e.CreateDate)
@@ -112,7 +113,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF1B39FA689");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF18B3A414F");
 
             entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
             entity.Property(e => e.AccountId).HasColumnName("AccountID");
@@ -142,7 +143,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<LeaveRequest>(entity =>
         {
-            entity.HasKey(e => e.LeaveRequestId).HasName("PK__LeaveReq__6094218EBC99B31D");
+            entity.HasKey(e => e.LeaveRequestId).HasName("PK__LeaveReq__6094218E8936D382");
 
             entity.Property(e => e.LeaveRequestId).HasColumnName("LeaveRequestID");
             entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
@@ -157,7 +158,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32C094F93D");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E321FC6793E");
 
             entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -172,7 +173,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<Position>(entity =>
         {
-            entity.HasKey(e => e.PositionId).HasName("PK__Position__60BB9A5960BCD381");
+            entity.HasKey(e => e.PositionId).HasName("PK__Position__60BB9A59CAE74FB4");
 
             entity.Property(e => e.PositionId).HasColumnName("PositionID");
             entity.Property(e => e.PositionName).HasMaxLength(100);
@@ -180,7 +181,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE3A9BA77F06");
+            entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE3ACBE05EC8");
 
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.RoleName).HasMaxLength(100);
@@ -188,7 +189,7 @@ public partial class FuhrmContext : DbContext
 
         modelBuilder.Entity<Salary>(entity =>
         {
-            entity.HasKey(e => e.SalaryId).HasName("PK__Salaries__4BE204B702D97E48");
+            entity.HasKey(e => e.SalaryId).HasName("PK__Salaries__4BE204B76DA4DB22");
 
             entity.Property(e => e.SalaryId).HasColumnName("SalaryID");
             entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");

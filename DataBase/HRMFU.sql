@@ -20,7 +20,8 @@ CREATE TABLE Accounts (
 CREATE TABLE Departments (
     DepartmentID INT PRIMARY KEY IDENTITY(1,1),
     DepartmentName NVARCHAR(100) NOT NULL,
-    CreateDate DATETIME DEFAULT GETDATE()
+    CreateDate DATETIME DEFAULT GETDATE(),
+	NumberOfEmployee INT
 );
 
 CREATE TABLE Positions (
@@ -112,7 +113,7 @@ INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee', 'employee1
 
 -- Chèn dữ liệu vào bảng Departments
 INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('Human Resources', GETDATE());
-INSERT INTO Departments (DepartmentNam, CreateDatee) VALUES ('Finance', GETDATE());
+INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('Finance', GETDATE());
 INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('IT', GETDATE());
 
 -- Chèn dữ liệu vào bảng Positions
@@ -189,3 +190,15 @@ VALUES ('2023-02-01 00:00:00', 'backup_2023_02_01.bak');
 
 INSERT INTO Backups (BackupDate, BackupFile) 
 VALUES ('2023-03-01 00:00:00', 'backup_2023_03_01.bak');
+
+SELECT 
+    d.DepartmentID,
+    d.DepartmentName,
+    d.CreateDate,
+    COUNT(e.EmployeeID) AS NumberOfEmployee
+FROM 
+    Departments d
+LEFT JOIN 
+    Employees e ON d.DepartmentID = e.DepartmentID
+GROUP BY 
+    d.DepartmentID, d.DepartmentName, d.CreateDate;
