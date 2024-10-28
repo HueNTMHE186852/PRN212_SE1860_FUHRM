@@ -13,10 +13,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Background="#4A90E2" Grid.Column="0" VerticalAlignment="Stretch" Margin="0">
-            <TextBlock Text="Quản Lý Phòng Ban" FontSize="20" FontWeight="Bold" 
-                   Foreground="#FFFFFF" Height="28" Width="181"/>
-            <ComboBox x:Name="UserTypeComboBox" SelectedIndex="0" Margin="10,0,10,10" 
-                  Background="#F0F0F0" Foreground="#333">
+            <TextBlock Text="Quản Lý Phòng Ban" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Height="28" Width="181"/>
+            <ComboBox x:Name="UserTypeComboBox" SelectedIndex="0" Margin="10,0,10,10" Background="#F0F0F0" Foreground="#333">
                 <ComboBoxItem Content="ADMIN"/>
             </ComboBox>
             <ListBox x:Name="SideMenu" Margin="10" Background="Transparent" BorderThickness="0">
@@ -35,39 +33,35 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="20,20,20,0">
-            <TextBlock Text="Danh sách phòng ban" FontSize="18" FontWeight="Bold" 
-                   Margin="0,0,0,10" Foreground="#4A90E2"/>
+            <TextBlock Text="Danh sách phòng ban" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4A90E2"/>
             <DataGrid x:Name="DepartmentDataGrid" AutoGenerateColumns="False" Height="150" 
-          Margin="0,10,0,0" CanUserAddRows="False" Width="631"
-          SelectionChanged="DepartmentDataGrid_SelectionChanged" 
-          Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1">
+                      Margin="0,10,0,0" CanUserAddRows="False" Width="631"
+                      SelectionChanged="DepartmentDataGrid_SelectionChanged"
+                      Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding DepartmentId}" Width="50"/>
                     <DataGridTextColumn Header="Tên Phòng Ban" Binding="{Binding DepartmentName}" Width="290"/>
                     <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreateDate, StringFormat='dd/MM/yyyy'}" Width="190"/>
-                    <DataGridTextColumn Header="Số nhân viên" Binding="{Binding NumberOfEmployee}" Width="100"/>
+                    <DataGridTextColumn Header="Số nhân viên" Binding="{Binding EmployeeCount}" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-
-            <StackPanel Margin="0,10,0,0" Height="257">
+            <StackPanel Margin="0,10,0,0" Height="257" DataContext="{Binding SelectedDepartment}">
                 <TextBlock Text="ID:"/>
-                <TextBox x:Name="DepartmentIdTextBox" Text="{Binding DepartmentId}" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+                <TextBox x:Name="DepartmentIdTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
 
                 <TextBlock Text="Tên Bộ Phận:"/>
-                <TextBox x:Name="DepartmentNameTextBox" Text="{Binding DepartmentName}" Margin="0,0,0,10" Background="#F0F0F0"/>
+                <TextBox x:Name="DepartmentNameTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
 
                 <TextBlock Text="Ngày tạo:"/>
-                <DatePicker x:Name="CreateDatePicker" Text="{Binding CreateDate, StringFormat='dd/MM/yyyy'}" Margin="0,0,0,10"/>
+                <DatePicker x:Name="CreateDatePicker" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Số lượng nhân viên:"/>
-                <TextBox x:Name="NumberOfEmployeeTextBox" Text="{Binding NumberOfEmployee}" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+                <TextBox x:Name="NumberOfEmployeeTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-                    <Button Content="Add" Width="100" Margin="0,0,10,0" 
-                            Click="AddButton_Click" Background="LightGreen" Foreground="White" Height="26"/>
-                    <Button Content="Edit" Width="100" Margin="0,0,10,0" 
-        Click="EditButton_Click" Background="#4A90E2" Foreground="White" Height="26"/>
+                    <Button Content="Add" Width="100" Margin="0,0,10,0" Click="AddButton_Click" Background="LightGreen" Foreground="White" Height="26"/>
+                    <Button Content="Edit" Width="100" Margin="0,0,10,0" Click="EditButton_Click" Background="#4A90E2" Foreground="White" Height="26"/>
                     <Button Content="Delete" Width="100" Click="DeleteButton_Click" Background="#E94E77" Foreground="White"/>
                 </StackPanel>
             </StackPanel>
