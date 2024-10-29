@@ -70,8 +70,9 @@ namespace WPFApp
             DepartmentComboBox.SelectedValue = employee.DepartmentId;
             PositionComboBox.SelectedValue = employee.PositionId;
             RoleComboBox.SelectedValue = employee.Account.RoleId;
-
+            CreateDatePicker.SelectedDate = employee.StartDate;
             SalaryTextBox.Text = employee.Salary.ToString();
+
         }
 
 
@@ -101,9 +102,14 @@ namespace WPFApp
                 selectedEmployee.PositionId = (int)PositionComboBox.SelectedValue; // Chuyển đổi sang int nếu cần
                 selectedEmployee.Account.RoleId = (int)RoleComboBox.SelectedValue; // Chuyển đổi sang int nếu cần
                 selectedEmployee.Salary = Double.Parse(SalaryTextBox.Text); // Cần xử lý ngoại lệ nếu cần
-
+                selectedEmployee.StartDate = CreateDatePicker.SelectedDate.GetValueOrDefault();
                 try
                 {
+                    if (selectedEmployee.Salary <= 0)
+                    {
+                        MessageBox.Show("Nhập lương lớn hơn 0");
+                        return;
+                    }
                     // Lưu thay đổi vào cơ sở dữ liệu
                     _employeeRepository.UpdateEmployee(selectedEmployee);
 

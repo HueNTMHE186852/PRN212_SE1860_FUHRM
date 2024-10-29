@@ -65,6 +65,8 @@ namespace DataAccessObjects
                 existingEmployee.DepartmentId = employee.DepartmentId;
                 existingEmployee.PositionId = employee.PositionId;
                 existingEmployee.Salary = employee.Salary;
+                existingEmployee.StartDate = employee.StartDate;
+                
 
                 // Lưu thay đổi
                 _context.SaveChanges();
