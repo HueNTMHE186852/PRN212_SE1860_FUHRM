@@ -70,8 +70,9 @@ namespace WPFApp
             DepartmentComboBox.SelectedValue = employee.DepartmentId;
             PositionComboBox.SelectedValue = employee.PositionId;
             RoleComboBox.SelectedValue = employee.Account.RoleId;
-
+            CreateDatePicker.SelectedDate = employee.StartDate;
             SalaryTextBox.Text = employee.Salary.ToString();
+
         }
 
 
@@ -101,9 +102,14 @@ namespace WPFApp
                 selectedEmployee.PositionId = (int)PositionComboBox.SelectedValue; // Chuyển đổi sang int nếu cần
                 selectedEmployee.Account.RoleId = (int)RoleComboBox.SelectedValue; // Chuyển đổi sang int nếu cần
                 selectedEmployee.Salary = Double.Parse(SalaryTextBox.Text); // Cần xử lý ngoại lệ nếu cần
-
+                selectedEmployee.StartDate = CreateDatePicker.SelectedDate.GetValueOrDefault();
                 try
                 {
+                    if (selectedEmployee.Salary <= 0)
+                    {
+                        MessageBox.Show("Nhập lương lớn hơn 0");
+                        return;
+                    }
                     // Lưu thay đổi vào cơ sở dữ liệu
                     _employeeRepository.UpdateEmployee(selectedEmployee);
 
@@ -125,5 +131,53 @@ namespace WPFApp
             }
         }
 
+        private void NavigateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                switch (button.Content.ToString())
+                {
+                    //case "Trang Chủ":
+                    //    // Navigate to Home screen
+                    //    var homeView = new HomeView();
+                    //    homeView.Show();
+                    //    this.Close();
+                    //    break;
+                    case "Nhân viên":
+                        // Navigate to Employee screen
+                        var employeeView = new EmployeeWindow();
+                        employeeView.Show();
+                        this.Close();
+                        break;
+                    case "Bộ phận":
+                        // Navigate to Department screen
+                        var departmentView = new DepartmentManagement();
+                        departmentView.Show();
+                        this.Close();
+                        break;
+                    case "Chấm công":
+                        // Navigate to Attendance screen
+                        var attendanceView = new AttendanceView();
+                        attendanceView.Show();
+                        this.Close();
+                        break;
+                    case "Bảng lương":
+                        // Navigate to Salary screen
+                        var salaryView = new SalaryView();
+                        salaryView.Show();
+                        this.Close();
+                        break;
+                    case "Nghỉ phép":
+                        // Navigate to Leave screen
+                        var leaveView = new LeaveRequestView();
+                        leaveView.Show();
+                        this.Close();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }

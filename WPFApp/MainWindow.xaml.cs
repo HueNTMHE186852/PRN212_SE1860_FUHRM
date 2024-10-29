@@ -22,12 +22,12 @@ namespace WPFApp
                     case "Bộ phận":
                         MainContentFrame.Navigate(new DepartmentManagement());
                         break;
-                    //case "Chấm công":
-                    //    MainContentFrame.Navigate(new AttendanceManagement());
-                    //    break;
-                    //case "Bảng lương":
-                    //    MainContentFrame.Navigate(new SalaryManagement());
-                    //    break;
+                    case "Chấm công":
+                        MainContentFrame.Navigate(new AttendanceView());
+                        break;
+                    case "Bảng lương":
+                        MainContentFrame.Navigate(new SalaryView());
+                        break;
                     //case "Dự án":
                     //    MainContentFrame.Navigate(new ProjectManagement());
                     //    break;
