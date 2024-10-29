@@ -5,49 +5,50 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessObjects
 {
-    public static class DepartmentDAO
+    public static class SalaryDAO
     {
-        public static List<Department> GetDepartments()
+        public static List<Salary> GetSalaries()
         {
             using (var context = new FuhrmContext())
             {
-                return context.Departments.ToList();
+                return context.Salaries.Include(s => s.Employee).ToList();
             }
         }
 
-        public static void AddDepartment(Department department)
+        public static void AddSalary(Salary salary)
         {
             using (var context = new FuhrmContext())
             {
-                context.Departments.Add(department);
+                context.Salaries.Add(salary);
                 context.SaveChanges();
             }
         }
 
-        public static List<Department> SearchDepartment(string name)
+        public static List<Salary> SearchSalary(string employeeName)
         {
             using (var context = new FuhrmContext())
             {
-                return context.Departments
-                    .Where(d => d.DepartmentName.Contains(name))
+                return context.Salaries
+                    .Include(s => s.Employee)
+                    .Where(s => s.Employee.FullName.Contains(employeeName))
                     .ToList();
             }
         }
 
-        public static void RemoveDepartment(Department department)
+        public static void RemoveSalary(Salary salary)
         {
             using (var context = new FuhrmContext())
             {
-                context.Departments.Remove(department);
+                context.Salaries.Remove(salary);
                 context.SaveChanges();
             }
         }
 
-        public static void UpdateDepartment(Department department)
+        public static void UpdateSalary(Salary salary)
         {
             using (var context = new FuhrmContext())
             {
-                context.Departments.Update(department);
+                context.Salaries.Update(salary);
                 context.SaveChanges();
             }
         }

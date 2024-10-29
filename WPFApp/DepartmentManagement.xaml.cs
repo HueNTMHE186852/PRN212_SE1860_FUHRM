@@ -1,43 +1,80 @@
-﻿using DataAccessObjects;
-using Repositories;
-using System;
+﻿using Repositories;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using BusinessObjects;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for DepartmentManagement.xaml
-    /// </summary>
     public partial class DepartmentManagement : Window
     {
-        FuhrmContext _context = new FuhrmContext();
-        DepartmentRepository _departmentRepository;
+        private readonly DepartmentRepository _departmentRepository;
+
         public DepartmentManagement()
         {
             InitializeComponent();
+            _departmentRepository = new DepartmentRepository();
+            LoadDepartments();
         }
 
         private void LoadDepartments()
         {
-            try
+            var departments = _departmentRepository.GetDepartments();
+            DepartmentDataGrid.ItemsSource = departments;
+        }
+
+        private void DepartmentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DepartmentDataGrid.SelectedItem is Department selectedDepartment)
             {
-                using var db = new FuhrmContext();
+                DepartmentIdTextBox.Text = selectedDepartment.DepartmentId.ToString();
+                DepartmentNameTextBox.Text = selectedDepartment.DepartmentName;
+                CreateDatePicker.SelectedDate = selectedDepartment.CreateDate;
+                NumberOfEmployeeTextBox.Text = selectedDepartment.EmployeeCount.ToString();
             }
-            catch (Exception ex)
+            else
             {
+                Clear();
+            }
+        }
+
+        private void Clear()
+        {
+            DepartmentIdTextBox.Text = string.Empty;
+            DepartmentNameTextBox.Text = string.Empty;
+            CreateDatePicker.SelectedDate = null;
+            NumberOfEmployeeTextBox.Text = string.Empty;
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            var department = new Department();
+            department.DepartmentName = DepartmentNameTextBox.Text;
+            department.CreateDate = CreateDatePicker.SelectedDate;
+            _departmentRepository.AddDepartment(department);
+            LoadDepartments();
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DepartmentDataGrid.SelectedItem is Department selectedDepartment)
+            {
+                selectedDepartment.DepartmentName = DepartmentNameTextBox.Text;
+                selectedDepartment.CreateDate = CreateDatePicker.SelectedDate;
+                _departmentRepository.UpdateDepartment(selectedDepartment);
+                LoadDepartments();
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DepartmentDataGrid.SelectedItem is Department selectedDepartment)
+            {
+                _departmentRepository.RemoveDepartment(selectedDepartment);
+                LoadDepartments();
             }
         }
     }
 }
-
