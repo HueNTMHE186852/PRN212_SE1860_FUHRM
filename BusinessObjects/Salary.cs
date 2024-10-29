@@ -9,7 +9,7 @@
         public double? Bonus { get; set; }
         public double? Penalty { get; set; }
         public double TotalIncome { get; set; }
-        public DateTime PaymentDate { get; set; }
+        public DateOnly PaymentDate { get; set; }
         public Employee Employee { get; set; } // Assuming Employee is another model
     }
 }

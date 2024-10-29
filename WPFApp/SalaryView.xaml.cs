@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using BusinessObjects;
 using System;
+using System.Globalization;
 
 namespace WPFApp
 {
@@ -66,7 +67,7 @@ namespace WPFApp
                     Allowance = string.IsNullOrEmpty(AllowanceTextBox.Text) ? (double?)null : double.Parse(AllowanceTextBox.Text),
                     Bonus = string.IsNullOrEmpty(BonusTextBox.Text) ? (double?)null : double.Parse(BonusTextBox.Text),
                     Penalty = string.IsNullOrEmpty(PenaltyTextBox.Text) ? (double?)null : double.Parse(PenaltyTextBox.Text),
-                    PaymentDate = DateTime.Parse(PaymentDateTextBox.Text)
+                    PaymentDate = DateOnly.ParseExact(PaymentDateTextBox.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture)
                 };
                 _salaryRepository.AddSalary(salary);
                 LoadSalaries();
@@ -87,7 +88,7 @@ namespace WPFApp
                     selectedSalary.Allowance = string.IsNullOrEmpty(AllowanceTextBox.Text) ? (double?)null : double.Parse(AllowanceTextBox.Text);
                     selectedSalary.Bonus = string.IsNullOrEmpty(BonusTextBox.Text) ? (double?)null : double.Parse(BonusTextBox.Text);
                     selectedSalary.Penalty = string.IsNullOrEmpty(PenaltyTextBox.Text) ? (double?)null : double.Parse(PenaltyTextBox.Text);
-                    selectedSalary.PaymentDate = DateTime.Parse(PaymentDateTextBox.Text);
+                    selectedSalary.PaymentDate = DateOnly.ParseExact(PaymentDateTextBox.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture);
                     _salaryRepository.UpdateSalary(selectedSalary);
                     LoadSalaries();
                 }
@@ -111,6 +112,55 @@ namespace WPFApp
             catch (Exception ex)
             {
                 MessageBox.Show($"Error deleting salary: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void NavigateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                switch (button.Content.ToString())
+                {
+                    //case "Trang Chủ":
+                    //    // Navigate to Home screen
+                    //    var homeView = new HomeView();
+                    //    homeView.Show();
+                    //    this.Close();
+                    //    break;
+                    case "Nhân viên":
+                        // Navigate to Employee screen
+                        var employeeView = new EmployeeWindow();
+                        employeeView.Show();
+                        this.Close();
+                        break;
+                    case "Bộ phận":
+                        // Navigate to Department screen
+                        var departmentView = new DepartmentManagement();
+                        departmentView.Show();
+                        this.Close();
+                        break;
+                    case "Chấm công":
+                        // Navigate to Attendance screen
+                        var attendanceView = new AttendanceView();
+                        attendanceView.Show();
+                        this.Close();
+                        break;
+                    case "Bảng lương":
+                        // Navigate to Salary screen
+                        var salaryView = new SalaryView();
+                        salaryView.Show();
+                        this.Close();
+                        break;
+                    case "Nghỉ phép":
+                        // Navigate to Leave screen
+                        var leaveView = new LeaveRequestView();
+                        leaveView.Show();
+                        this.Close();
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
     }
