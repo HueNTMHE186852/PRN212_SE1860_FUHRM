@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using BusinessObjects;
 using System;
+using System.Globalization;
 
 namespace WPFApp
 {
@@ -66,7 +67,7 @@ namespace WPFApp
                     Allowance = string.IsNullOrEmpty(AllowanceTextBox.Text) ? (double?)null : double.Parse(AllowanceTextBox.Text),
                     Bonus = string.IsNullOrEmpty(BonusTextBox.Text) ? (double?)null : double.Parse(BonusTextBox.Text),
                     Penalty = string.IsNullOrEmpty(PenaltyTextBox.Text) ? (double?)null : double.Parse(PenaltyTextBox.Text),
-                    PaymentDate = DateTime.Parse(PaymentDateTextBox.Text)
+                    PaymentDate = DateOnly.ParseExact(PaymentDateTextBox.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture)
                 };
                 _salaryRepository.AddSalary(salary);
                 LoadSalaries();
@@ -87,7 +88,7 @@ namespace WPFApp
                     selectedSalary.Allowance = string.IsNullOrEmpty(AllowanceTextBox.Text) ? (double?)null : double.Parse(AllowanceTextBox.Text);
                     selectedSalary.Bonus = string.IsNullOrEmpty(BonusTextBox.Text) ? (double?)null : double.Parse(BonusTextBox.Text);
                     selectedSalary.Penalty = string.IsNullOrEmpty(PenaltyTextBox.Text) ? (double?)null : double.Parse(PenaltyTextBox.Text);
-                    selectedSalary.PaymentDate = DateTime.Parse(PaymentDateTextBox.Text);
+                    selectedSalary.PaymentDate = DateOnly.ParseExact(PaymentDateTextBox.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture);
                     _salaryRepository.UpdateSalary(selectedSalary);
                     LoadSalaries();
                 }
