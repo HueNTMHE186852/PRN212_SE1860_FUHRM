@@ -32,5 +32,24 @@ namespace DataAccessObjects
                 .FirstOrDefault(l => l.LeaveRequestId == id);
             return leaveRequestDetail;
         }
+        public void ChangeStatus(int leaveRequestId, string newStatus)
+        {
+            using var _context = new FuhrmContext();
+            try
+            {
+                var leaveRequest = _context.LeaveRequests.FirstOrDefault(lr => lr.LeaveRequestId == leaveRequestId);
+                if (leaveRequest == null)
+                {
+                    throw new Exception("Leave request not found.");
+                }
+                leaveRequest.Status = newStatus;
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating status: " + ex.Message);
+            }
+        }
+
     }
 }

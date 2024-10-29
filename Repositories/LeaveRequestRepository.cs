@@ -17,5 +17,7 @@ namespace Repositories
 
         public LeaveRequest getLeaveRequest(int id)
         => leaveRequestDAO.getLeaveRequest(id);
+        public void ChangeStatus(int leaveRequestId, string newStatus)
+            =>leaveRequestDAO.ChangeStatus(leaveRequestId, newStatus);
     }
 }
