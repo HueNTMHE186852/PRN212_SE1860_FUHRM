@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using DataAccessObjects;
 using Repositories;
 using System;
 using System.Collections.Generic;
@@ -49,5 +50,28 @@ namespace WPFApp
                 }
             }
         }
+        private void ChangeStatus_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (LeaveRequestDataGrid.SelectedItem is LeaveRequest selectedLeave)
+            {
+                int leaveRequestID = selectedLeave.LeaveRequestId;
+                string newStatus = button.Content.ToString(); // Lấy nội dung của nút (Approved hoặc Rejected)
+                int leaveRequestId = leaveRequestID;
+                var dao = new LeaveRequestDAO();
+
+                try
+                {
+                    dao.ChangeStatus(leaveRequestId, newStatus);
+                    MessageBox.Show($"Status changed to {newStatus}");
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
     }
 }
