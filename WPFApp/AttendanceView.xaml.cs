@@ -49,54 +49,6 @@ namespace WPFApp
             AttendanceDateTextBox.Text = string.Empty;
             StatusTextBox.Text = string.Empty;
         }
-        private void NavigateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button)
-            {
-                switch (button.Content.ToString())
-                {
-                    //case "Trang Chủ":
-                    //    // Navigate to Home screen
-                    //    var homeView = new HomeView();
-                    //    homeView.Show();
-                    //    this.Close();
-                    //    break;
-                    case "Nhân viên":
-                        // Navigate to Employee screen
-                        var employeeView = new EmployeeWindow();
-                        employeeView.Show();
-                        this.Close();
-                        break;
-                    case "Bộ phận":
-                        // Navigate to Department screen
-                        var departmentView = new DepartmentManagement();
-                        departmentView.Show();
-                        this.Close();
-                        break;
-                    case "Chấm công":
-                        // Navigate to Attendance screen
-                        var attendanceView = new AttendanceView();
-                        attendanceView.Show();
-                        this.Close();
-                        break;
-                    case "Bảng lương":
-                        // Navigate to Salary screen
-                        var salaryView = new SalaryView();
-                        salaryView.Show();
-                        this.Close();
-                        break;
-                    case "Nghỉ phép":
-                        // Navigate to Leave screen
-                        var leaveView = new LeaveRequestView();
-                        leaveView.Show();
-                        this.Close();
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        }
         private void AddAttendanceButton_Click(object sender, RoutedEventArgs e)
         {
             try
