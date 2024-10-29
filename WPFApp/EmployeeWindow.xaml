@@ -25,7 +25,6 @@
                 <StackPanel>
                     <TextBlock Text="Danh sách nhân viên" FontSize="18" FontWeight="Bold" 
                                Margin="0,0,0,10" Foreground="#4A90E2"/>
-
                     <DataGrid x:Name="EmployeeDataGrid" AutoGenerateColumns="False" Height="150" 
                               Margin="0,10,0,10" CanUserAddRows="False" Width="Auto"
                               SelectionChanged="EmployeeDataGrid_SelectionChanged"
