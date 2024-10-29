@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WPFApp.Models;
+namespace BusinessObjects;
 
 public partial class Salary
 {

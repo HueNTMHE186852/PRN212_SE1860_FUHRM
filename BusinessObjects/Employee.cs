@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WPFApp.Models;
+namespace BusinessObjects;
 
 public partial class Employee
 {
@@ -9,7 +9,7 @@ public partial class Employee
 
     public string FullName { get; set; } = null!;
 
-    public DateOnly DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }
 
     public string Gender { get; set; } = null!;
 
@@ -24,8 +24,8 @@ public partial class Employee
     public int AccountId { get; set; }
 
     public double Salary { get; set; }
-
-    public DateOnly StartDate { get; set; }
+    
+    public DateTime StartDate { get; set; }
 
     public string? ProfilePicture { get; set; }
 
