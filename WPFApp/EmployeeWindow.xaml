@@ -5,112 +5,131 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*" />
+            <!-- Sidebar -->
+            <ColumnDefinition Width="3*" />
+            <!-- Employee details and list -->
+            <ColumnDefinition Width="1*" />
+            <!-- Employee image -->
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <StackPanel Background="#4A90E2" Grid.Column="0" VerticalAlignment="Stretch" Margin="0">
+        <StackPanel Background="#4A90E2" Grid.Column="0" VerticalAlignment="Stretch" Margin="0,0,50,0">
             <TextBlock Text="Quản Lý Nhân Viên" FontSize="20" FontWeight="Bold" 
-                       Foreground="#FFFFFF" Margin="10"/>
+                       Foreground="#FFFFFF" Margin="0,0,30,0"/>
             <ComboBox x:Name="UserTypeComboBox" SelectedIndex="0" Margin="10,0,10,10" 
                       Background="#F0F0F0" Foreground="#333">
                 <ComboBoxItem Content="ADMIN"/>
             </ComboBox>
             <ListBox x:Name="SideMenu" Margin="10" Background="Transparent" BorderThickness="0">
-                <ListBoxItem Content="Trang Chủ" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Nhân viên" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Bộ phận" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Chấm công" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Bảng lương" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Dự án" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Nghỉ phép" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Báo cáo thống kê" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Tra cứu thông tin" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Hệ thống" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Chat" Foreground="#FFFFFF" />
+                <ListBoxItem Content="Trang Chủ" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Nhân viên" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Bộ phận" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Chấm công" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Bảng lương" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Dự án" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Nghỉ phép" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Báo cáo thống kê" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Tra cứu thông tin" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Hệ thống" Foreground="#FFFFFF"/>
+                <ListBoxItem Content="Chat" Foreground="#FFFFFF"/>
             </ListBox>
         </StackPanel>
 
         <!-- Main Content -->
-        <StackPanel Grid.Column="1" Margin="20">
-            <TextBlock Text="Danh sách nhân viên" FontSize="18" FontWeight="Bold" 
-                       Margin="0,0,0,10" Foreground="#4A90E2"/>
-            <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                <DataGrid x:Name="EmployeeDataGrid" AutoGenerateColumns="False" Height="150" 
-                          Margin="0,10,0,10" CanUserAddRows="False" Width="Auto"
-                          SelectionChanged="EmployeeDataGrid_SelectionChanged"
-                          Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" Width="0.6*"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding FullName}" Width="1.2*"/>
-                        <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat='dd/MM/yyyy'}" Width="2.1*"/>
-                        <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="1.3*"/>
-                        <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="1.5*"/>
-                        <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}" Width="2.4*"/>
-                        <DataGridTextColumn Header="Department" Binding="{Binding Department.DepartmentName}" Width="2*"/>
-                        <DataGridTextColumn Header="Position" Binding="{Binding Position.PositionName}" Width="1.5*"/>
-                        <DataGridTextColumn Header="Role" Binding="{Binding Account.Role.RoleName}" Width="*"/>
-                        <DataGridTextColumn Header="Image" Binding="{Binding ProfilePicture}" Width="1.3*"/>
-                        <DataGridTextColumn Header="Salary" Binding="{Binding Salary, StringFormat=C}" Width="1.2*"/>
-                        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='dd/MM/yyyy'}" Width="1.9*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+        <Grid Grid.Column="1">
+            <!-- Dashboard -->
+            <StackPanel Background="#F5F5F5" Height="100" VerticalAlignment="Top">
 
-                <StackPanel Margin="0,10,0,0">
-                    <TextBlock Text="ID:"/>
-                    <TextBox x:Name="EmployeeIdTextBox" Height="30" IsReadOnly="True" Background="#F0F0F0"/>
+            </StackPanel>
 
-                    <TextBlock Text="Full Name:"/>
-                    <TextBox x:Name="FullNameTextBox" Height="30" Background="#F0F0F0"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Danh sách nhân viên" FontSize="18" FontWeight="Bold" 
+                               Margin="0,0,0,10" Foreground="#4A90E2"/>
 
-                    <TextBlock Text="Date of Birth:"/>
-                    <DatePicker x:Name="DateOfBirthDatePicker" Height="30"/>
+                    <DataGrid x:Name="EmployeeDataGrid" AutoGenerateColumns="False" Height="150" 
+                              Margin="0,10,0,10" CanUserAddRows="False" Width="Auto"
+                              SelectionChanged="EmployeeDataGrid_SelectionChanged"
+                              Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" Width="0.7*"/>
+                            <DataGridTextColumn Header="Tên" Binding="{Binding FullName}" Width="1.2*"/>
+                            <DataGridTextColumn Header="Ngày sinh" Binding="{Binding DateOfBirth, StringFormat='dd/MM/yyyy'}" Width="2.1*"/>
+                            <DataGridTextColumn Header="Giới tính" Binding="{Binding Gender}" Width="1.7*"/>
+                            <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="1.5*"/>
+                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding PhoneNumber}" Width="2.4*"/>
+                            <DataGridTextColumn Header="Phòng ban" Binding="{Binding Department.DepartmentName}" Width="2*"/>
+                            <DataGridTextColumn Header="Vị trí" Binding="{Binding Position.PositionName}" Width="1.5*"/>
+                            <DataGridTextColumn Header="Vai trò" Binding="{Binding Account.Role.RoleName}" Width="1.5*"/>
+                            <DataGridTextColumn Header="Ảnh" Binding="{Binding ProfilePicture}" Width="1.3*"/>
+                            <DataGridTextColumn Header="Lương" Binding="{Binding Salary, StringFormat=C}" Width="1.4*"/>
+                            <DataGridTextColumn Header="Ngày bắt đầu" Binding="{Binding StartDate, StringFormat='dd/MM/yyyy'}" Width="2.2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
-                    <TextBlock Text="Gender:"/>
-                    <ComboBox x:Name="GenderComboBox" Height="30" Background="#F0F0F0">
-                        <ComboBoxItem Content="Male"/>
-                        <ComboBoxItem Content="Female"/>
-                        <ComboBoxItem Content="Other"/>
-                    </ComboBox>
+                    <StackPanel Margin="0,10,0,0">
+                        <TextBlock Text="ID:"/>
+                        <TextBox x:Name="EmployeeIdTextBox" Height="30" IsReadOnly="True" Background="#F0F0F0"/>
 
-                    <TextBlock Text="Address:"/>
-                    <TextBox x:Name="AddressTextBox" Height="30" Background="#F0F0F0"/>
+                        <TextBlock Text="Tên:"/>
+                        <TextBox x:Name="FullNameTextBox" Height="30" Background="#F0F0F0"/>
 
-                    <TextBlock Text="Phone Number:"/>
-                    <TextBox x:Name="PhoneNumberTextBox" Height="30" Background="#F0F0F0"/>
+                        <TextBlock Text="Ngày sinh:"/>
+                        <DatePicker x:Name="DateOfBirthDatePicker" Height="30"/>
 
-                    <TextBlock Text="Department:"/>
-                    <ComboBox x:Name="DepartmentComboBox" Height="30" 
-                              DisplayMemberPath="DepartmentName" SelectedValuePath="DepartmentID"
-                              Background="#F0F0F0"/>
+                        <TextBlock Text="Giới tính:"/>
+                        <ComboBox x:Name="GenderComboBox" Height="30" Background="#F0F0F0">
+                            <ComboBoxItem Content="Male"/>
+                            <ComboBoxItem Content="Female"/>
+                            <ComboBoxItem Content="Other"/>
+                        </ComboBox>
 
-                    <TextBlock Text="Position:"/>
-                    <ComboBox x:Name="PositionComboBox" Height="30" 
-                              DisplayMemberPath="PositionName" SelectedValuePath="PositionID"
-                              Background="#F0F0F0"/>
+                        <TextBlock Text="Địa chỉ:"/>
+                        <TextBox x:Name="AddressTextBox" Height="30" Background="#F0F0F0"/>
 
-                    <TextBlock Text="Role:"/>
-                    <ComboBox x:Name="RoleComboBox" Height="30" 
-                              DisplayMemberPath="RoleName" SelectedValuePath="RoleID"
-                              Background="#F0F0F0"/>
+                        <TextBlock Text="Số điện thoại:"/>
+                        <TextBox x:Name="PhoneNumberTextBox" Height="30" Background="#F0F0F0"/>
 
-                    <TextBlock Text="Ngày tham gia:"/>
-                    <DatePicker x:Name="CreateDatePicker" Height="30"/>
+                        <TextBlock Text="Phòng ban:"/>
+                        <ComboBox x:Name="DepartmentComboBox" Height="30" 
+                                  DisplayMemberPath="DepartmentName" SelectedValuePath="DepartmentID"
+                                  Background="#F0F0F0"/>
+                        <TextBlock Text="Vị trí:"/>
+                        <ComboBox x:Name="PositionComboBox" Height="30" 
+                                  DisplayMemberPath="PositionName" SelectedValuePath="PositionID"
+                                  Background="#F0F0F0"/>
 
-                    <TextBlock Text="Salary:"/>
-                    <TextBox x:Name="SalaryTextBox" Height="30" Background="#F0F0F0"/>
+                        <TextBlock Text="Vai trò:"/>
+                        <ComboBox x:Name="RoleComboBox" Height="30" 
+                                  DisplayMemberPath="RoleName" SelectedValuePath="RoleID"
+                                  Background="#F0F0F0"/>
 
-                    <!-- Buttons -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-                        <Button Content="Save Changes" Width="100" Height="30" Margin="5" 
-                                Click="SaveChangesButton_Click" Background="#4A90E2" Foreground="White"/>
-                        <Button Content="Close" Width="100" Height="30" Margin="5" 
-                                Click="CloseButton_Click" Background="#E94E77" Foreground="White"/>
+                        <TextBlock Text="Ngày tham gia:"/>
+                        <DatePicker x:Name="CreateDatePicker" Height="30"/>
 
+                        <TextBlock Text="Lương:"/>
+                        <TextBox x:Name="SalaryTextBox" Height="30" Background="#F0F0F0"/>
+
+                        <!-- Buttons -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button Content="Save Changes" Width="100" Height="30" Margin="5" 
+                                    Click="SaveChangesButton_Click" Background="#4A90E2" Foreground="White"/>
+                            <Button Content="Close" Width="100" Height="30" Margin="5" 
+                                    Click="CloseButton_Click" Background="#E94E77" Foreground="White"/>
+                            <Button Content="Refresh" Width="100" Height="30" Margin="5" 
+                              Click="RefreshButton_Click" Background="Brown" Foreground="White"/>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <!-- Employee Image -->
+        <StackPanel Grid.Column="2" VerticalAlignment="Stretch" Background="#F5F5F5">
+
+            <Image x:Name="EmployeeImage" Width="150" Height="150" Margin="10" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
-        </ScrollViewer>
     </Grid>
 </Window>
