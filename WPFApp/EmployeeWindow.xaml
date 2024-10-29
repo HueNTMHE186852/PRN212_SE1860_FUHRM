@@ -107,10 +107,10 @@
                                 Click="SaveChangesButton_Click" Background="#4A90E2" Foreground="White"/>
                         <Button Content="Close" Width="100" Height="30" Margin="5" 
                                 Click="CloseButton_Click" Background="#E94E77" Foreground="White"/>
-                        
+
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
+        </StackPanel>
         </ScrollViewer>
     </Grid>
 </Window>

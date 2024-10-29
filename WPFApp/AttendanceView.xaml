@@ -12,24 +12,23 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+
         <StackPanel Background="#4A90E2" Grid.Column="0" VerticalAlignment="Stretch" Margin="0">
-            <TextBlock Text="Quản Lý Chấm Công" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Height="28" Width="186"/>
+            <TextBlock Text="Quản Lý Lương" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Height="28" Width="186"/>
             <ComboBox x:Name="UserTypeComboBox" SelectedIndex="0" Margin="10,0,10,10" Background="#F0F0F0" Foreground="#333">
                 <ComboBoxItem Content="ADMIN"/>
             </ComboBox>
-            <ListBox x:Name="SideMenu" Margin="10" Background="Transparent" BorderThickness="0">
-                <ListBoxItem Content="Trang Chủ" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Nhân viên" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Bộ phận" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Chấm công" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Bảng lương" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Dự án" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Nghỉ phép" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Báo cáo thống kê" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Tra cứu thông tin" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Hệ thống" Foreground="#FFFFFF" />
-                <ListBoxItem Content="Chat" Foreground="#FFFFFF" />
-            </ListBox>
+            <Button Content="Trang Chủ" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Nhân viên" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Bộ phận" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Chấm công" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Bảng lương" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Dự án" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Nghỉ phép" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Báo cáo thống kê" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Tra cứu thông tin" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Hệ thống" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+            <Button Content="Chat" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="20,20,20,0">
