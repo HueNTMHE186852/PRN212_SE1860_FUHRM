@@ -1,86 +1,55 @@
-﻿using System;
+﻿using BusinessObjects;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessObjects
 {
-    public class DepartmentDAO
+    public static class DepartmentDAO
     {
-        public DepartmentDAO() { }
         public static List<Department> GetDepartments()
         {
-            List<Department> list = new List<Department>();
-            try
+            using (var context = new FuhrmContext())
             {
-                using var db = new FuhrmContext();
-                list = db.Departments.ToList();
+                return context.Departments.ToList();
             }
-            catch (Exception ex)
-            {
-            }
-            return list;
         }
 
         public static void AddDepartment(Department department)
         {
-            try
+            using (var context = new FuhrmContext())
             {
-                using var db = new FuhrmContext();
-                db.Add(department);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
+                context.Departments.Add(department);
+                context.SaveChanges();
             }
         }
 
-        public static List<Department>? SearchDepartment(string Name)
+        public static List<Department> SearchDepartment(string name)
         {
-            List<Department> list = new List<Department>();
-            try
+            using (var context = new FuhrmContext())
             {
-                using var db = new FuhrmContext();
-                list = db.Departments
-                    .Where(d => d.DepartmentName.Equals(Name))
+                return context.Departments
+                    .Where(d => d.DepartmentName.Contains(name))
                     .ToList();
             }
-            catch (Exception ex)
-            {
-
-            }
-            return list;
         }
 
         public static void RemoveDepartment(Department department)
         {
-            try
+            using (var context = new FuhrmContext())
             {
-                using var db = new FuhrmContext();
-                db.Remove(department);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
+                context.Departments.Remove(department);
+                context.SaveChanges();
             }
         }
 
         public static void UpdateDepartment(Department department)
         {
-            try
+            using (var context = new FuhrmContext())
             {
-                using var db = new FuhrmContext();
-                db.Update(department);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
+                context.Departments.Update(department);
+                context.SaveChanges();
             }
         }
-
     }
 }
