@@ -6,11 +6,11 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.6*"/>
             <!-- Sidebar -->
             <ColumnDefinition Width="2*"/>
             <!-- Main content -->
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.5*"/>
             <!-- Employee details -->
         </Grid.ColumnDefinitions>
 
@@ -43,8 +43,8 @@
                 <TextBlock Text="Danh sách nhân viên" FontSize="18" FontWeight="Bold" 
                            Margin="0,0,0,10" Foreground="#4A90E2"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
-                    <TextBlock Text="Search by Name:" Margin="0,0,10,0"/>
-                    <TextBox x:Name="SearchTextBox" Width="200" Height="30" 
+                    <TextBlock Text="Tìm theo tên:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="SearchTextBox" Width="222" Height="30" 
                  Background="#F0F0F0" TextChanged="SearchTextBox_TextChanged"/>
                 </StackPanel>
                 <DataGrid x:Name="EmployeeDataGrid" AutoGenerateColumns="False" Height="150"
