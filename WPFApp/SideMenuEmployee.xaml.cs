@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using DataAccessObjects;
+using Repositories;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -60,6 +62,11 @@ namespace WPFApp
                     case "Take Attendance":
                         var takeAttendanceView = new TakeAttendance(SessionManager.CurrentAccount.AccountId);
                         takeAttendanceView.Show();
+                        currentWindow.Close();
+                        break;
+                    case "Notifications":
+                        var notificationWindow = new NotificationWindow(SessionManager.CurrentAccount.AccountId, new NotificationRepository(), new EmployeeRepository(new EmployeeDAO(new FuhrmContext())));
+                        notificationWindow.Show();
                         currentWindow.Close();
                         break;
                     default:
