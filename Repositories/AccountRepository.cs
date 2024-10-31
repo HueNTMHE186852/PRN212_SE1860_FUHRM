@@ -52,9 +52,9 @@ namespace Repositories
             return _accountDAO.GetAccountByUsername(username);
         }
 
-        public Employee GetEmployeeByUsername(string username)
+        public Employee GetEmployeeByUsername(int accountId)
         {
-            return _accountDAO.GetEmployeeByUsername(username);
+            return _accountDAO.GetEmployeeByUsername(accountId);
         }
     }
 }

@@ -22,25 +22,25 @@ namespace WPFApp
     /// </summary>
     public partial class AttendanceForm : Window
     {
-        private int _accountId; // Biến để lưu AccountId
-        public AttendanceForm(int accountId)
+        private readonly Employee _currentEmployee;
+        public AttendanceForm(Employee employee)
         {
             InitializeComponent();
-            _accountId = accountId;
+            _currentEmployee = employee;
         }
 
         private void btnSubmitLeaveRequest_Click(object sender, RoutedEventArgs e)
         {
             // Lấy EmployeeId dựa trên AccountId
             var leaveRequestRepo = new LeaveRequestRepository();
-            var employee = leaveRequestRepo.GetEmployeeByAccountId(MainWindow.CurrentAccountId);
+           
 
-            if (employee != null)
+            if (_currentEmployee != null)
             {
                 // Lấy thông tin từ các trường trong form
                 var leaveRequest = new LeaveRequest
                 {
-                    EmployeeId = employee.EmployeeId, // Sử dụng EmployeeID
+                    EmployeeId = _currentEmployee.EmployeeId, // Sử dụng EmployeeID
                     LeaveType = LeaveType.Text,
                     StartDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value),
                     EndDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value),

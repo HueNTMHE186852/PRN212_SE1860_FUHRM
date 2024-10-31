@@ -39,8 +39,8 @@ namespace WPFApp
                 {
                     if (account.Password.Equals(txtPassword.Password))
                     {
-  
 
+                        var employee = _accountRepository.GetEmployeeByUsername(account.AccountId);
                         if (account.Role.RoleName.Equals("Admin"))
                         {
                             EmployeeWindow employeeWindow = new EmployeeWindow();
@@ -49,13 +49,13 @@ namespace WPFApp
                         }
                         if (account.Role.RoleName.Equals("Employee"))
                         {
-                            TakeAttendance takeAttendance = new TakeAttendance(account.AccountId - 2);
-                            takeAttendance.Show();
+                            MainWindow mainWindow = new MainWindow(employee);
+                            mainWindow.Show();
                             this.Close();
                         }
                         else
                         {
-                            MainWindow mainWindow = new MainWindow();
+                            MainWindow mainWindow = new MainWindow(employee);
                             mainWindow.Show();
                             this.Close();
                         }
