@@ -293,11 +293,7 @@ namespace WPFApp
                 }
             }
         }
-        private void LeaveRequestButton_Click(object sender, RoutedEventArgs e)
-        {
-            AttendanceForm attendanceForm = new AttendanceForm();
-            attendanceForm.Show();
-        }
+       
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
