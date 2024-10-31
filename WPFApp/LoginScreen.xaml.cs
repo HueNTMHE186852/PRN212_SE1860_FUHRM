@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -48,17 +49,17 @@ namespace WPFApp
                     }
                     else
                     {
-                        txtError.Text = "Incorrect password " + txtPassword.Password;
+                        System.Windows.MessageBox.Show("Incorrect password");
                     }
                 }
                 else
                 {
-                    txtError.Text = "Invalid username or password";
+                    System.Windows.MessageBox.Show("Incorrect username");
                 }
             }
             else
             {
-                MessageBox.Show("Invalid username or password");
+                System.Windows.MessageBox.Show("Please enter username and password");
             }
         }
     }
