@@ -18,7 +18,7 @@ namespace WPFApp
         {
             if (txtUsername != null && txtPassword != null)
             {
-                Account account = _accountRepository.GetAccountByName(txtUsername.Text);
+                Account account = _accountRepository.GetAccountByUserName(txtUsername.Text);
                 if (account != null)
                 {
                     if (account.Password.Equals(txtPassword.Password))
@@ -47,17 +47,17 @@ namespace WPFApp
                     }
                     else
                     {
-                        txtError.Text = "Incorrect password " + txtPassword.Password;
+                        System.Windows.MessageBox.Show("Incorrect password");
                     }
                 }
                 else
                 {
-                    txtError.Text = "Invalid username or password";
+                    System.Windows.MessageBox.Show("Incorrect username");
                 }
             }
             else
             {
-                MessageBox.Show("Invalid username or password");
+                System.Windows.MessageBox.Show("Please enter username and password");
             }
         }
     }
