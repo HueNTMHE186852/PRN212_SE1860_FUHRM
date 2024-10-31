@@ -1,0 +1,30 @@
+﻿<Window x:Class="WPFApp.TakeAttendance"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApp"
+        mc:Ignorable="d"
+        Title="Take Attendance" Height="300" Width="400">
+    <Grid>
+        
+        
+        <StackPanel Margin="20">
+            <TextBlock Text="Take Attendance" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4A90E2"/>
+
+            <TextBlock Text="Employee ID:"/>
+            <TextBox x:Name="EmployeeIdTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+            <TextBlock Text="Full Name:"/>
+            <TextBox x:Name="EmployeeNameTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+            <TextBlock Text="Attendance Date:"/>
+            <TextBox x:Name="AttendanceDateTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+            <TextBlock Text="Status:"/>
+            <TextBox x:Name="StatusTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+            <Button Content="Take Attendance" Width="150" Margin="0,10,0,0" Click="SaveAttendanceButton_Click" Background="LightGreen" Foreground="White" Height="30" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>

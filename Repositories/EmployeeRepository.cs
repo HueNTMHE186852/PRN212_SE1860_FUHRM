@@ -26,19 +26,18 @@ namespace Repositories
             return _employeeDAO.GetEmployeeById(employeeId);
         }
 
-        public void AddEmployee(Employee employee)
-        {
-            _employeeDAO.AddEmployee(employee);
-        }
+
 
         public void UpdateEmployee(Employee employee)
         {
             _employeeDAO.UpdateEmployee(employee);
         }
 
-        public void DeleteEmployee(int employeeId)
+        public bool DeleteEmployee(int employeeId)
         {
-            _employeeDAO.DeleteEmployee(employeeId);
+            // Ensure to return the result of the deletion
+            return _employeeDAO.DeleteEmployee(employeeId);
         }
+
     }
 }

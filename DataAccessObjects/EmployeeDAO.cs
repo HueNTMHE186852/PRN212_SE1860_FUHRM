@@ -20,17 +20,14 @@ namespace DataAccessObjects
         {
             try
             {
-                using (var context = new FuhrmContext())
-                {
-                    var employees = context.Employees
-                        .Include(e => e.Department)
-                        .Include(e => e.Position)
-                        .Include(e => e.Account)
-                        .ThenInclude(a => a.Role) 
-                        .ToList();
+                var employees = _context.Employees
+                    .Include(e => e.Department)
+                    .Include(e => e.Position)
+                    .Include(e => e.Account)
+                    .ThenInclude(a => a.Role)
+                    .ToList();
 
-                    return employees;
-                }
+                return employees;
             }
             catch (Exception ex)
             {
@@ -40,23 +37,19 @@ namespace DataAccessObjects
         }
 
 
+
         public Employee GetEmployeeById(int employeeId)
         {
             return _context.Employees.Find(employeeId);
         }
 
-        public void AddEmployee(Employee employee)
-        {
-            _context.Employees.Add(employee);
-            _context.SaveChanges();
-        }
-
+     
         public void UpdateEmployee(Employee employee)
         {
             var existingEmployee = _context.Employees.Find(employee.EmployeeId);
             if (existingEmployee != null)
             {
-                // Cập nhật các thuộc tính
+                
                 existingEmployee.FullName = employee.FullName;
                 existingEmployee.DateOfBirth = employee.DateOfBirth;
                 existingEmployee.Gender = employee.Gender;
@@ -68,20 +61,22 @@ namespace DataAccessObjects
                 existingEmployee.StartDate = employee.StartDate;
                 
 
-                // Lưu thay đổi
                 _context.SaveChanges();
             }
         }
 
 
-        public void DeleteEmployee(int employeeId)
+        public bool DeleteEmployee(int employeeId)
         {
             var employee = _context.Employees.Find(employeeId);
             if (employee != null)
             {
                 _context.Employees.Remove(employee);
                 _context.SaveChanges();
+                return true; 
             }
+            return false; 
         }
+
     }
 }

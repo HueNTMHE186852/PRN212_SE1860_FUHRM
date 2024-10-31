@@ -5,34 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="LeaveRequestView" Height="500" Width="900">
+        Title="LeaveRequestView" Height="541" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Background="#F0F0F0" Grid.Column="0" VerticalAlignment="Stretch">
-            <TextBlock Text="QLNV" FontSize="20" FontWeight="Bold" Margin="10" Foreground="#333"/>
-            <ComboBox x:Name="UserTypeComboBox" SelectedIndex="0" Margin="10,0,10,10">
-                <ComboBoxItem Content="ADMIN"/>
-            </ComboBox>
-
-            <ListBox x:Name="SideMenu" Margin="10" Background="Transparent" BorderThickness="0">
-                <ListBoxItem Content="Trang Chủ" />
-                <ListBoxItem Content="Nhân viên" />
-                <ListBoxItem Content="Bộ phận" />
-                <ListBoxItem Content="Chấm công" />
-                <ListBoxItem Content="Bảng lương" />
-                <ListBoxItem Content="Dự án" />
-                <ListBoxItem Content="Nghỉ phép" />
-                <ListBoxItem Content="Báo cáo thống kê"/>
-                <ListBoxItem Content="Tra cứu thông tin" />
-                <ListBoxItem Content="Hệ thống" />
-                <ListBoxItem Content="Chat" />
-            </ListBox>
-        </StackPanel>
+        
+        <local:SideMenu Grid.Column="0"/>
+        
         <StackPanel Grid.Column="1" Margin="10">
-            
+            <TextBlock TextWrapping="Wrap" Text="Danh sách đơn" FontWeight="Bold" FontSize="18"/>
+            <DataGrid Margin="0,10,0,0" x:Name="LeaveRequestDataGrid" AutoGenerateColumns="False" Height="150"
+                      SelectionChanged="LeaveRequestDataGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Leave Request ID" Binding="{Binding LeaveRequestId}"/>
+                    <DataGridTextColumn Width="*" Header="Employee ID" Binding="{Binding EmployeeId}"/>
+                    <DataGridTextColumn Width="*" Header="Leave Type" Binding="{Binding LeaveType}"/>
+                    <DataGridTextColumn Width="*" Header="Start Date" Binding="{Binding StartDate}"/>
+                    <DataGridTextColumn Width="*" Header="End Date" Binding="{Binding EndDate}"/>
+                    <DataGridTextColumn Width="*" Header="Status" Binding="{Binding Status}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Margin="0,10,0,0" Height="308">
+                <TextBox TextWrapping="Wrap" x:Name="EmployeeNameText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="DepartmentNameText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="LeaveTypeText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="StartDateText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="EndDateText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="StatusText"  Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <Button Content="Approved" Width="88" Height="30" Background="LightGreen" HorizontalAlignment="Left" Margin="5" Click="ChangeStatus_Click"/>
+                <Button Content="Rejected" Width="88" Height="30" Background="Red" HorizontalAlignment="Left" Margin="5" Click="ChangeStatus_Click"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
