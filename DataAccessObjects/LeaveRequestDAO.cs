@@ -50,6 +50,37 @@ namespace DataAccessObjects
                 throw new Exception("Error updating status: " + ex.Message);
             }
         }
+        public void AddLeaveRequest(LeaveRequest leaveRequest)
+        {
+            using var context = new FuhrmContext();
+            try
+            {
+                if (leaveRequest == null)
+                {
+                    throw new ArgumentNullException(nameof(leaveRequest), "Leave request cannot be null.");
+                }
+                var employee = context.Employees.FirstOrDefault(e => e.EmployeeId == leaveRequest.EmployeeId);
+                if (employee == null)
+                {
+                    throw new Exception($"Employee with ID {leaveRequest.EmployeeId} not found.");
+                }
+
+                if (leaveRequest.StartDate > leaveRequest.EndDate)
+                {
+                    throw new ArgumentException("Start date must be before or equal to end date.");
+                }
+                if (string.IsNullOrWhiteSpace(leaveRequest.Status))
+                {
+                    leaveRequest.Status = "Pending";
+                }
+                context.LeaveRequests.Add(leaveRequest);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error adding leave request: {ex.Message}", ex);
+            }
+        }
 
     }
 }
