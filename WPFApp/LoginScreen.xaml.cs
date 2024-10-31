@@ -23,6 +23,12 @@ namespace WPFApp
                 {
                     if (account.Password.Equals(txtPassword.Password))
                     {
+                        // Handle special case for account ID > 1
+                        if (account.AccountId > 1)
+                        {
+                            account.AccountId = account.AccountId - 1;
+                        }
+
                         // Store the account in the session
                         SessionManager.CurrentAccount = account;
 
