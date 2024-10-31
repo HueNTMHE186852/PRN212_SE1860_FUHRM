@@ -47,6 +47,12 @@ namespace WPFApp
                             employeeWindow.Show();
                             this.Close();
                         }
+                        if (account.Role.RoleName.Equals("Employee"))
+                        {
+                            TakeAttendance takeAttendance = new TakeAttendance(account.AccountId - 2);
+                            takeAttendance.Show();
+                            this.Close();
+                        }
                         else
                         {
                             MainWindow mainWindow = new MainWindow();
