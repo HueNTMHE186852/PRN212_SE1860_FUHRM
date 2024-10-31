@@ -45,6 +45,12 @@ namespace WPFApp
                             employeeWindow.Show();
                             this.Close();
                         }
+                        else
+                        {
+                            MainWindow mainWindow = new MainWindow();
+                            mainWindow.Show();
+                            this.Close();
+                        }
                     }
                     else
                     {

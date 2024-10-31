@@ -51,36 +51,45 @@ namespace DataAccessObjects
             }
         }
         public void AddLeaveRequest(LeaveRequest leaveRequest)
+{
+    using var context = new FuhrmContext();
+    try
+    {
+        // Validate input
+        if (leaveRequest == null)
         {
-            using var context = new FuhrmContext();
-            try
-            {
-                if (leaveRequest == null)
-                {
-                    throw new ArgumentNullException(nameof(leaveRequest), "Leave request cannot be null.");
-                }
-                var employee = context.Employees.FirstOrDefault(e => e.EmployeeId == leaveRequest.EmployeeId);
-                if (employee == null)
-                {
-                    throw new Exception($"Employee with ID {leaveRequest.EmployeeId} not found.");
-                }
-
-                if (leaveRequest.StartDate > leaveRequest.EndDate)
-                {
-                    throw new ArgumentException("Start date must be before or equal to end date.");
-                }
-                if (string.IsNullOrWhiteSpace(leaveRequest.Status))
-                {
-                    leaveRequest.Status = "Pending";
-                }
-                context.LeaveRequests.Add(leaveRequest);
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error adding leave request: {ex.Message}", ex);
-            }
+            throw new ArgumentNullException(nameof(leaveRequest), "Leave request cannot be null.");
         }
+
+        // Check if employee exists
+        var employee = context.Employees.FirstOrDefault(e => e.EmployeeId == leaveRequest.EmployeeId);
+        if (employee == null)
+        {
+            throw new Exception($"Employee with ID {leaveRequest.EmployeeId} not found.");
+        }
+
+        // Validate date range
+        if (leaveRequest.StartDate > leaveRequest.EndDate)
+        {
+            throw new ArgumentException("Start date must be before or equal to end date.");
+        }
+
+        // Set default status if not provided
+        if (string.IsNullOrWhiteSpace(leaveRequest.Status))
+        {
+            leaveRequest.Status = "Pending";
+        }
+
+        // Add the leave request
+        context.LeaveRequests.Add(leaveRequest);
+        context.SaveChanges();
+    }
+    catch (Exception ex)
+    {
+        // Log the exception or handle it as needed
+        throw new Exception($"Error adding leave request: {ex.Message}", ex);
+    }
+}
 
     }
 }
