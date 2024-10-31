@@ -12,8 +12,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <local:SideMenu Grid.Column="0"/>
         <StackPanel Background="#4A90E2" Grid.Column="0" VerticalAlignment="Stretch" Margin="0">
-            <TextBlock Text="Quản Lý Lương" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Height="28" Width="186"/>
+            <TextBlock Text="Quản Lý Phòng ban" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Height="28" Width="186"/>
             <ComboBox x:Name="UserTypeComboBox" SelectedIndex="0" Margin="10,0,10,10" Background="#F0F0F0" Foreground="#333">
                 <ComboBoxItem Content="ADMIN"/>
             </ComboBox>

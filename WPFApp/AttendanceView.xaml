@@ -25,7 +25,7 @@
                     <DataGridTextColumn Header="Attendance ID" Binding="{Binding AttendanceId}" Width="*"/>
                     <DataGridTextColumn Header="Tên Nhân Viên" Binding="{Binding Employee.FullName}" Width="*"/>
                     <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" Width="*"/>
-                    <DataGridTextColumn Header="Ngày Chấm Công" Binding="{Binding AttendanceDate}" Width="*"/>
+                    <DataGridTextColumn Header="Ngày Chấm Công" Binding="{Binding Date}" Width="*"/>
                     <DataGridTextColumn Header="Trạng Thái" Binding="{Binding Status}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>

@@ -34,7 +34,7 @@ namespace WPFApp
         {
             if (txtUsername != null && txtPassword != null)
             {
-                Account account = _accountRepository.GetAccountByName(txtUsername.Text);
+                Account account = _accountRepository.GetAccountByUserName(txtUsername.Text);
                 if (account != null)
                 {
                     if (account.Password.Equals(txtPassword.Password))

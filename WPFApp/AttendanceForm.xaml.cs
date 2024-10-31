@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace WPFApp
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for AttendanceForm.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class AttendanceForm : Window
     {
-        public Window1()
+        public AttendanceForm()
         {
             InitializeComponent();
         }

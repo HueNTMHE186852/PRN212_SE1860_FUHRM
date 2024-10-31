@@ -10,10 +10,11 @@ namespace Repositories
     public interface IAccountRepository
     {
         public List<Account> GetAccounts();
+        public List<Role> GetRoles();
         public void AddAccount(Account account);
         public void UpdateAccount(Account account);
         public void DeleteAccount(int accountId);
         public Account GetAccountById(int accountId); 
-        public Account GetAccountByName(string name);
+        public Account GetAccountByUserName(string name);
     }
 }

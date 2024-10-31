@@ -39,9 +39,28 @@ namespace DataAccessObjects
             }
         }
 
+        public List<Role> GetRoles()
+        {
+            try
+            {
+                using (var context = new FuhrmContext())
+                {
+                    var roles = context.Roles
+                        .ToList();
+
+                    return roles;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching accounts: {ex.Message}");
+                return new List<Role>();
+            }
+        }
+
         public Account GetAccountById(int accountId)
         {
-            return _context.Accounts.Find(accountId);
+            return _context.Accounts.Include(a => a.Role).FirstOrDefault(a => a.AccountId == accountId);
         }
 
         public Account GetAccountByUsername(string username)
@@ -57,14 +76,15 @@ namespace DataAccessObjects
 
         public void UpdateAccount(Account account)
         {
-            var existingAccount = _context.Accounts.Find(account.AccountId);
-            if (existingAccount != null)
+            try
             {
-                // Update properties
-                existingAccount.Username = account.Username;
-                existingAccount.Password = account.Password;
-                existingAccount.RoleId = account.RoleId;
-                _context.SaveChanges();
+                using var db = new FuhrmContext();
+                db.Entry<Account>(account).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating account: {ex.Message}");
             }
         }
 
