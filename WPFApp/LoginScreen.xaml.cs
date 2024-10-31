@@ -26,7 +26,7 @@ namespace WPFApp
         {
             if (txtUsername != null && txtPassword != null)
             {
-                var account = _accountRepository.GetAccountByName(txtUsername.Text);
+                var account = _accountRepository.GetAccountByUserName(txtUsername.Text);
                 if (account != null)
                 {
                     if (account.Password.Equals(txtPassword.Password))
@@ -71,6 +71,6 @@ namespace WPFApp
 
     public static class SessionManager
     {
-        public static Account CurrentAccount { get; set; }
+        public static BusinessObjects.Account CurrentAccount { get; set; }
     }
 }
