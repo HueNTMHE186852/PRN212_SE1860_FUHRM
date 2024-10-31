@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WPFApp
@@ -6,11 +8,43 @@ namespace WPFApp
     /// <summary>
     /// Interaction logic for SideMenu.xaml
     /// </summary>
-    public partial class SideMenu : UserControl
+    public partial class SideMenu : UserControl, INotifyPropertyChanged
     {
+        private string _currentWindowName;
+
+        public string CurrentWindowName
+        {
+            get => _currentWindowName;
+            set
+            {
+                _currentWindowName = value;
+                OnPropertyChanged();
+            }
+        }
+
         public SideMenu()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            DataContext = this;
+            Loaded += SideMenu_Loaded;
+        }
+
+        private void SideMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetInitialWindowName();
+        }
+
+        private void SetInitialWindowName()
+        {
+            Window currentWindow = Window.GetWindow(this);
+            if (currentWindow != null)
+            {
+                CurrentWindowName = currentWindow.Title; // Set the window title as the initial window name
+            }
+            else
+            {
+                CurrentWindowName = "Unknown Window"; // Fallback value if the window is not found
+            }
         }
 
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
@@ -56,6 +90,13 @@ namespace WPFApp
                         break;
                 }
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
