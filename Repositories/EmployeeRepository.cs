@@ -50,5 +50,10 @@ namespace Repositories
         {
             return _employeeDAO.GetEmployeeByAccountId(accountId);
         }
+
+        public Employee GetEmployeesById(int Id)
+        {
+            return _employeeDAO.GetEmployeeById(Id);
+        }
     }
 }
