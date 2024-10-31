@@ -10,5 +10,6 @@
         <Button Content="Home" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
         <Button Content="Take Attendance" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
         <Button Content="Notifications" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+        <Button Content="Leave Request" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
     </StackPanel>
 </UserControl>

@@ -10,7 +10,8 @@ namespace WPFApp
     public partial class SideMenuEmployee : UserControl, INotifyPropertyChanged
     {
         private string _currentWindowName;
-
+        private readonly EmployeeRepository _employeeRepository;
+        private readonly LeaveRequestRepository leaveRequestRepository;
         public string CurrentWindowName
         {
             get => _currentWindowName;
@@ -45,6 +46,7 @@ namespace WPFApp
                 CurrentWindowName = "Unknown Window"; // Fallback value if the window is not found
             }
         }
+       
 
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -69,6 +71,14 @@ namespace WPFApp
                         notificationWindow.Show();
                         currentWindow.Close();
                         break;
+                    case "Leave Request":
+                        // Lấy thông tin employee từ AccountId hiện tại
+                        var currentEmployee = new MainWindow(SessionManager.CurrentAccount.AccountId);
+                        currentEmployee.Show();
+                        currentWindow.Close();
+                        
+                        break;
+
                     default:
                         break;
                 }

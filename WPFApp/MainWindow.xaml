@@ -9,7 +9,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <local:SideMenu Grid.Column="0"/>
+        <local:SideMenuEmployee Grid.Column="0"/>
 
         <Frame x:Name="MainContentFrame" Grid.Column="1" Margin="20"/>
 
