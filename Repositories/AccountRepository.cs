@@ -56,5 +56,10 @@ namespace Repositories
         {
             return _accountDAO.GetRoles();
         }
+
+        public Account GetAccountByEmployeeId(int employeeId)
+        {
+            return _accountDAO.GetAccountByEmployeeId(employeeId);
+        }
     }
 }

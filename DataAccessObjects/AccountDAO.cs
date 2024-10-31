@@ -97,5 +97,11 @@ namespace DataAccessObjects
                 _context.SaveChanges();
             }
         }
+
+        public Account GetAccountByEmployeeId(int employeeId)
+        {
+            return _context.Accounts
+                .FirstOrDefault(a => a.Employees.Any(e => e.EmployeeId == employeeId));
+        }
     }
 }

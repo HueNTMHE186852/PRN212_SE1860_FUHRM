@@ -16,6 +16,11 @@ namespace Repositories
             _employeeDAO = employeeDAO;
         }
 
+        public EmployeeRepository()
+        {
+            _employeeDAO = new EmployeeDAO();
+        }
+
         public List<Employee> GetAllEmployees()
         {
             return _employeeDAO.GetAllEmployees();
@@ -26,7 +31,10 @@ namespace Repositories
             return _employeeDAO.GetEmployeeById(employeeId);
         }
 
-
+        public void AddEmployee(Employee employee)
+        {
+            _employeeDAO.AddEmployee(employee);
+        }
 
         public void UpdateEmployee(Employee employee)
         {
