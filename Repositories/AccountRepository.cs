@@ -47,14 +47,14 @@ namespace Repositories
             return _accountDAO.GetAccountById(accountId);
         }
 
-        public Account GetAccountByUserName(string username)
+        public Account GetAccountByUserName(string name)
         {
-            return _accountDAO.GetAccountByUsername(username);
+            return _accountDAO.GetAccountByUsername(name);
         }
 
-        public List<Role> GetRoles()
+        public Employee GetEmployeeByUsername(int accountId)
         {
-            return _accountDAO.GetRoles();
+            return _accountDAO.GetEmployeeByUsername(accountId);
         }
 
         public Account GetAccountByEmployeeId(int employeeId)

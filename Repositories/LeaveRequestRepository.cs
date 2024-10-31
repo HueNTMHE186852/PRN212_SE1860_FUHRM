@@ -22,5 +22,8 @@ namespace Repositories
 
         public void AddLeaveRequest(LeaveRequest leaveRequest)
        => leaveRequestDAO.AddLeaveRequest(leaveRequest);
+
+        public Employee GetEmployeeByAccountId(int accountId)
+        => leaveRequestDAO.GetEmployeeByAccountId(accountId);
     }
 }

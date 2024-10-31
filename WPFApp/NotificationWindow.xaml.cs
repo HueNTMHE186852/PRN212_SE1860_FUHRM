@@ -1,27 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using BusinessObjects;
+using Repositories;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for NotificationWindow.xaml
-    /// </summary>
     public partial class NotificationWindow : Window
     {
-        public NotificationWindow()
+        private readonly INotificationRepository _notificationRepository;
+        private readonly IEmployeeRepository _employeeRepository;
+        private readonly int _accountId;
+        public Employee LoggedInEmployee { get; set; }
+        public ObservableCollection<Notification> Notifications { get; set; }
+
+        public NotificationWindow(int accountId, INotificationRepository notificationRepository, IEmployeeRepository employeeRepository)
         {
             InitializeComponent();
+            _accountId = accountId;
+            _notificationRepository = notificationRepository;
+            _employeeRepository = employeeRepository;
+            LoadEmployeeDetails();
+        }
+
+        private void LoadEmployeeDetails()
+        {
+            var employee = _employeeRepository.GetAllEmployees().FirstOrDefault(e => e.AccountId == _accountId);
+            if (employee != null)
+            {
+                LoggedInEmployee = employee;
+                LoadNotifications();
+            }
+            else
+            {
+                MessageBox.Show("Employee not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+            }
+        }
+
+        private void LoadNotifications()
+        {
+            var notifications = _notificationRepository.GetNotificationsByDepartmentId(LoggedInEmployee.DepartmentId);
+            Notifications = new ObservableCollection<Notification>(notifications);
+            NotificationListView.ItemsSource = Notifications;
         }
     }
 }

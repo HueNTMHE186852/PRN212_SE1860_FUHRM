@@ -67,7 +67,12 @@ namespace DataAccessObjects
         {
             return _context.Accounts.Include(a => a.Role).FirstOrDefault(a => a.Username.Equals(username));
         }
-
+        public Employee GetEmployeeByUsername(int accountId)
+        {
+            return _context.Employees
+                 .Include(e => e.Account)
+                 .FirstOrDefault(e => e.AccountId == accountId);
+        }
         public void AddAccount(Account account)
         {
             _context.Accounts.Add(account);

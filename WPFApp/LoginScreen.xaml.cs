@@ -1,25 +1,18 @@
 ﻿using BusinessObjects;
 using Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFApp.Models;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for LoginScreen.xaml
-    /// </summary>
     public partial class LoginScreen : Window
     {
         private readonly AccountRepository _accountRepository;
@@ -27,34 +20,34 @@ namespace WPFApp
         {
             InitializeComponent();
             _accountRepository = new AccountRepository();
-
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (txtUsername != null && txtPassword != null)
             {
-                Account account = _accountRepository.GetAccountByUserName(txtUsername.Text);
+                var account = _accountRepository.GetAccountByName(txtUsername.Text);
                 if (account != null)
                 {
                     if (account.Password.Equals(txtPassword.Password))
                     {
-                        
-                        if(account.Role.RoleName.Equals("Admin"))
+
+                        var employee = _accountRepository.GetEmployeeByUsername(account.AccountId);
+                        if (account.Role.RoleName.Equals("Admin"))
                         {
                             EmployeeWindow employeeWindow = new EmployeeWindow();
                             employeeWindow.Show();
                             this.Close();
                         }
-                        if (account.Role.RoleName.Equals("Employee"))
+                        else if (account.Role.RoleName.Equals("Employee"))
                         {
-                            TakeAttendance takeAttendance = new TakeAttendance(account.AccountId - 2);
-                            takeAttendance.Show();
+                            MainWindow mainWindow = new MainWindow(employee);
+                            mainWindow.Show();
                             this.Close();
                         }
                         else
                         {
-                            MainWindow mainWindow = new MainWindow();
+                            MainWindow mainWindow = new MainWindow(employee);
                             mainWindow.Show();
                             this.Close();
                         }
@@ -74,5 +67,10 @@ namespace WPFApp
                 System.Windows.MessageBox.Show("Please enter username and password");
             }
         }
+    }
+
+    public static class SessionManager
+    {
+        public static Account CurrentAccount { get; set; }
     }
 }

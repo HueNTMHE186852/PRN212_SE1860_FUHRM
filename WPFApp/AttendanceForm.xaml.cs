@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BusinessObjects;
 using Repositories;
+using Microsoft.Identity.Client;
 namespace WPFApp
 {
     /// <summary>
@@ -21,11 +22,11 @@ namespace WPFApp
     /// </summary>
     public partial class AttendanceForm : Window
     {
-
-        public AttendanceForm()
+        private readonly Employee _currentEmployee;
+        public AttendanceForm(Employee employee)
         {
             InitializeComponent();
-            // Lưu EmployeeId để tạo yêu cầu nghỉ phép
+            _currentEmployee = employee;
         }
 
         private void btnSubmitLeaveRequest_Click(object sender, RoutedEventArgs e)
@@ -44,8 +45,13 @@ namespace WPFApp
             var leaveRequestRepo = new LeaveRequestRepository();
             //leaveRequestRepo.AddLeaveRequest(leaveRequest);
 
-            MessageBox.Show("Leave request submitted successfully!");
-            this.Close();
+                MessageBox.Show("Leave request submitted successfully!");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Employee not found for the current account.");
+            }
         }
     }
 
