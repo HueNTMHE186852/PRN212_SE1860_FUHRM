@@ -12,6 +12,11 @@ namespace DataAccessObjects
     public class EmployeeDAO
     {
         private readonly FuhrmContext _context;
+        public EmployeeDAO()
+        {
+            _context = new FuhrmContext();
+        }
+
         public EmployeeDAO(FuhrmContext context)
         {
             _context = context;
@@ -36,7 +41,14 @@ namespace DataAccessObjects
             }
         }
 
-
+        public void AddEmployee(Employee employee)
+        {
+            using (var context = new FuhrmContext())
+            {
+                context.Employees.Add(employee);
+                context.SaveChanges();
+            }
+        }
 
         public Employee GetEmployeeById(int employeeId)
         {
@@ -71,18 +83,15 @@ namespace DataAccessObjects
         }
 
 
-        public bool DeleteEmployee(int employeeId)
+        public void DeleteEmployee(int employeeId)
         {
             var employee = _context.Employees.Find(employeeId);
             if (employee != null)
             {
                 _context.Employees.Remove(employee);
                 _context.SaveChanges();
-                return true; 
             }
-            return false; 
         }
-
 
     }
 }

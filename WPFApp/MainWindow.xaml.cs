@@ -1,22 +1,26 @@
-﻿using System.Windows;
+﻿
+using Repositories;
+using System.Windows;
 using System.Windows.Controls;
-
+using WPFApp.Models;
+using BusinessObjects;
 namespace WPFApp
 {
     public partial class MainWindow : Window
     {
-        
-        public MainWindow()
+        private readonly BusinessObjects.Employee _currentEmployee;
+        public MainWindow(BusinessObjects.Employee employee)
         {
             InitializeComponent();
+            _currentEmployee = employee;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
+           
         {
-            Window currentWindow = Window.GetWindow(this);
-            var leavesRequestForm = new AttendanceForm();
-            leavesRequestForm.Show();
-            currentWindow.Close();
+            AttendanceForm attendanceForm = new AttendanceForm(_currentEmployee);
+            attendanceForm.Show();
+            this.Close();
         }
     }
 }

@@ -16,5 +16,8 @@ namespace Repositories
         public void DeleteAccount(int accountId);
         public Account GetAccountById(int accountId); 
         public Account GetAccountByUserName(string name);
+
+        public Account GetAccountByEmployeeId(int employeeId);
+        public Employee GetEmployeeByUsername(int accountId);
     }
 }

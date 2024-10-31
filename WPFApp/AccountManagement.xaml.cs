@@ -22,10 +22,13 @@ namespace WPFApp
     public partial class AccountManagement : Window
     {
         AccountRepository accountRepository;
+        EmployeeRepository employeeRepository;
+
         public AccountManagement()
         {
             InitializeComponent();
             accountRepository = new AccountRepository();
+            employeeRepository = new EmployeeRepository();
             LoadAccounts();
             LoadRoles();
         }
@@ -98,13 +101,13 @@ namespace WPFApp
 
         private void AddAccount_Click(object sender, RoutedEventArgs e)
         {
-            if(UsernameTextBox.Text == "" || PasswordTextBox.Text == "" || RoleCombobox.SelectedValue == null)
+            if (UsernameTextBox.Text == "" || PasswordTextBox.Text == "" || RoleCombobox.SelectedValue == null)
             {
                 MessageBox.Show("Please fill in all fields");
             }
             else
             {
-                if(accountRepository.GetAccountByUserName(UsernameTextBox.Text) != null)
+                if (accountRepository.GetAccountByUserName(UsernameTextBox.Text) != null)
                 {
                     MessageBox.Show("Username already exists");
                     return;
@@ -118,11 +121,31 @@ namespace WPFApp
                         RoleId = (int)RoleCombobox.SelectedValue
                     };
                     accountRepository.AddAccount(account);
+                    if (account.RoleId == 2)
+                    {
+
+                        Employee employee = new Employee
+                        {
+                            FullName = "Default Name", // Set default or required properties
+                            DateOfBirth = new DateTime(2000, 1, 1), // Set default or required properties
+                            Gender = "Not Specified", // Set default or required properties
+                            Address = "Default Address", // Set default or required properties
+                            PhoneNumber = "000-000-0000", // Set default or required properties
+                            DepartmentId = 1, // Set default or required properties
+                            PositionId = 1, // Set default or required properties
+                            Salary = 0, // Set default or required properties
+                            StartDate = DateTime.Now, // Set default or required properties
+                            AccountId = account.AccountId // Associate with the created account
+                        };
+
+
+                        employeeRepository.AddEmployee(employee);
+                    }
                     LoadAccounts();
                 }
-                
             }
         }
+
 
         private void EditAccount_Click(object sender, RoutedEventArgs e)
         {
@@ -164,11 +187,17 @@ namespace WPFApp
                 MessageBoxResult result = MessageBox.Show("Are you sure to delete?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    accountRepository.DeleteAccount(int.Parse(AccountIdTextBox.Text));
+                    int accountId = int.Parse(AccountIdTextBox.Text);
+                    var employee = employeeRepository.GetEmployeeById(accountId);
+                    if (employee != null)
+                    {
+                        employeeRepository.DeleteEmployee(employee.EmployeeId);
+                    }
+                    accountRepository.DeleteAccount(accountId);
                     LoadAccounts();
                 }
-
             }
         }
+
     }
 }
