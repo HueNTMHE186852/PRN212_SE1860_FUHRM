@@ -10,7 +10,7 @@ namespace WPFApp
     {
         public SideMenu()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
