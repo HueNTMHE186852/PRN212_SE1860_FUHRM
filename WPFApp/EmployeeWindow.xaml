@@ -99,9 +99,7 @@
                                 Click="SaveChangesButton_Click" Background="#4A90E2" Foreground="White"/>
                         <Button Content="Refresh" Width="100" Height="30" Margin="5" 
                                 Click="RefreshButton_Click" Background="Brown" Foreground="White"/>
-                        <Button Content="Xóa" Width="100" Height="30" Margin="5" 
-                                Click="DeleteButton_Click" Background="Red" Foreground="White"/>
-                    </StackPanel>
+                        </StackPanel>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

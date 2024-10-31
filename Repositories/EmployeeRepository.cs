@@ -41,10 +41,19 @@ namespace Repositories
             _employeeDAO.UpdateEmployee(employee);
         }
 
-        public bool DeleteEmployee(int employeeId)
+        public void DeleteEmployee(int employeeId)
         {
-            return _employeeDAO.DeleteEmployee(employeeId); 
+            _employeeDAO.DeleteEmployee(employeeId);
         }
 
+        public Employee GetEmployeeByAccountId(int accountId)
+        {
+            return _employeeDAO.GetEmployeeByAccountId(accountId);
+        }
+
+        public Employee GetEmployeesById(int Id)
+        {
+            return _employeeDAO.GetEmployeeById(Id);
+        }
     }
 }

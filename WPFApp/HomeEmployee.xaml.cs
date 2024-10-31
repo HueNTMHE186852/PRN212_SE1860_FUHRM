@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataAccessObjects;
+using Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,13 @@ namespace WPFApp
     /// </summary>
     public partial class HomeEmployee : Window
     {
+        EmployeeRepository employeeRepository;
         public HomeEmployee()
         {
             InitializeComponent();
+            FuhrmContext context = new FuhrmContext();
+            EmployeeDAO ed = new EmployeeDAO(context);
+            employeeRepository = new EmployeeRepository(ed);
             LoadEmployeeData();
         }
 
@@ -30,12 +36,27 @@ namespace WPFApp
             var currentAccount = SessionManager.CurrentAccount;
             if (currentAccount != null)
             {
-                WelcomeTextBlock.Text = $"Welcome {currentAccount.Username}";
+                var em = employeeRepository.GetEmployeeByAccountId(currentAccount.AccountId);
+                WelcomeTextBlock.Text = $"Welcome {em.FullName}";
+                NameTextBox.Text = em.FullName;
+                BirthTextBox.Text = em.DateOfBirth.ToString().Split(" ")[0];
+                GenderTextBox.Text = em.Gender;
+                AddressTextBox.Text = em.Address;
+                PhoneTextBox.Text = em.PhoneNumber;
+                StartTextBox.Text = em.StartDate.ToString().Split(" ")[0];
+                DepartmentTextBox.Text = em.Department.DepartmentName;
+                PositionTextBox.Text = em.Position.PositionName;
+                SalaryTextBox.Text = em.Salary.ToString();
             }
             else
             {
                 WelcomeTextBlock.Text = "Welcome";
             }
+        }
+
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

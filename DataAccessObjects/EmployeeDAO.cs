@@ -55,7 +55,12 @@ namespace DataAccessObjects
             return _context.Employees.Find(employeeId);
         }
 
-     
+        public Employee GetEmployeeByAccountId(int accountId)
+        {
+            return _context.Employees.Include(e => e.Department).Include(e => e.Position).FirstOrDefault(e => e.AccountId == accountId);
+        }
+
+
         public void UpdateEmployee(Employee employee)
         {
             var existingEmployee = _context.Employees.Find(employee.EmployeeId);
@@ -78,18 +83,15 @@ namespace DataAccessObjects
         }
 
 
-        public bool DeleteEmployee(int employeeId)
+        public void DeleteEmployee(int employeeId)
         {
             var employee = _context.Employees.Find(employeeId);
             if (employee != null)
             {
                 _context.Employees.Remove(employee);
                 _context.SaveChanges();
-                return true; 
             }
-            return false; 
         }
-
 
     }
 }
