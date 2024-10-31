@@ -17,5 +17,6 @@
             <StatusBarItem Content="Quyền hạn: Quản trị hệ thống"/>
             <StatusBarItem Content="Ngày: 01/25/2024" HorizontalAlignment="Right"/>
         </StatusBar>
+        <Button Grid.Column="1" Content="Add Leave Request" HorizontalAlignment="Left" Margin="42,41,0,0" VerticalAlignment="Top" Height="21" Width="173" Click="Button_Click"/>
     </Grid>
 </Window>
