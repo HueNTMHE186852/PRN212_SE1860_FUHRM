@@ -1,24 +1,10 @@
 ﻿using BusinessObjects;
 using Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for LoginScreen.xaml
-    /// </summary>
     public partial class LoginScreen : Window
     {
         private readonly AccountRepository _accountRepository;
@@ -26,7 +12,6 @@ namespace WPFApp
         {
             InitializeComponent();
             _accountRepository = new AccountRepository();
-
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -38,17 +23,19 @@ namespace WPFApp
                 {
                     if (account.Password.Equals(txtPassword.Password))
                     {
-                        
-                        if(account.Role.RoleName.Equals("Admin"))
+                        // Store the account in the session
+                        SessionManager.CurrentAccount = account;
+
+                        if (account.Role.RoleName.Equals("Admin"))
                         {
                             EmployeeWindow employeeWindow = new EmployeeWindow();
                             employeeWindow.Show();
                             this.Close();
                         }
-                        if (account.Role.RoleName.Equals("Employee"))
+                        else if (account.Role.RoleName.Equals("Employee"))
                         {
-                            TakeAttendance takeAttendance = new TakeAttendance(account.AccountId - 2);
-                            takeAttendance.Show();
+                            HomeEmployee homeEmployee = new HomeEmployee();
+                            homeEmployee.Show();
                             this.Close();
                         }
                         else
@@ -73,5 +60,10 @@ namespace WPFApp
                 MessageBox.Show("Invalid username or password");
             }
         }
+    }
+
+    public static class SessionManager
+    {
+        public static Account CurrentAccount { get; set; }
     }
 }

@@ -33,7 +33,6 @@ namespace WPFApp
             // Lấy thông tin từ các trường trong form (ví dụ: loại nghỉ phép, ngày bắt đầu, ngày kết thúc)
             var leaveRequest = new LeaveRequest
             {
-                EmployeeId = ,
                 LeaveType = LeaveType.Text,
                 StartDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value),
             EndDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value),
@@ -42,7 +41,6 @@ namespace WPFApp
 
             // Gọi phương thức thêm yêu cầu nghỉ phép từ DAO
             var leaveRequestRepo = new LeaveRequestRepository();
-            leaveRequestRepo.AddLeaveRequest(leaveRequest);
 
             MessageBox.Show("Leave request submitted successfully!");
             this.Close();

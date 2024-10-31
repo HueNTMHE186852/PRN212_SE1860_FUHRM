@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="Take Attendance" Height="300" Width="400">
+        Title="Take Attendance" Height="600" Width="900">
     <Grid>
-        
-        
-        <StackPanel Margin="20">
-            <TextBlock Text="Take Attendance" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4A90E2"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <local:SideMenuEmployee Grid.Column="0"/>
+
+        <StackPanel Grid.Column="1" Margin="20,20,20,0">
+            <TextBlock Text="Take Attendance" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4A90E2"/>
             <TextBlock Text="Employee ID:"/>
             <TextBox x:Name="EmployeeIdTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
 
