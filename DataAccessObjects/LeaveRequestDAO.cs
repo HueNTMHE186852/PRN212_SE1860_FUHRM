@@ -24,6 +24,23 @@ namespace DataAccessObjects
             }
                 return leaveList;
         }
+        public List<LeaveRequest> GetLeaveRequestsByEmployeeID(int employeeId)
+        {
+            try
+            {
+                using var context = new FuhrmContext();
+                return context.LeaveRequests
+                    .Include(lr => lr.Employee)
+                    .Where(lr => lr.EmployeeId == employeeId)
+                    .OrderByDescending(lr => lr.StartDate)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if you have logging configured
+                throw new Exception($"Error retrieving leave requests for employee {employeeId}: {ex.Message}", ex);
+            }
+        }
         public LeaveRequest getLeaveRequest(int id) { 
         using var _context = new FuhrmContext();
         var leaveRequestDetail = _context.LeaveRequests
