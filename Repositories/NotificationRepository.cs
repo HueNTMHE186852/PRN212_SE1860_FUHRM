@@ -21,5 +21,7 @@ namespace Repositories
         public void UpdateNotification(Notification notification)
             => NotificationDAO.UpdateNotification(notification);
 
+        public List<Notification> GetNotificationsByDepartmentId(int departmentId) // Implementing the missing method
+            => NotificationDAO.GetNotificationsByDepartmentId(departmentId);
     }
 }

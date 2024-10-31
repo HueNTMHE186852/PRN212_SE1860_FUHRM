@@ -22,5 +22,9 @@ namespace Repositories
 
         public List<Department> GetDepartments()
             => DepartmentDAO.GetDepartments();
+
+        public int GetEmployeeCountByDepartment(int departmentId)
+            => DepartmentDAO.GetEmployeeCountByDepartment(departmentId);
+
     }
 }

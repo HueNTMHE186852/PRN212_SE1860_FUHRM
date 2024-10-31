@@ -1,10 +1,7 @@
-﻿using System;
+﻿using BusinessObjects;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessObjects;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessObjects
 {
@@ -54,6 +51,16 @@ namespace DataAccessObjects
             {
                 context.Notifications.Update(notification);
                 context.SaveChanges();
+            }
+        }
+
+        public static List<Notification> GetNotificationsByDepartmentId(int departmentId) // New method
+        {
+            using (var context = new FuhrmContext())
+            {
+                return context.Notifications
+                    .Where(n => n.DepartmentId == departmentId)
+                    .ToList();
             }
         }
     }

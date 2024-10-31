@@ -1,10 +1,6 @@
 ﻿using BusinessObjects;
 using Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,9 +13,6 @@ using WPFApp.Models;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for LoginScreen.xaml
-    /// </summary>
     public partial class LoginScreen : Window
     {
         private readonly AccountRepository _accountRepository;
@@ -27,7 +20,6 @@ namespace WPFApp
         {
             InitializeComponent();
             _accountRepository = new AccountRepository();
-
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -47,7 +39,7 @@ namespace WPFApp
                             employeeWindow.Show();
                             this.Close();
                         }
-                        if (account.Role.RoleName.Equals("Employee"))
+                        else if (account.Role.RoleName.Equals("Employee"))
                         {
                             MainWindow mainWindow = new MainWindow(employee);
                             mainWindow.Show();
@@ -62,18 +54,23 @@ namespace WPFApp
                     }
                     else
                     {
-                        txtError.Text = "Incorrect password " + txtPassword.Password;
+                        System.Windows.MessageBox.Show("Incorrect password");
                     }
                 }
                 else
                 {
-                    txtError.Text = "Invalid username or password";
+                    System.Windows.MessageBox.Show("Incorrect username");
                 }
             }
             else
             {
-                MessageBox.Show("Invalid username or password");
+                System.Windows.MessageBox.Show("Please enter username and password");
             }
         }
+    }
+
+    public static class SessionManager
+    {
+        public static Account CurrentAccount { get; set; }
     }
 }

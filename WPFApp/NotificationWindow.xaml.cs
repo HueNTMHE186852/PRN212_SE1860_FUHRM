@@ -1,27 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using BusinessObjects;
+using Repositories;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for NotificationWindow.xaml
-    /// </summary>
     public partial class NotificationWindow : Window
     {
-        public NotificationWindow()
+        private readonly INotificationRepository _notificationRepository;
+        public Employee LoggedInEmployee { get; set; }
+        public ObservableCollection<Notification> Notifications { get; set; }
+
+        public NotificationWindow(Employee employee, INotificationRepository notificationRepository)
         {
             InitializeComponent();
+            LoggedInEmployee = employee;
+            _notificationRepository = notificationRepository;
+            LoadNotifications();
+        }
+
+        private void LoadNotifications()
+        {
+            var notifications = _notificationRepository.GetNotificationsByDepartmentId(LoggedInEmployee.DepartmentId);
+            Notifications = new ObservableCollection<Notification>(notifications);
+            NotificationListView.ItemsSource = Notifications;
         }
     }
 }

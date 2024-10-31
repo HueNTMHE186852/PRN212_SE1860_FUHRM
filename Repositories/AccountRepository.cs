@@ -47,7 +47,7 @@ namespace Repositories
             return _accountDAO.GetAccountById(accountId);
         }
 
-        public Account GetAccountByName(string username)
+        public Account GetAccountByUserName(string username)
         {
             return _accountDAO.GetAccountByUsername(username);
         }

@@ -14,5 +14,7 @@ namespace Repositories
         List<Notification>? SearchNotification(string title);
         void RemoveNotification(Notification notification);
         void UpdateNotification(Notification notification);
+        List<Notification> GetNotificationsByDepartmentId(int departmentId); // New method
     }
 }
+

@@ -2,8 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WPFApp"
+<<<<<<< HEAD
              StartupUri="LeaveRequestView.xaml">
+=======
+             StartupUri="EmployeeWindow.xaml">
+>>>>>>> 3d8c17e353b03ad59f164fd5af6e47ad73874cae
     <Application.Resources>
-        
+         
     </Application.Resources>
 </Application>
