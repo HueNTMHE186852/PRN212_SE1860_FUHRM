@@ -95,11 +95,23 @@ namespace DataAccessObjects
 
         public void DeleteAccount(int accountId)
         {
-            var account = _context.Accounts.Find(accountId);
-            if (account != null)
+            try
             {
-                _context.Accounts.Remove(account);
-                _context.SaveChanges();
+                var account = _context.Accounts.Find(accountId);
+                if (account != null)
+                {
+                    var employee = _context.Employees.FirstOrDefault(e => e.AccountId == accountId);
+                    if (employee != null)
+                    {
+                        _context.Employees.Remove(employee);
+                    }
+                    _context.Accounts.Remove(account);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
             }
         }
 

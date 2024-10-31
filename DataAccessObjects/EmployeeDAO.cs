@@ -78,18 +78,15 @@ namespace DataAccessObjects
         }
 
 
-        public bool DeleteEmployee(int employeeId)
+        public void DeleteEmployee(int employeeId)
         {
             var employee = _context.Employees.Find(employeeId);
             if (employee != null)
             {
                 _context.Employees.Remove(employee);
                 _context.SaveChanges();
-                return true; 
             }
-            return false; 
         }
-
 
     }
 }
