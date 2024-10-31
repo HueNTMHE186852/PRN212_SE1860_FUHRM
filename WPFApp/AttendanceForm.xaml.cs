@@ -41,7 +41,6 @@ namespace WPFApp
 
             // Gọi phương thức thêm yêu cầu nghỉ phép từ DAO
             var leaveRequestRepo = new LeaveRequestRepository();
-            leaveRequestRepo.AddLeaveRequest(leaveRequest);
 
             MessageBox.Show("Leave request submitted successfully!");
             this.Close();
