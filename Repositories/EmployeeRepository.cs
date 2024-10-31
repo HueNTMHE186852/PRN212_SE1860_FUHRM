@@ -38,5 +38,9 @@ namespace Repositories
             return _employeeDAO.DeleteEmployee(employeeId); 
         }
 
+        public Employee GetEmployeeByAccountId(int accountId)
+        {
+            return _employeeDAO.GetEmployeeByAccountId(accountId);
+        }
     }
 }

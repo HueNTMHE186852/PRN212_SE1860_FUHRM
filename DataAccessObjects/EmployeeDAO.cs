@@ -43,7 +43,12 @@ namespace DataAccessObjects
             return _context.Employees.Find(employeeId);
         }
 
-     
+        public Employee GetEmployeeByAccountId(int accountId)
+        {
+            return _context.Employees.Include(e => e.Department).Include(e => e.Position).FirstOrDefault(e => e.AccountId == accountId);
+        }
+
+
         public void UpdateEmployee(Employee employee)
         {
             var existingEmployee = _context.Employees.Find(employee.EmployeeId);
