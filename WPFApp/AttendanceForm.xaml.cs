@@ -31,24 +31,19 @@ namespace WPFApp
 
         private void btnSubmitLeaveRequest_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy EmployeeId dựa trên AccountId
-            var leaveRequestRepo = new LeaveRequestRepository();
-           
-
-            if (_currentEmployee != null)
+            // Lấy thông tin từ các trường trong form (ví dụ: loại nghỉ phép, ngày bắt đầu, ngày kết thúc)
+            var leaveRequest = new LeaveRequest
             {
-                // Lấy thông tin từ các trường trong form
-                var leaveRequest = new LeaveRequest
-                {
-                    EmployeeId = _currentEmployee.EmployeeId, // Sử dụng EmployeeID
-                    LeaveType = LeaveType.Text,
-                    StartDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value),
-                    EndDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value),
-                    Status = "Pending"
-                };
+            //    EmployeeId = ,
+            //    LeaveType = LeaveType.Text,
+            //    StartDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value),
+            //EndDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value),
+            //    Status = "Pending"
+            };
 
-                // Gọi phương thức thêm yêu cầu nghỉ phép từ DAO
-                leaveRequestRepo.AddLeaveRequest(leaveRequest);
+            // Gọi phương thức thêm yêu cầu nghỉ phép từ DAO
+            var leaveRequestRepo = new LeaveRequestRepository();
+            //leaveRequestRepo.AddLeaveRequest(leaveRequest);
 
                 MessageBox.Show("Leave request submitted successfully!");
                 this.Close();

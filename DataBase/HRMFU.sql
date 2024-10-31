@@ -102,13 +102,13 @@ CREATE TABLE Backups (
 
 -- Chèn dữ liệu vào bảng Roles
 INSERT INTO Roles (RoleName) VALUES ('Admin');
-INSERT INTO Roles (RoleName) VALUES ('Manager');
 INSERT INTO Roles (RoleName) VALUES ('Employee');
 
 -- Chèn dữ liệu vào bảng Accounts
 INSERT INTO Accounts (Username, Password, RoleID) VALUES ('admin', 'admin123', 1);
-INSERT INTO Accounts (Username, Password, RoleID) VALUES ('manager', 'manager123', 2);
-INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee', 'employee123', 3);
+INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee1', 'employee1', 2);
+INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee2', 'employee2', 2);
+INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee3', 'employee3', 2);
 
 -- Chèn dữ liệu vào bảng Departments
 INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('Human Resources', GETDATE());
@@ -122,13 +122,13 @@ INSERT INTO Positions (PositionName) VALUES ('IT Specialist');
 
 -- Chèn dữ liệu vào bảng Employees
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES ('John Doe', '1985-05-15', 'Male', '123 Main St', '123-456-7890', 1, 1, 1, 50000, '2020-01-01', 'john_doe.jpg');
+VALUES ('John Doe', '1985-05-15', 'Male', '123 Main St', '123-456-7890', 1, 1, 2, 50000, '2020-01-01', 'john_doe.jpg');
 
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES ('Jane Smith', '1990-07-20', 'Female', '456 Elm St', '987-654-3210', 2, 2, 2, 60000, '2021-02-01', 'jane_smith.jpg');
+VALUES ('Jane Smith', '1990-07-20', 'Female', '456 Elm St', '987-654-3210', 2, 2, 3, 60000, '2021-02-01', 'jane_smith.jpg');
 
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES ('Alice Johnson', '1992-03-10', 'Female', '789 Oak St', '555-666-7777', 3, 3, 3, 55000, '2022-03-01', 'alice_johnson.jpg');
+VALUES ('Alice Johnson', '1992-03-10', 'Female', '789 Oak St', '555-666-7777', 3, 3, 4, 55000, '2022-03-01', 'alice_johnson.jpg');
 
 -- Chèn dữ liệu vào bảng Salaries
 INSERT INTO Salaries (EmployeeID, BaseSalary, Allowance, Bonus, Penalty, PaymentDate) 
