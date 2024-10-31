@@ -14,5 +14,6 @@ namespace Repositories
         void ChangeStatus(int leaveRequestId, string newStatus);
 
         void AddLeaveRequest(LeaveRequest leaveRequest);
+        Employee GetEmployeeByAccountId(int accountId);
     }
 }

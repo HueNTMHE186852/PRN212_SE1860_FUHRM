@@ -48,7 +48,21 @@ namespace DataAccessObjects
         {
             return _context.Accounts.Include(a => a.Role).FirstOrDefault(a => a.Username.Equals(username));
         }
+        public Employee GetEmployeeByUsername(string username)
+        {
+            // Lấy Account dựa trên username
+            var account = _context.Accounts
+                .Include(a => a.Employees) // Đảm bảo bao gồm thông tin Employees
+                .FirstOrDefault(a => a.Username.Equals(username));
 
+            if (account != null)
+            {
+                // Lấy Employee từ account
+                return _context.Employees.FirstOrDefault(e => e.AccountId == account.AccountId);
+            }
+
+            return null; // Trả về null nếu không tìm thấy account
+        }
         public void AddAccount(Account account)
         {
             _context.Accounts.Add(account);

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BusinessObjects;
 using Repositories;
+using Microsoft.Identity.Client;
 namespace WPFApp
 {
     /// <summary>
@@ -21,31 +22,41 @@ namespace WPFApp
     /// </summary>
     public partial class AttendanceForm : Window
     {
-
-        public AttendanceForm()
+        private int _accountId; // Biến để lưu AccountId
+        public AttendanceForm(int accountId)
         {
             InitializeComponent();
-            // Lưu EmployeeId để tạo yêu cầu nghỉ phép
+            _accountId = accountId;
         }
 
         private void btnSubmitLeaveRequest_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy thông tin từ các trường trong form (ví dụ: loại nghỉ phép, ngày bắt đầu, ngày kết thúc)
-            var leaveRequest = new LeaveRequest
-            {
-                EmployeeId = ,
-                LeaveType = LeaveType.Text,
-                StartDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value),
-            EndDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value),
-                Status = "Pending"
-            };
-
-            // Gọi phương thức thêm yêu cầu nghỉ phép từ DAO
+            // Lấy EmployeeId dựa trên AccountId
             var leaveRequestRepo = new LeaveRequestRepository();
-            leaveRequestRepo.AddLeaveRequest(leaveRequest);
+            var employee = leaveRequestRepo.GetEmployeeByAccountId(MainWindow.CurrentAccountId);
 
-            MessageBox.Show("Leave request submitted successfully!");
-            this.Close();
+            if (employee != null)
+            {
+                // Lấy thông tin từ các trường trong form
+                var leaveRequest = new LeaveRequest
+                {
+                    EmployeeId = employee.EmployeeId, // Sử dụng EmployeeID
+                    LeaveType = LeaveType.Text,
+                    StartDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value),
+                    EndDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value),
+                    Status = "Pending"
+                };
+
+                // Gọi phương thức thêm yêu cầu nghỉ phép từ DAO
+                leaveRequestRepo.AddLeaveRequest(leaveRequest);
+
+                MessageBox.Show("Leave request submitted successfully!");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Employee not found for the current account.");
+            }
         }
     }
 

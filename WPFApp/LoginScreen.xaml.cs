@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFApp.Models;
 
 namespace WPFApp
 {
@@ -33,13 +34,14 @@ namespace WPFApp
         {
             if (txtUsername != null && txtPassword != null)
             {
-                Account account = _accountRepository.GetAccountByName(txtUsername.Text);
+                var account = _accountRepository.GetAccountByName(txtUsername.Text);
                 if (account != null)
                 {
                     if (account.Password.Equals(txtPassword.Password))
                     {
-                        
-                        if(account.Role.RoleName.Equals("Admin"))
+  
+
+                        if (account.Role.RoleName.Equals("Admin"))
                         {
                             EmployeeWindow employeeWindow = new EmployeeWindow();
                             employeeWindow.Show();
