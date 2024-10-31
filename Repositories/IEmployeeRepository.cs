@@ -14,9 +14,6 @@ namespace Repositories
 
         void AddEmployee(Employee employee);
         void UpdateEmployee(Employee employee);
-        void DeleteEmployee(int employeeId);
-        Employee GetEmployeeByAccountId(int accountId);
-
-
+        bool DeleteEmployee(int employeeId);
     }
 }
