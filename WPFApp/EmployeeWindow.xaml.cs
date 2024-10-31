@@ -279,5 +279,13 @@ namespace WPFApp
             AttendanceForm attendanceForm = new AttendanceForm();
             attendanceForm.Show();
         }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.ToLower();
+            var filteredEmployees= _employeeRepository.GetAllEmployees().Where(e => e.FullName.ToLower().Contains(searchText)).ToList();
+            EmployeeDataGrid.ItemsSource = filteredEmployees;
+
+        }
     }
 }
