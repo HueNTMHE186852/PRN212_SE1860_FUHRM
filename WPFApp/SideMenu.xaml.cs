@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using BusinessObjects;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,7 +12,7 @@ namespace WPFApp
     public partial class SideMenu : UserControl, INotifyPropertyChanged
     {
         private string _currentWindowName;
-
+        private Employee _currentEmployee;
         public string CurrentWindowName
         {
             get => _currentWindowName;
@@ -21,7 +22,8 @@ namespace WPFApp
                 OnPropertyChanged();
             }
         }
-
+        // Thêm constructor nhận Employee
+        
         public SideMenu()
         {
             InitializeComponent();

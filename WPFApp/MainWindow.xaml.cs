@@ -22,5 +22,10 @@ namespace WPFApp
             attendanceForm.Show();
             this.Close();
         }
+        public void LoadLeavesRequestByID()
+        {
+            LeaveRequestRepository leave = new LeaveRequestRepository();
+            var leaveRequest = leave.GetLeaveRequestsByEmployeeID(_currentEmployee);
+        }
     }
 }
