@@ -9,15 +9,33 @@ namespace WPFApp
     public partial class NotificationWindow : Window
     {
         private readonly INotificationRepository _notificationRepository;
+        private readonly IEmployeeRepository _employeeRepository;
+        private readonly int _accountId;
         public Employee LoggedInEmployee { get; set; }
         public ObservableCollection<Notification> Notifications { get; set; }
 
-        public NotificationWindow(Employee employee, INotificationRepository notificationRepository)
+        public NotificationWindow(int accountId, INotificationRepository notificationRepository, IEmployeeRepository employeeRepository)
         {
             InitializeComponent();
-            LoggedInEmployee = employee;
+            _accountId = accountId;
             _notificationRepository = notificationRepository;
-            LoadNotifications();
+            _employeeRepository = employeeRepository;
+            LoadEmployeeDetails();
+        }
+
+        private void LoadEmployeeDetails()
+        {
+            var employee = _employeeRepository.GetAllEmployees().FirstOrDefault(e => e.AccountId == _accountId);
+            if (employee != null)
+            {
+                LoggedInEmployee = employee;
+                LoadNotifications();
+            }
+            else
+            {
+                MessageBox.Show("Employee not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+            }
         }
 
         private void LoadNotifications()

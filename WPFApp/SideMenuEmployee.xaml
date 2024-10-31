@@ -9,5 +9,6 @@
         <TextBlock Text="{Binding CurrentWindowName}" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Height="28" Width="186"/>
         <Button Content="Home" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
         <Button Content="Take Attendance" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
+        <Button Content="Notifications" Foreground="#FFFFFF" Background="Transparent" Click="NavigateButton_Click"/>
     </StackPanel>
 </UserControl>
