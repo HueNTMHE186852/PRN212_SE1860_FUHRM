@@ -1,6 +1,5 @@
 ﻿using Repositories;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -50,9 +49,11 @@ namespace WPFApp
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var department = new Department();
-            department.DepartmentName = DepartmentNameTextBox.Text;
-            department.CreateDate = CreateDatePicker.SelectedDate;
+            var department = new Department
+            {
+                DepartmentName = DepartmentNameTextBox.Text,
+                CreateDate = CreateDatePicker.SelectedDate
+            };
             _departmentRepository.AddDepartment(department);
             LoadDepartments();
         }
@@ -75,6 +76,15 @@ namespace WPFApp
                 _departmentRepository.RemoveDepartment(selectedDepartment);
                 LoadDepartments();
             }
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            var searchText = SearchTextBox.Text.ToLower();
+            var filteredDepartments = _departmentRepository.GetDepartments()
+                .Where(d => d.DepartmentName.ToLower().Contains(searchText))
+                .ToList();
+            DepartmentDataGrid.ItemsSource = filteredDepartments;
         }
 
         private void NavigateButton_Click(object sender, RoutedEventArgs e)

@@ -11,7 +11,9 @@ namespace DataAccessObjects
         {
             using (var context = new FuhrmContext())
             {
-                return context.Departments.ToList();
+                return context.Departments
+                    .Include(d => d.Employees)
+                    .ToList();
             }
         }
 
@@ -51,5 +53,15 @@ namespace DataAccessObjects
                 context.SaveChanges();
             }
         }
+
+        public static int GetEmployeeCountByDepartment(int departmentId)
+        {
+            using (var context = new FuhrmContext())
+            {
+                return context.Employees.Count(e => e.DepartmentId == departmentId);
+            }
+        }
+
+
     }
 }

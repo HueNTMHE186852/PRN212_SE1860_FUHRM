@@ -35,9 +35,9 @@ namespace Repositories
 
         public bool DeleteEmployee(int employeeId)
         {
-            // Ensure to return the result of the deletion
-            return _employeeDAO.DeleteEmployee(employeeId);
+            return _employeeDAO.DeleteEmployee(employeeId); 
         }
+
 
     }
 }

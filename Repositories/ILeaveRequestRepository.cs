@@ -12,5 +12,7 @@ namespace Repositories
         List<LeaveRequest> getAllLeaveRequest();
         LeaveRequest getLeaveRequest(int id);
         void ChangeStatus(int leaveRequestId, string newStatus);
+
+        void AddLeaveRequest(LeaveRequest leaveRequest);
     }
 }

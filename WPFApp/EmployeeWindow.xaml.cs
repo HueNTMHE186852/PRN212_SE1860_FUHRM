@@ -105,14 +105,33 @@ namespace WPFApp
 
             if (openFileDialog.ShowDialog() == true)
             {
-               
-                EmployeeImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                
+                string imageDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "Employees");
+                if (!System.IO.Directory.Exists(imageDirectory))
+                {
+                    System.IO.Directory.CreateDirectory(imageDirectory);
+                }
 
-              
-                ProfilePictureUrlTextBlock.Text = openFileDialog.FileName;
+                string fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+                string destinationPath = System.IO.Path.Combine(imageDirectory, fileName);
+
+                try
+                {
+                   
+                    System.IO.File.Copy(openFileDialog.FileName, destinationPath, true);
+
+                   
+                    EmployeeImage.Source = new BitmapImage(new Uri(destinationPath, UriKind.Absolute));
+                    ProfilePictureUrlTextBlock.Text = destinationPath;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Có lỗi xảy ra khi lưu ảnh: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
-       
+
+
 
 
 
@@ -158,6 +177,8 @@ namespace WPFApp
                 selectedEmployee.PositionId = (int)PositionComboBox.SelectedValue; 
                 selectedEmployee.Salary = Double.Parse(SalaryTextBox.Text); 
                 selectedEmployee.StartDate = CreateDatePicker.SelectedDate.GetValueOrDefault();
+                selectedEmployee.ProfilePicture = ProfilePictureUrlTextBlock.Text;
+
                 try
                 {
                     if (selectedEmployee.Salary <= 0)
@@ -202,27 +223,25 @@ namespace WPFApp
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            Employee selectedEmployee = (Employee)EmployeeDataGrid.SelectedItem;
-
-            if (selectedEmployee == null)
+            if (EmployeeDataGrid.SelectedItem is Employee selectedEmployee)
             {
-                MessageBox.Show("Please select an employee to delete.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // Directly attempt to delete for testing
-            bool isDeleted = _employeeRepository.DeleteEmployee(selectedEmployee.EmployeeId);
-
-            if (isDeleted)
-            {
-                MessageBox.Show("Employee deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                LoadEmployees(); // Refresh the data grid
+                bool isDeleted = _employeeRepository.DeleteEmployee(selectedEmployee.EmployeeId);
+                if (isDeleted)
+                {
+                    MessageBox.Show("Employee deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadEmployees(); 
+                }
+                else
+                {
+                    MessageBox.Show("Failed to delete the employee. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Failed to delete the employee. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select an employee to delete.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
 
 
 
@@ -274,10 +293,14 @@ namespace WPFApp
                 }
             }
         }
-        private void LeaveRequestButton_Click(object sender, RoutedEventArgs e)
+       
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            AttendanceForm attendanceForm = new AttendanceForm();
-            attendanceForm.Show();
+            string searchText = SearchTextBox.Text.ToLower();
+            var filteredEmployees= _employeeRepository.GetAllEmployees().Where(e => e.FullName.ToLower().Contains(searchText)).ToList();
+            EmployeeDataGrid.ItemsSource = filteredEmployees;
+
         }
     }
 }
