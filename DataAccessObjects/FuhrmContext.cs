@@ -19,11 +19,7 @@ public partial class FuhrmContext : DbContext
 
     public virtual DbSet<Account> Accounts { get; set; }
 
-    public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
-
     public virtual DbSet<Attendance> Attendances { get; set; }
-
-    public virtual DbSet<Backup> Backups { get; set; }
 
     public virtual DbSet<Department> Departments { get; set; }
 
@@ -63,21 +59,6 @@ public partial class FuhrmContext : DbContext
                 .HasConstraintName("FK__Accounts__RoleID__3A81B327");
         });
 
-        modelBuilder.Entity<ActivityLog>(entity =>
-        {
-            entity.HasKey(e => e.ActivityLogId).HasName("PK__Activity__19A9B78F664D0B3E");
-
-            entity.Property(e => e.ActivityLogId).HasColumnName("ActivityLogID");
-            entity.Property(e => e.AccountId).HasColumnName("AccountID");
-            entity.Property(e => e.Action).HasMaxLength(255);
-            entity.Property(e => e.Timestamp).HasColumnType("datetime");
-
-            entity.HasOne(d => d.Account).WithMany(p => p.ActivityLogs)
-                .HasForeignKey(d => d.AccountId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ActivityL__Accou__4F7CD00D");
-        });
-
         modelBuilder.Entity<Attendance>(entity =>
         {
             entity.HasKey(e => e.AttendanceId).HasName("PK__Attendan__8B69263C1EAE4096");
@@ -90,15 +71,6 @@ public partial class FuhrmContext : DbContext
                 .HasForeignKey(d => d.EmployeeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Attendanc__Emplo__49C3F6B7");
-        });
-
-        modelBuilder.Entity<Backup>(entity =>
-        {
-            entity.HasKey(e => e.BackupId).HasName("PK__Backups__EB9069E2A6FA95F9");
-
-            entity.Property(e => e.BackupId).HasColumnName("BackupID");
-            entity.Property(e => e.BackupDate).HasColumnType("datetime");
-            entity.Property(e => e.BackupFile).HasMaxLength(255);
         });
 
         modelBuilder.Entity<Department>(entity =>
