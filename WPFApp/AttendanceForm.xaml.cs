@@ -53,6 +53,8 @@ namespace WPFApp
                 leave.AddLeaveRequest(leaveRequest);
 
                 MessageBox.Show("Leave request submitted successfully!");
+                MainWindow mainWindow = new MainWindow(_employeeID);
+                mainWindow.Show();
                 this.Close();
             }
             else

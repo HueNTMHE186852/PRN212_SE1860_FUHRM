@@ -86,9 +86,7 @@ namespace DataAccessObjects
             {
                 _context.Employees.Remove(employee);
                 _context.SaveChanges();
-                return true; 
             }
-            return false; 
         }
 
     }
