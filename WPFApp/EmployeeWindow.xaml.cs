@@ -245,6 +245,7 @@ namespace WPFApp
 
 
 
+
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button)

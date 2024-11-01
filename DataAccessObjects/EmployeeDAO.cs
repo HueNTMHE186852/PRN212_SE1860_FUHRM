@@ -3,19 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessObjects
 {
-    
     public class EmployeeDAO
     {
         private readonly FuhrmContext _context;
+
         public EmployeeDAO(FuhrmContext context)
         {
             _context = context;
         }
+
         public List<Employee> GetAllEmployees()
         {
             try
@@ -36,20 +35,16 @@ namespace DataAccessObjects
             }
         }
 
-
-
         public Employee GetEmployeeById(int employeeId)
         {
             return _context.Employees.Find(employeeId);
         }
 
-     
         public void UpdateEmployee(Employee employee)
         {
             var existingEmployee = _context.Employees.Find(employee.EmployeeId);
             if (existingEmployee != null)
             {
-                
                 existingEmployee.FullName = employee.FullName;
                 existingEmployee.DateOfBirth = employee.DateOfBirth;
                 existingEmployee.Gender = employee.Gender;
@@ -59,25 +54,58 @@ namespace DataAccessObjects
                 existingEmployee.PositionId = employee.PositionId;
                 existingEmployee.Salary = employee.Salary;
                 existingEmployee.StartDate = employee.StartDate;
-                
 
                 _context.SaveChanges();
             }
         }
-
 
         public bool DeleteEmployee(int employeeId)
         {
-            var employee = _context.Employees.Find(employeeId);
-            if (employee != null)
+            using var transaction = _context.Database.BeginTransaction();
+            try
             {
+                var employee = _context.Employees
+                    .Include(e => e.Account)
+                    .Include(e => e.Attendances)
+                    .Include(e => e.LeaveRequests)
+                    .Include(e => e.Salaries)
+                    .FirstOrDefault(e => e.EmployeeId == employeeId);
+
+                if (employee == null)
+                {
+                    return false;
+                }
+
+                if (employee.Attendances.Any())
+                {
+                    _context.Attendances.RemoveRange(employee.Attendances);
+                }
+                if (employee.LeaveRequests.Any())
+                {
+                    _context.LeaveRequests.RemoveRange(employee.LeaveRequests);
+                }
+                if (employee.Salaries.Any())
+                {
+                    _context.Salaries.RemoveRange(employee.Salaries);
+                }
+
+                if (employee.Account != null)
+                {
+                    _context.Accounts.Remove(employee.Account);
+                }
+
                 _context.Employees.Remove(employee);
                 _context.SaveChanges();
-                return true; 
+                transaction.Commit();
+                return true;
             }
-            return false; 
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                Console.WriteLine($"Error deleting employee: {ex.Message}");
+                return false;
+            }
         }
-
 
     }
 }

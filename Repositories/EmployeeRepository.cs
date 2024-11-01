@@ -1,10 +1,7 @@
 ﻿using BusinessObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccessObjects;
+using System.Collections.Generic;
+
 namespace Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
@@ -26,8 +23,6 @@ namespace Repositories
             return _employeeDAO.GetEmployeeById(employeeId);
         }
 
-
-
         public void UpdateEmployee(Employee employee)
         {
             _employeeDAO.UpdateEmployee(employee);
@@ -35,9 +30,8 @@ namespace Repositories
 
         public bool DeleteEmployee(int employeeId)
         {
-            return _employeeDAO.DeleteEmployee(employeeId); 
+            return _employeeDAO.DeleteEmployee(employeeId);
         }
-
 
     }
 }
