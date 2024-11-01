@@ -12,21 +12,21 @@ namespace WPFApp
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IAttendanceRepository _attendanceRepository;
-        private readonly int _employeeId;
+        private readonly int _accountId;
 
-        public TakeAttendance(int employeeId)
+        public TakeAttendance(int accountId)
         {
             InitializeComponent();
             var context = new FuhrmContext(); // Assuming FuhrmContext is your DbContext
             _employeeRepository = new EmployeeRepository(new EmployeeDAO(context));
             _attendanceRepository = new AttendanceRepository();
-            _employeeId = employeeId;
+            _accountId = accountId;
             LoadEmployeeDetails();
         }
 
         private void LoadEmployeeDetails()
         {
-            var employee = _employeeRepository.GetEmployeeById(_employeeId);
+            var employee = _employeeRepository.GetAllEmployees().FirstOrDefault(e => e.AccountId == _accountId);
             if (employee != null)
             {
                 EmployeeIdTextBox.Text = employee.EmployeeId.ToString();
@@ -47,7 +47,7 @@ namespace WPFApp
             {
                 var attendance = new Attendance
                 {
-                    EmployeeId = _employeeId,
+                    EmployeeId = int.Parse(EmployeeIdTextBox.Text),
                     Date = DateOnly.FromDateTime(DateTime.Now),
                     Status = "Present"
                 };

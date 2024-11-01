@@ -13,6 +13,11 @@ namespace Repositories
             _employeeDAO = employeeDAO;
         }
 
+        public EmployeeRepository()
+        {
+            _employeeDAO = new EmployeeDAO();
+        }
+
         public List<Employee> GetAllEmployees()
         {
             return _employeeDAO.GetAllEmployees();
@@ -23,15 +28,29 @@ namespace Repositories
             return _employeeDAO.GetEmployeeById(employeeId);
         }
 
+        public void AddEmployee(Employee employee)
+        {
+            _employeeDAO.AddEmployee(employee);
+        }
+
         public void UpdateEmployee(Employee employee)
         {
             _employeeDAO.UpdateEmployee(employee);
         }
 
-        public bool DeleteEmployee(int employeeId)
+        public void DeleteEmployee(int employeeId)
         {
-            return _employeeDAO.DeleteEmployee(employeeId);
+            _employeeDAO.DeleteEmployee(employeeId);
         }
 
+        public Employee GetEmployeeByAccountId(int accountId)
+        {
+            return _employeeDAO.GetEmployeeByAccountId(accountId);
+        }
+
+        public Employee GetEmployeesById(int Id)
+        {
+            return _employeeDAO.GetEmployeeById(Id);
+        }
     }
 }

@@ -9,6 +9,10 @@ namespace DataAccessObjects
     public class EmployeeDAO
     {
         private readonly FuhrmContext _context;
+        public EmployeeDAO()
+        {
+            _context = new FuhrmContext();
+        }
 
         public EmployeeDAO(FuhrmContext context)
         {
@@ -35,10 +39,25 @@ namespace DataAccessObjects
             }
         }
 
+        public void AddEmployee(Employee employee)
+        {
+            using (var context = new FuhrmContext())
+            {
+                context.Employees.Add(employee);
+                context.SaveChanges();
+            }
+        }
+
         public Employee GetEmployeeById(int employeeId)
         {
             return _context.Employees.Find(employeeId);
         }
+
+        public Employee GetEmployeeByAccountId(int accountId)
+        {
+            return _context.Employees.Include(e => e.Department).Include(e => e.Position).FirstOrDefault(e => e.AccountId == accountId);
+        }
+
 
         public void UpdateEmployee(Employee employee)
         {
@@ -59,52 +78,17 @@ namespace DataAccessObjects
             }
         }
 
-        public bool DeleteEmployee(int employeeId)
+
+        public void DeleteEmployee(int employeeId)
         {
-            using var transaction = _context.Database.BeginTransaction();
-            try
+            var employee = _context.Employees.Find(employeeId);
+            if (employee != null)
             {
-                var employee = _context.Employees
-                    .Include(e => e.Account)
-                    .Include(e => e.Attendances)
-                    .Include(e => e.LeaveRequests)
-                    .Include(e => e.Salaries)
-                    .FirstOrDefault(e => e.EmployeeId == employeeId);
-
-                if (employee == null)
-                {
-                    return false;
-                }
-
-                if (employee.Attendances.Any())
-                {
-                    _context.Attendances.RemoveRange(employee.Attendances);
-                }
-                if (employee.LeaveRequests.Any())
-                {
-                    _context.LeaveRequests.RemoveRange(employee.LeaveRequests);
-                }
-                if (employee.Salaries.Any())
-                {
-                    _context.Salaries.RemoveRange(employee.Salaries);
-                }
-
-                if (employee.Account != null)
-                {
-                    _context.Accounts.Remove(employee.Account);
-                }
-
                 _context.Employees.Remove(employee);
                 _context.SaveChanges();
-                transaction.Commit();
-                return true;
+                return true; 
             }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                Console.WriteLine($"Error deleting employee: {ex.Message}");
-                return false;
-            }
+            return false; 
         }
 
     }

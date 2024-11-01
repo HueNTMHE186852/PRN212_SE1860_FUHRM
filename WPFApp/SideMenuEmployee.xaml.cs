@@ -1,4 +1,5 @@
-﻿using BusinessObjects;
+﻿using DataAccessObjects;
+using Repositories;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -6,13 +7,11 @@ using System.Windows.Controls;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for SideMenu.xaml
-    /// </summary>
-    public partial class SideMenu : UserControl, INotifyPropertyChanged
+    public partial class SideMenuEmployee : UserControl, INotifyPropertyChanged
     {
         private string _currentWindowName;
-        private Employee _currentEmployee;
+        private readonly EmployeeRepository _employeeRepository;
+        private readonly LeaveRequestRepository leaveRequestRepository;
         public string CurrentWindowName
         {
             get => _currentWindowName;
@@ -22,16 +21,15 @@ namespace WPFApp
                 OnPropertyChanged();
             }
         }
-        // Thêm constructor nhận Employee
-        
-        public SideMenu()
+
+        public SideMenuEmployee()
         {
             InitializeComponent();
             DataContext = this;
-            Loaded += SideMenu_Loaded;
+            Loaded += SideMenuEmployee_Loaded;
         }
 
-        private void SideMenu_Loaded(object sender, RoutedEventArgs e)
+        private void SideMenuEmployee_Loaded(object sender, RoutedEventArgs e)
         {
             SetInitialWindowName();
         }
@@ -48,6 +46,7 @@ namespace WPFApp
                 CurrentWindowName = "Unknown Window"; // Fallback value if the window is not found
             }
         }
+       
 
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -57,37 +56,29 @@ namespace WPFApp
 
                 switch (button.Content.ToString())
                 {
-                    // Uncomment and implement the HomeView navigation if needed
-                    // case "Trang Chủ":
-                    //     var homeView = new HomeView();
-                    //     homeView.Show();
-                    //     currentWindow.Close();
-                    //     break;
-                    case "Nhân viên":
-                        var employeeView = new EmployeeWindow();
-                        employeeView.Show();
+                    case "Home":
+                        var homeView = new HomeEmployee();
+                        homeView.Show();
                         currentWindow.Close();
                         break;
-                    case "Bộ phận":
-                        var departmentView = new DepartmentManagement();
-                        departmentView.Show();
+                    case "Take Attendance":
+                        var takeAttendanceView = new TakeAttendance(SessionManager.CurrentAccount.AccountId);
+                        takeAttendanceView.Show();
                         currentWindow.Close();
                         break;
-                    case "Chấm công":
-                        var attendanceView = new AttendanceView();
-                        attendanceView.Show();
+                    case "Notifications":
+                        var notificationWindow = new NotificationWindow(SessionManager.CurrentAccount.AccountId, new NotificationRepository(), new EmployeeRepository(new EmployeeDAO(new FuhrmContext())));
+                        notificationWindow.Show();
                         currentWindow.Close();
                         break;
-                    case "Bảng lương":
-                        var salaryView = new SalaryView();
-                        salaryView.Show();
+                    case "Leave Request":
+                        // Lấy thông tin employee từ AccountId hiện tại
+                        var currentEmployee = new MainWindow(SessionManager.CurrentAccount.AccountId);
+                        currentEmployee.Show();
                         currentWindow.Close();
+                        
                         break;
-                    case "Nghỉ phép":
-                        var leaveView = new LeaveRequestView();
-                        leaveView.Show();
-                        currentWindow.Close();
-                        break;
+
                     default:
                         break;
                 }

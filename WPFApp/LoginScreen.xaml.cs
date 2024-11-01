@@ -1,10 +1,6 @@
 ﻿using BusinessObjects;
 using Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,12 +9,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFApp.Models;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for LoginScreen.xaml
-    /// </summary>
     public partial class LoginScreen : Window
     {
         private readonly AccountRepository _accountRepository;
@@ -26,40 +20,51 @@ namespace WPFApp
         {
             InitializeComponent();
             _accountRepository = new AccountRepository();
-
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (txtUsername != null && txtPassword != null)
             {
-                Account account = _accountRepository.GetAccountByName(txtUsername.Text);
+                var account = _accountRepository.GetAccountByUserName(txtUsername.Text);
                 if (account != null)
                 {
                     if (account.Password.Equals(txtPassword.Password))
                     {
-                        
-                        if(account.Role.RoleName.Equals("Admin"))
+                        SessionManager.CurrentAccount = account;
+                        var employee = _accountRepository.GetEmployeeByUsername(account.AccountId);
+                        if (account.Role.RoleName.Equals("Admin"))
                         {
                             EmployeeWindow employeeWindow = new EmployeeWindow();
                             employeeWindow.Show();
                             this.Close();
                         }
+                        else if (account.Role.RoleName.Equals("Employee"))
+                        {
+                            HomeEmployee homeEmployee = new HomeEmployee();
+                            homeEmployee.Show();
+                            this.Close();
+                        }
                     }
                     else
                     {
-                        txtError.Text = "Incorrect password " + txtPassword.Password;
+                        System.Windows.MessageBox.Show("Incorrect password");
                     }
                 }
                 else
                 {
-                    txtError.Text = "Invalid username or password";
+                    System.Windows.MessageBox.Show("Incorrect username");
                 }
             }
             else
             {
-                MessageBox.Show("Invalid username or password");
+                System.Windows.MessageBox.Show("Please enter username and password");
             }
         }
+    }
+
+    public static class SessionManager
+    {
+        public static BusinessObjects.Account CurrentAccount { get; set; }
     }
 }

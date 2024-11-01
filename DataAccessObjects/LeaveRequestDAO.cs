@@ -24,6 +24,23 @@ namespace DataAccessObjects
             }
                 return leaveList;
         }
+        public List<LeaveRequest> GetLeaveRequestsByEmployeeID(int employeeId)
+        {
+            try
+            {
+                using var context = new FuhrmContext();
+                return context.LeaveRequests
+                    .Include(lr => lr.Employee)
+                    .Where(lr => lr.EmployeeId == employeeId)
+                    .OrderByDescending(lr => lr.StartDate)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if you have logging configured
+                throw new Exception($"Error retrieving leave requests for employee {employeeId}: {ex.Message}", ex);
+            }
+        }
         public LeaveRequest getLeaveRequest(int id) { 
         using var _context = new FuhrmContext();
         var leaveRequestDetail = _context.LeaveRequests
@@ -52,34 +69,14 @@ namespace DataAccessObjects
         }
         public void AddLeaveRequest(LeaveRequest leaveRequest)
         {
-            using var context = new FuhrmContext();
-            try
-            {
-                if (leaveRequest == null)
-                {
-                    throw new ArgumentNullException(nameof(leaveRequest), "Leave request cannot be null.");
-                }
-                var employee = context.Employees.FirstOrDefault(e => e.EmployeeId == leaveRequest.EmployeeId);
-                if (employee == null)
-                {
-                    throw new Exception($"Employee with ID {leaveRequest.EmployeeId} not found.");
-                }
-
-                if (leaveRequest.StartDate > leaveRequest.EndDate)
-                {
-                    throw new ArgumentException("Start date must be before or equal to end date.");
-                }
-                if (string.IsNullOrWhiteSpace(leaveRequest.Status))
-                {
-                    leaveRequest.Status = "Pending";
-                }
-                context.LeaveRequests.Add(leaveRequest);
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error adding leave request: {ex.Message}", ex);
-            }
+            using var _context = new FuhrmContext();
+            _context.LeaveRequests.Add(leaveRequest);
+            _context.SaveChanges();
+        }
+        public Employee GetEmployeeByAccountId(int accountId)
+        { 
+        using var _context = new FuhrmContext();
+            return _context.Employees.FirstOrDefault(e => e.AccountId == accountId);
         }
 
     }

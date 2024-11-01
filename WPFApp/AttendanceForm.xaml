@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="AttendanceForm" Height="450" Width="800">
+        Title="AttendanceForm" Height="450" Width="800" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -17,7 +17,7 @@
                 <TextBlock Text="Tạo đơn xin nghỉ phép" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
 
                 <Label Content="Leave Type:"/>
-                <TextBox x:Name="LeaveType" Margin="0,0,0,10" Height="20" Background="#FFF0F0F0" BorderBrush="#FFCCCCCC" BorderThickness="1" IsReadOnly="True"/>
+                <TextBox x:Name="LeaveType" Margin="0,0,0,10" Height="20" Background="#FFF0F0F0" BorderBrush="#FFCCCCCC" BorderThickness="1" />
 
                 <Label Content="Start Date"/>
                 <DatePicker x:Name="StartDate" Margin="0,0,0,10" Height="24" Background="#FFF0F0F0" BorderBrush="#FFCCCCCC" BorderThickness="1"/>
@@ -27,7 +27,7 @@
 
 
                 <!-- Nút chỉnh sửa -->
-                <Button Content="Gửi đơn" Width="120" Height="20" Margin="0,20,0,0" Background="#FF32CD32" Foreground="White"/>
+                <Button Content="Gửi đơn" Width="120" Height="20" Margin="0,20,0,0" Background="#FF32CD32" Foreground="White" Click="btnSubmitLeaveRequest_Click"/>
             </StackPanel>
         </Border>
     </Grid>

@@ -7,8 +7,9 @@ namespace Repositories
     {
         List<Employee> GetAllEmployees();
         Employee GetEmployeeById(int employeeId);
+
+        void AddEmployee(Employee employee);
         void UpdateEmployee(Employee employee);
-        bool DeleteEmployee(int employeeId);
-        
+        void DeleteEmployee(int employeeId);
     }
 }

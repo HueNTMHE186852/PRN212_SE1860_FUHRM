@@ -164,18 +164,18 @@ namespace WPFApp
         }
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (EmployeeDataGrid.SelectedItem is Employee selectedEmployee)
             {
-      
+
                 selectedEmployee.FullName = FullNameTextBox.Text;
                 selectedEmployee.DateOfBirth = DateOfBirthDatePicker.SelectedDate.GetValueOrDefault();
                 selectedEmployee.Gender = (GenderComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
                 selectedEmployee.Address = AddressTextBox.Text;
                 selectedEmployee.PhoneNumber = PhoneNumberTextBox.Text;
-                selectedEmployee.DepartmentId = (int)DepartmentComboBox.SelectedValue; 
-                selectedEmployee.PositionId = (int)PositionComboBox.SelectedValue; 
-                selectedEmployee.Salary = Double.Parse(SalaryTextBox.Text); 
+                selectedEmployee.DepartmentId = (int)DepartmentComboBox.SelectedValue;
+                selectedEmployee.PositionId = (int)PositionComboBox.SelectedValue;
+                selectedEmployee.Salary = Double.Parse(SalaryTextBox.Text);
                 selectedEmployee.StartDate = CreateDatePicker.SelectedDate.GetValueOrDefault();
                 selectedEmployee.ProfilePicture = ProfilePictureUrlTextBlock.Text;
 
@@ -205,14 +205,14 @@ namespace WPFApp
 
                     _employeeRepository.UpdateEmployee(selectedEmployee);
 
-                   
+
                     LoadEmployees();
 
                     MessageBox.Show("Thông tin nhân viên đã được lưu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
-            
+
                     MessageBox.Show($"Có lỗi xảy ra khi lưu thông tin: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -221,29 +221,6 @@ namespace WPFApp
                 MessageBox.Show("Vui lòng chọn một nhân viên để lưu thông tin!", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (EmployeeDataGrid.SelectedItem is Employee selectedEmployee)
-            {
-                bool isDeleted = _employeeRepository.DeleteEmployee(selectedEmployee.EmployeeId);
-                if (isDeleted)
-                {
-                    MessageBox.Show("Employee deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    LoadEmployees(); 
-                }
-                else
-                {
-                    MessageBox.Show("Failed to delete the employee. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select an employee to delete.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-
-
 
 
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
@@ -294,11 +271,7 @@ namespace WPFApp
                 }
             }
         }
-        private void LeaveRequestButton_Click(object sender, RoutedEventArgs e)
-        {
-            AttendanceForm attendanceForm = new AttendanceForm();
-            attendanceForm.Show();
-        }
+       
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
