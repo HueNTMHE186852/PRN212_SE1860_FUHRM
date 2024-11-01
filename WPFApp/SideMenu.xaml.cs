@@ -58,11 +58,16 @@ namespace WPFApp
                 switch (button.Content.ToString())
                 {
                     // Uncomment and implement the HomeView navigation if needed
-                    // case "Trang Chủ":
-                    //     var homeView = new HomeView();
-                    //     homeView.Show();
-                    //     currentWindow.Close();
-                    //     break;
+                    case "Trang Chủ":
+                        var homeView = new AdminDashboard();
+                        homeView.Show();
+                        currentWindow.Close();
+                        break;
+                    case "Tài khoản":
+                        var account = new AccountManagement();
+                        account.Show();
+                        currentWindow.Close();
+                        break;
                     case "Nhân viên":
                         var employeeView = new EmployeeWindow();
                         employeeView.Show();
@@ -71,6 +76,11 @@ namespace WPFApp
                     case "Bộ phận":
                         var departmentView = new DepartmentManagement();
                         departmentView.Show();
+                        currentWindow.Close();
+                        break;
+                    case "Vị trí":
+                        var position = new PositionManagement();
+                        position.Show();
                         currentWindow.Close();
                         break;
                     case "Chấm công":
@@ -92,6 +102,19 @@ namespace WPFApp
                         break;
                 }
             }
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the session
+            SessionManager.CurrentAccount = null;
+
+            // Redirect to login screen
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+
+            // Close the current window
+            Window.GetWindow(this).Close();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

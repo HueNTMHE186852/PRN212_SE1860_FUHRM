@@ -26,8 +26,10 @@ namespace WPFApp
         {
             InitializeComponent();
             DataContext = this;
+            _employeeRepository = new EmployeeRepository(new EmployeeDAO(new FuhrmContext())); // Initialize the repository
             Loaded += SideMenuEmployee_Loaded;
         }
+
 
         private void SideMenuEmployee_Loaded(object sender, RoutedEventArgs e)
         {
@@ -72,11 +74,17 @@ namespace WPFApp
                         currentWindow.Close();
                         break;
                     case "Leave Request":
-                        // Lấy thông tin employee từ AccountId hiện tại
-                        var currentEmployee = new MainWindow(SessionManager.CurrentAccount.AccountId);
-                        currentEmployee.Show();
-                        currentWindow.Close();
-                        
+                        var employee = _employeeRepository.GetEmployeeByAccountId(SessionManager.CurrentAccount.AccountId);
+                        if (employee != null)
+                        {
+                            var currentEmployee = new MainWindow(employee.EmployeeId);
+                            currentEmployee.Show();
+                            currentWindow.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Employee not found.");
+                        }
                         break;
 
                     default:
@@ -90,6 +98,19 @@ namespace WPFApp
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the session
+            SessionManager.CurrentAccount = null;
+
+            // Redirect to login screen
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+
+            // Close the current window
+            Window.GetWindow(this).Close();
         }
     }
 }

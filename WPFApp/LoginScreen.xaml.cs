@@ -35,8 +35,8 @@ namespace WPFApp
                         var employee = _accountRepository.GetEmployeeByUsername(account.AccountId);
                         if (account.Role.RoleName.Equals("Admin"))
                         {
-                            EmployeeWindow employeeWindow = new EmployeeWindow();
-                            employeeWindow.Show();
+                            AdminDashboard adminDashboard = new AdminDashboard();
+                            adminDashboard.Show();
                             this.Close();
                         }
                         else if (account.Role.RoleName.Equals("Employee"))
