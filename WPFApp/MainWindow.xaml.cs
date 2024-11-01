@@ -33,6 +33,8 @@ namespace WPFApp
 
             // Gán dữ liệu cho ViewLeaveRequest
             ViewLeaveRequest.ItemsSource = leaveRequests;
+
+
         }
     }
 }
