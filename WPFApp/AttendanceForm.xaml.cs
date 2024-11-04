@@ -22,11 +22,11 @@ namespace WPFApp
     /// </summary>
     public partial class AttendanceForm : Window
     {
-        private readonly Employee _currentEmployee;
-        public AttendanceForm(Employee employee)
+        private readonly int _employeeID;
+        public AttendanceForm(int employeeID)
         {
             InitializeComponent();
-            _currentEmployee = employee;
+            _employeeID = employeeID;
         }
 
         private void btnSubmitLeaveRequest_Click(object sender, RoutedEventArgs e)
@@ -35,12 +35,12 @@ namespace WPFApp
             var leaveRequestRepo = new LeaveRequestRepository();
 
 
-            if (_currentEmployee != null)
+            if (_employeeID != null)
             {
                 // Lấy thông tin từ các trường trong form
                 var leaveRequest = new LeaveRequest
                 {
-                    EmployeeId = _currentEmployee.EmployeeId, // Sử dụng EmployeeID
+                    EmployeeId = _employeeID, // Sử dụng EmployeeID
                     LeaveType = LeaveType.Text,
                     StartDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value),
                     EndDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value),
@@ -53,6 +53,8 @@ namespace WPFApp
                 leave.AddLeaveRequest(leaveRequest);
 
                 MessageBox.Show("Leave request submitted successfully!");
+                MainWindow mainWindow = new MainWindow(_employeeID);
+                mainWindow.Show();
                 this.Close();
             }
             else

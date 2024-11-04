@@ -53,7 +53,9 @@ namespace WPFApp
                 };
                 _attendanceRepository.AddAttendance(attendance);
                 MessageBox.Show("Attendance recorded successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Close();
+                HomeEmployee homeEmployee = new HomeEmployee();
+                homeEmployee.Show();
+                this.Close();
             }
             catch (Exception ex)
             {

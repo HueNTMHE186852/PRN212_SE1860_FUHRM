@@ -1,10 +1,7 @@
 ﻿using BusinessObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccessObjects;
+using System.Collections.Generic;
+
 namespace Repositories
 {
     public class EmployeeRepository : IEmployeeRepository

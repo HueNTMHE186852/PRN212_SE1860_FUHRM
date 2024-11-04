@@ -3,12 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessObjects
 {
-    
     public class EmployeeDAO
     {
         private readonly FuhrmContext _context;
@@ -21,6 +18,7 @@ namespace DataAccessObjects
         {
             _context = context;
         }
+
         public List<Employee> GetAllEmployees()
         {
             try
@@ -66,7 +64,6 @@ namespace DataAccessObjects
             var existingEmployee = _context.Employees.Find(employee.EmployeeId);
             if (existingEmployee != null)
             {
-                
                 existingEmployee.FullName = employee.FullName;
                 existingEmployee.DateOfBirth = employee.DateOfBirth;
                 existingEmployee.Gender = employee.Gender;
@@ -76,7 +73,6 @@ namespace DataAccessObjects
                 existingEmployee.PositionId = employee.PositionId;
                 existingEmployee.Salary = employee.Salary;
                 existingEmployee.StartDate = employee.StartDate;
-                
 
                 _context.SaveChanges();
             }

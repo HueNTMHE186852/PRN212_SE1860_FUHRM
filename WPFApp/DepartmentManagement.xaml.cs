@@ -91,49 +91,69 @@ namespace WPFApp
         {
             if (sender is Button button)
             {
+                Window currentWindow = Window.GetWindow(this);
+
                 switch (button.Content.ToString())
                 {
-                    //case "Trang Chủ":
-                    //    // Navigate to Home screen
-                    //    var homeView = new HomeView();
-                    //    homeView.Show();
-                    //    this.Close();
-                    //    break;
+                    // Uncomment and implement the HomeView navigation if needed
+                    case "Trang Chủ":
+                        var homeView = new AdminDashboard();
+                        homeView.Show();
+                        currentWindow.Close();
+                        break;
+                    case "Tài khoản":
+                        var account = new AccountManagement();
+                        account.Show();
+                        currentWindow.Close();
+                        break;
                     case "Nhân viên":
-                        // Navigate to Employee screen
                         var employeeView = new EmployeeWindow();
                         employeeView.Show();
-                        this.Close();
+                        currentWindow.Close();
                         break;
                     case "Bộ phận":
-                        // Navigate to Department screen
                         var departmentView = new DepartmentManagement();
                         departmentView.Show();
-                        this.Close();
+                        currentWindow.Close();
+                        break;
+                    case "Vị trí":
+                        var position = new PositionManagement();
+                        position.Show();
+                        currentWindow.Close();
                         break;
                     case "Chấm công":
-                        // Navigate to Attendance screen
                         var attendanceView = new AttendanceView();
                         attendanceView.Show();
-                        this.Close();
+                        currentWindow.Close();
                         break;
                     case "Bảng lương":
-                        // Navigate to Salary screen
                         var salaryView = new SalaryView();
                         salaryView.Show();
-                        this.Close();
+                        currentWindow.Close();
                         break;
                     case "Nghỉ phép":
-                        // Navigate to Leave screen
                         var leaveView = new LeaveRequestView();
                         leaveView.Show();
-                        this.Close();
+                        currentWindow.Close();
                         break;
-
                     default:
                         break;
                 }
             }
         }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the session
+            SessionManager.CurrentAccount = null;
+
+            // Redirect to login screen
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+
+            // Close the current window
+            Window.GetWindow(this).Close();
+        }
+
     }
 }

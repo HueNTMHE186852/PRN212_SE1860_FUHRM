@@ -10,7 +10,8 @@ namespace WPFApp
     public partial class SideMenuEmployee : UserControl, INotifyPropertyChanged
     {
         private string _currentWindowName;
-
+        private readonly EmployeeRepository _employeeRepository;
+        private readonly LeaveRequestRepository leaveRequestRepository;
         public string CurrentWindowName
         {
             get => _currentWindowName;
@@ -25,8 +26,10 @@ namespace WPFApp
         {
             InitializeComponent();
             DataContext = this;
+            _employeeRepository = new EmployeeRepository(new EmployeeDAO(new FuhrmContext())); // Initialize the repository
             Loaded += SideMenuEmployee_Loaded;
         }
+
 
         private void SideMenuEmployee_Loaded(object sender, RoutedEventArgs e)
         {
@@ -45,6 +48,7 @@ namespace WPFApp
                 CurrentWindowName = "Unknown Window"; // Fallback value if the window is not found
             }
         }
+       
 
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -69,6 +73,20 @@ namespace WPFApp
                         notificationWindow.Show();
                         currentWindow.Close();
                         break;
+                    case "Leave Request":
+                        var employee = _employeeRepository.GetEmployeeByAccountId(SessionManager.CurrentAccount.AccountId);
+                        if (employee != null)
+                        {
+                            var currentEmployee = new MainWindow(employee.EmployeeId);
+                            currentEmployee.Show();
+                            currentWindow.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Employee not found.");
+                        }
+                        break;
+
                     default:
                         break;
                 }
@@ -80,6 +98,19 @@ namespace WPFApp
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the session
+            SessionManager.CurrentAccount = null;
+
+            // Redirect to login screen
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+
+            // Close the current window
+            Window.GetWindow(this).Close();
         }
     }
 }

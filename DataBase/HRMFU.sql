@@ -76,14 +76,6 @@ CREATE TABLE Notifications (
     FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
 );
 
-CREATE TABLE ActivityLogs (
-    ActivityLogID INT PRIMARY KEY IDENTITY(1,1),
-    AccountID INT NOT NULL,
-    Action NVARCHAR(255) NOT NULL,
-    Timestamp DATETIME NOT NULL,
-    FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
-);
-
 CREATE TABLE LeaveRequests (
     LeaveRequestID INT PRIMARY KEY IDENTITY(1,1),
     EmployeeID INT NOT NULL,
@@ -94,11 +86,6 @@ CREATE TABLE LeaveRequests (
     FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
 );
 
-CREATE TABLE Backups (
-    BackupID INT PRIMARY KEY IDENTITY(1,1),
-    BackupDate DATETIME NOT NULL,
-    BackupFile NVARCHAR(255) NOT NULL
-);
 
 -- Chèn dữ liệu vào bảng Roles
 INSERT INTO Roles (RoleName) VALUES ('Admin');
@@ -160,32 +147,3 @@ VALUES ('Policy Update', 'Please review the updated company policies.', 2, '2023
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
 VALUES ('System Maintenance', 'The IT system will be down for maintenance this weekend.', 3, '2023-01-03 11:00:00');
 
--- Chèn dữ liệu vào bảng ActivityLogs
-INSERT INTO ActivityLogs (AccountID, Action, Timestamp) 
-VALUES (1, 'Logged in', '2023-01-01 08:00:00');
-
-INSERT INTO ActivityLogs (AccountID, Action, Timestamp) 
-VALUES (2, 'Updated profile', '2023-01-02 09:00:00');
-
-INSERT INTO ActivityLogs (AccountID, Action, Timestamp) 
-VALUES (3, 'Logged out', '2023-01-03 10:00:00');
-
--- Chèn dữ liệu vào bảng LeaveRequests
-INSERT INTO LeaveRequests (EmployeeID, LeaveType, StartDate, EndDate, Status) 
-VALUES (1, 'Sick Leave', '2023-01-10', '2023-01-12', 'Approved');
-
-INSERT INTO LeaveRequests (EmployeeID, LeaveType, StartDate, EndDate, Status) 
-VALUES (2, 'Vacation', '2023-02-01', '2023-02-05', 'Pending');
-
-INSERT INTO LeaveRequests (EmployeeID, LeaveType, StartDate, EndDate, Status) 
-VALUES (3, 'Personal Leave', '2023-03-01', '2023-03-03', 'Rejected');
-
--- Chèn dữ liệu vào bảng Backups
-INSERT INTO Backups (BackupDate, BackupFile) 
-VALUES ('2023-01-01 00:00:00', 'backup_2023_01_01.bak');
-
-INSERT INTO Backups (BackupDate, BackupFile) 
-VALUES ('2023-02-01 00:00:00', 'backup_2023_02_01.bak');
-
-INSERT INTO Backups (BackupDate, BackupFile) 
-VALUES ('2023-03-01 00:00:00', 'backup_2023_03_01.bak');

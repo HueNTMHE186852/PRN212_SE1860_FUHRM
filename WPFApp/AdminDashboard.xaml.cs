@@ -1,176 +1,212 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DataAccessObjects;
+using Repositories;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+using BusinessObjects;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using WPFApp.Models;
+using System.Collections.ObjectModel;
+using System.Windows.Threading;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for AdminDashboard.xaml
-    /// </summary>
     public partial class AdminDashboard : Window
     {
-        private readonly FuhrmContext _context;
-        public string CurrentWindowName { get; set; } = "Báo cáo thống kê";
+        private readonly IEmployeeRepository _employeeRepository;
+        private readonly DispatcherTimer _refreshTimer;
+        private ObservableCollection<DepartmentStats> _departmentStats;
+
+        public class DepartmentStats
+        {
+            public string DepartmentName { get; set; }
+            public int EmployeeCount { get; set; }
+            public string Percentage { get; set; }
+            public double ProgressValue { get; set; }
+        }
 
         public AdminDashboard()
         {
             InitializeComponent();
-            DataContext = this;
-            _context = new FuhrmContext();
 
-            DrawBarChart();
-            DrawLineChart();
+            // Khởi tạo repositories
+            var context = new FuhrmContext();
+            var employeeDAO = new EmployeeDAO(context);
+            _employeeRepository = new EmployeeRepository(employeeDAO);
+
+            // Khởi tạo collection cho thống kê phòng ban
+            _departmentStats = new ObservableCollection<DepartmentStats>();
+            EmployeesByDepartmentItemsControl.ItemsSource = _departmentStats;
+
+            // Thiết lập timer để tự động refresh dữ liệu
+            _refreshTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(5)
+            };
+            _refreshTimer.Tick += (s, e) => LoadDashboardData();
+            _refreshTimer.Start();
+
+            LoadDashboardData();
         }
 
-        private void DrawBarChart()
+        private void LoadDashboardData()
         {
-            var data = _context.Departments
-                .Select(d => new
-                {
-                    d.DepartmentName,
-                    EmployeeCount = d.Employees.Count()
-                })
-                .ToList();
-
-            double maxCount = data.Max(d => d.EmployeeCount);
-            double barWidth = 50;
-            double spacing = 20;
-
-            for (int i = 0; i < data.Count; i++)
+            try
             {
-                double barHeight = (data[i].EmployeeCount / maxCount) * BarChartCanvas.ActualHeight;
-
-                Rectangle bar = new Rectangle
-                {
-                    Width = barWidth,
-                    Height = barHeight,
-                    Fill = Brushes.SteelBlue
-                };
-
-                Canvas.SetLeft(bar, i * (barWidth + spacing));
-                Canvas.SetBottom(bar, 0);
-                BarChartCanvas.Children.Add(bar);
-
-                // Add Label
-                TextBlock label = new TextBlock
-                {
-                    Text = data[i].DepartmentName,
-                    RenderTransform = new RotateTransform(-45),
-                    FontSize = 10,
-                    Foreground = Brushes.Black
-                };
-                Canvas.SetLeft(label, i * (barWidth + spacing) + barWidth / 4);
-                Canvas.SetTop(label, BarChartCanvas.ActualHeight - barHeight - 20);
-                BarChartCanvas.Children.Add(label);
+                LoadTotalEmployees();
+                LoadEmployeesByDepartment();
+                LoadLeaveRequests();
+                LoadSalaryExpense();
+                LoadAttendanceStats();
+                LoadNotifications();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Có lỗi xảy ra khi tải dữ liệu: {ex.Message}", "Lỗi",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void DrawLineChart()
+        private void LoadTotalEmployees()
         {
-            var data = _context.Attendances
-                .GroupBy(a => a.Date.Month)
-                .Select(g => new
+            var totalEmployees = _employeeRepository.GetAllEmployees().Count();
+            TotalEmployeesTextBlock.Text = totalEmployees.ToString("N0");
+        }
+
+        private void LoadEmployeesByDepartment()
+        {
+            var context = new FuhrmContext();
+            var employeesByDepartment = context.Employees
+                .GroupBy(e => e.Department.DepartmentName)
+                .Select(group => new
                 {
-                    Month = g.Key,
-                    PresentCount = g.Count(a => a.Status == "Present"),
-                    AbsentCount = g.Count(a => a.Status == "Absent")
-                })
-                .OrderBy(g => g.Month)
-                .ToList();
+                    Department = group.Key,
+                    Count = group.Count()
+                }).ToList();
 
-            double maxCount = data.Max(d => Math.Max(d.PresentCount, d.AbsentCount));
-            double canvasWidth = LineChartCanvas.ActualWidth;
-            double canvasHeight = LineChartCanvas.ActualHeight;
-            double pointSpacing = canvasWidth / (data.Count - 1);
+            EmployeesByDepartmentItemsControl.ItemsSource = employeesByDepartment;
+        }
 
-            PointCollection presentPoints = new PointCollection();
-            PointCollection absentPoints = new PointCollection();
-
-            for (int i = 0; i < data.Count; i++)
+        private void LoadLeaveRequests()
+        {
+            using (var context = new FuhrmContext())
             {
-                double x = i * pointSpacing;
-                double presentY = canvasHeight - (data[i].PresentCount / maxCount) * canvasHeight;
-                double absentY = canvasHeight - (data[i].AbsentCount / maxCount) * canvasHeight;
-
-                presentPoints.Add(new Point(x, presentY));
-                absentPoints.Add(new Point(x, absentY));
+                var pendingCount = context.LeaveRequests.Count(l => l.Status == "Pending");
+                PendingLeaveRequestsTextBlock.Text = pendingCount.ToString("N0");
             }
+        }
 
-            Polyline presentLine = new Polyline
+        private void LoadSalaryExpense()
+        {
+            using (var context = new FuhrmContext())
             {
-                Points = presentPoints,
-                Stroke = Brushes.Green,
-                StrokeThickness = 2
-            };
-            Polyline absentLine = new Polyline
-            {
-                Points = absentPoints,
-                Stroke = Brushes.Red,
-                StrokeThickness = 2
-            };
+                var totalSalary = context.Employees.Sum(e => e.Salary);
+                TotalSalaryExpenseTextBlock.Text = totalSalary.ToString("N0") + " VNĐ";
+            }
+        }
 
-            LineChartCanvas.Children.Add(presentLine);
-            LineChartCanvas.Children.Add(absentLine);
+        private void LoadAttendanceStats()
+        {
+            using (var context = new FuhrmContext())
+            {
+
+                TotalWorkingDaysTextBlock.Text = context.Attendances.Count(a => a.Status == "Present").ToString();
+
+                TotalLeavesTextBlock.Text = context.Attendances.Count(a => a.Status == "Absent").ToString();
+            }
+        }
+
+        private void LoadNotifications()
+        {
+            using (var context = new FuhrmContext())
+            {
+                var recentNotifications = context.Notifications
+                    .OrderByDescending(n => n.CreatedDate)
+                    .Take(5)  // Chỉ lấy 5 thông báo mới nhất
+                    .Select(n => new
+                    {
+                        Content = n.Content,
+                        Date = n.CreatedDate.ToString("dd/MM/yyyy HH:mm"),
+                        IsNew = (DateTime.Now - n.CreatedDate).TotalDays <= 1
+                    })
+                    .ToList();
+
+                NotificationsItemsControl.ItemsSource = recentNotifications;
+            }
         }
 
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button)
             {
+                Window currentWindow = Window.GetWindow(this);
+
                 switch (button.Content.ToString())
                 {
-                    //case "Trang Chủ":
-                    //    // Navigate to Home screen
-                    //    var homeView = new HomeView();
-                    //    homeView.Show();
-                    //    this.Close();
-                    //    break;
+                    // Uncomment and implement the HomeView navigation if needed
+                    case "Trang Chủ":
+                        var homeView = new AdminDashboard();
+                        homeView.Show();
+                        currentWindow.Close();
+                        break;
+                    case "Tài khoản":
+                        var account = new AccountManagement();
+                        account.Show();
+                        currentWindow.Close();
+                        break;
                     case "Nhân viên":
-                        // Navigate to Employee screen
                         var employeeView = new EmployeeWindow();
                         employeeView.Show();
-                        this.Close();
+                        currentWindow.Close();
                         break;
                     case "Bộ phận":
-                        // Navigate to Department screen
                         var departmentView = new DepartmentManagement();
                         departmentView.Show();
-                        this.Close();
+                        currentWindow.Close();
+                        break;
+                    case "Vị trí":
+                        var position = new PositionManagement();
+                        position.Show();
+                        currentWindow.Close();
                         break;
                     case "Chấm công":
-                        // Navigate to Attendance screen
                         var attendanceView = new AttendanceView();
                         attendanceView.Show();
-                        this.Close();
+                        currentWindow.Close();
                         break;
                     case "Bảng lương":
-                        // Navigate to Salary screen
                         var salaryView = new SalaryView();
                         salaryView.Show();
-                        this.Close();
+                        currentWindow.Close();
                         break;
                     case "Nghỉ phép":
-                        // Navigate to Leave screen
                         var leaveView = new LeaveRequestView();
                         leaveView.Show();
-                        this.Close();
+                        currentWindow.Close();
                         break;
-
                     default:
                         break;
                 }
             }
         }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the session
+            SessionManager.CurrentAccount = null;
+
+            // Redirect to login screen
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+
+            // Close the current window
+            Window.GetWindow(this).Close();
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            _refreshTimer.Stop();
+            base.OnClosed(e);
+        }
+
     }
 }
