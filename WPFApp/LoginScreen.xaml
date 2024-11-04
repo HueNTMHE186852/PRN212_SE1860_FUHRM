@@ -6,15 +6,87 @@
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
         Title="LoginScreen" Height="450" Width="800"
->
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
     <Grid>
-        <TextBlock Margin="0,59,0,0" TextWrapping="Wrap" Text="Login" Height="67" Width="98" FontWeight="Bold" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Margin="279,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340" Height="37" Background="White" FontSize="22"/>
-        <Label Content="Username:" HorizontalAlignment="Left" Margin="174,135,0,0" VerticalAlignment="Top" Height="29" Width="105" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="174,0,0,0" VerticalAlignment="Center" Height="29" Width="105" FontWeight="Bold" FontSize="16"/>
-        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Center" Margin="0,292,0,0" VerticalAlignment="Top" Height="56" Width="120" Click="btnLogin_Click"/>
-        <TextBlock x:Name="txtError" HorizontalAlignment="Left" Margin="279,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="278" Foreground="Red"/>
-        <PasswordBox x:Name="txtPassword" Margin="279,188,167,182"/>
+        <Border CornerRadius="10" BorderThickness="2" Opacity="0.95">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#0099FF" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#FF60B1E7" Offset="1"/>
+                    <GradientStop Color="#FF596FDD" Offset="0.309"/>
+                    <GradientStop Color="#FF8C57CA" Offset="0.484"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#FF472FDE" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="82" VerticalAlignment="Top" Width="632">
+                    <TextBlock Text="LOGIN WINDOW" Foreground="White" FontSize="28" FontWeight="Medium" FontFamily="Montserrat" Cursor="Hand" Margin="180,30,0,0" Width="377"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="82,102,82,68">
+                    <TextBlock Text="Username" Foreground="DarkGray" FontSize="12" FontWeight="Medium" FontFamily="Montserrat" Margin="0,35,0,0"/>
+                    <TextBox x:Name="txtUsername" FontSize="13" FontWeight="Medium" FontFamily="Montserrat" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,2" Height="28" VerticalContentAlignment="Center" Margin="0,5,0,0">
+                        <TextBox.Background>
+                            <LinearGradientBrush></LinearGradientBrush>
+                        </TextBox.Background>
+                    </TextBox>
+                    <TextBlock Text="Password" Foreground="DarkGray" FontSize="12" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,0"/>
+                    <PasswordBox x:Name="txtPassword" FontSize="13" FontWeight="Medium" FontFamily="Montserrat" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,2" Height="28" VerticalContentAlignment="Center" Margin="0,5,0,0">
+                        <PasswordBox.Background>
+                            <LinearGradientBrush></LinearGradientBrush>
+                        </PasswordBox.Background>
+                    </PasswordBox>
+                    <Button x:Name="btnLogin" BorderThickness="0" Content="LOG IN" Foreground="White" FontSize="12" FontFamily="Montserrat" Cursor="Hand" Margin="0,50,0,0" Click="btnLogin_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#0099FF"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                <StackPanel>
+                    <Button x:Name="btnCancel" BorderThickness="0" Content="CANCEL" Foreground="White" FontSize="12" FontFamily="Montserrat" Cursor="Hand" Margin="20,350,20,0" Click="btnCancel_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="LightSeaGreen"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="SeaGreen"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
 
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

@@ -25,7 +25,7 @@ namespace WPFApp
         public void LoadLeavesRequestByID()
         {
             LeaveRequestRepository leave = new LeaveRequestRepository();
-            var leaveRequest = leave.GetLeaveRequestsByEmployeeID(_currentEmployee);
+            var leaveRequest = leave.GetLeaveRequestsByEmployeeID(_currentEmployee.EmployeeId);
         }
     }
 }

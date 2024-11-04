@@ -31,7 +31,7 @@ namespace WPFApp
                 {
                     if (account.Password.Equals(txtPassword.Password))
                     {
-
+                        SessionManager.CurrentAccount = account;
                         var employee = _accountRepository.GetEmployeeByUsername(account.AccountId);
                         if (account.Role.RoleName.Equals("Admin"))
                         {
@@ -41,7 +41,7 @@ namespace WPFApp
                         }
                         else if (account.Role.RoleName.Equals("Employee"))
                         {
-                            MainWindow mainWindow = new MainWindow(employee);
+                            HomeEmployee mainWindow = new HomeEmployee();
                             mainWindow.Show();
                             this.Close();
                         }
@@ -67,7 +67,10 @@ namespace WPFApp
                 System.Windows.MessageBox.Show("Please enter username and password");
             }
         }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e) => Close();
     }
+
 
     public static class SessionManager
     {
