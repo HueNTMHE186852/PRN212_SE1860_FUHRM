@@ -9,8 +9,6 @@ using System.Windows.Media;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 
-namespace WPFApp
-{
     public partial class AdminDashboard : Window
     {
         private readonly IEmployeeRepository _employeeRepository;
