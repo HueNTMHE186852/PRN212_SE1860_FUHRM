@@ -41,14 +41,8 @@ namespace WPFApp
                         }
                         else if (account.Role.RoleName.Equals("Employee"))
                         {
-                            MainWindow mainWindow = new MainWindow(employee);
-                            mainWindow.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MainWindow mainWindow = new MainWindow(employee);
-                            mainWindow.Show();
+                            HomeEmployee homeEmployee = new HomeEmployee();
+                            homeEmployee.Show();
                             this.Close();
                         }
                     }
