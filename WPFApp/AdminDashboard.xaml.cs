@@ -9,6 +9,8 @@ using System.Windows.Media;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 
+namespace WPFApp
+{
     public partial class AdminDashboard : Window
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -132,62 +134,6 @@ using System.Windows.Threading;
                 NotificationsItemsControl.ItemsSource = recentNotifications;
             }
         }
-
-        private void NavigateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button)
-            {
-                Window currentWindow = Window.GetWindow(this);
-
-                switch (button.Content.ToString())
-                {
-                    // Uncomment and implement the HomeView navigation if needed
-                    case "Trang Chủ":
-                        var homeView = new AdminDashboard();
-                        homeView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Tài khoản":
-                        var account = new AccountManagement();
-                        account.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Nhân viên":
-                        var employeeView = new EmployeeWindow();
-                        employeeView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Bộ phận":
-                        var departmentView = new DepartmentManagement();
-                        departmentView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Vị trí":
-                        var position = new PositionManagement();
-                        position.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Chấm công":
-                        var attendanceView = new AttendanceView();
-                        attendanceView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Bảng lương":
-                        var salaryView = new SalaryView();
-                        salaryView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Nghỉ phép":
-                        var leaveView = new LeaveRequestView();
-                        leaveView.Show();
-                        currentWindow.Close();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             // Clear the session
