@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="AccountManagement" Height="592" Width="936" WindowState="Maximized">
+        Title="Quản lý tài khoản" Height="592" Width="936" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -13,28 +13,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar Section -->
-        <StackPanel Grid.Column="0" Background="#4A90E2">
-            <!-- Header Section -->
-            <StackPanel Margin="10" VerticalAlignment="Top">
-                <TextBlock Text="Quản Lý Tài Khoản" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Margin="0,10,0,20"/>
-            </StackPanel>
-
-            <!-- Navigation Buttons Section -->
-            <StackPanel VerticalAlignment="Top">
-                <Button Content="Trang Chủ" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Tài khoản" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Nhân viên" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Bộ phận" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Vị trí" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Chấm công" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Bảng lương" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Nghỉ phép" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-            </StackPanel>
-
-            <!-- Logout Button Section -->
-            <Button Content="Đăng xuất" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200"
-                    VerticalAlignment="Bottom" Click="LogoutButton_Click"/>
-        </StackPanel>
+        <local:SideMenu Grid.Column="0"></local:SideMenu>
 
         <!-- Main Content Section -->
         <StackPanel Grid.Column="1" Margin="20,10">

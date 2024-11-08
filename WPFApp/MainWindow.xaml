@@ -6,7 +6,7 @@
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="av"
-        Title="QLNV"
+        Title="Đơn xin nghỉ"
         WindowState="Maximized">
 
     <Grid>

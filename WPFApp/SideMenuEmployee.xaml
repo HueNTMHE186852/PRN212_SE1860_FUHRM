@@ -20,10 +20,10 @@
 
         <!-- Navigation Buttons Section -->
         <StackPanel Grid.Row="1" VerticalAlignment="Top">
-            <Button Content="Home" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
-            <Button Content="Take Attendance" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
-            <Button Content="Notifications" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
-            <Button Content="Leave Request" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+            <Button Content="Trang chủ" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+            <Button Content="Chấm công" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+            <Button Content="Thông báo" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+            <Button Content="Đơn xin nghỉ" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
         </StackPanel>
 
         <!-- Logout Button Section -->

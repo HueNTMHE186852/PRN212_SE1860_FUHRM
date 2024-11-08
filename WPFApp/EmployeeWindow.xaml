@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WPFApp.EmployeeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:WPFApp"
-        Title="Employee Management" Height="600" Width="900" Background="#FFFFFF" WindowState="Maximized">
+        Title="Quản lý nhân viên" Height="600" Width="900" Background="#FFFFFF" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"/>
