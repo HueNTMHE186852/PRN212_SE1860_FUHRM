@@ -45,6 +45,12 @@ namespace WPFApp
                             homeEmployee.Show();
                             this.Close();
                         }
+                        else
+                        {
+                            HomeEmployee homeEmployee = new HomeEmployee();
+                            homeEmployee.Show();
+                            this.Close();
+                        }
                     }
                     else
                     {

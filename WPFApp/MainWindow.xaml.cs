@@ -35,5 +35,22 @@ namespace WPFApp
             ViewLeaveRequest.ItemsSource = leaveRequests;
 
         }
+
+        private void ViewLeaveRequest_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ViewLeaveRequest.SelectedItem is BusinessObjects.LeaveRequest selectedLeave)
+            {
+                LeaveRequestRepository leaveRepository = new LeaveRequestRepository();
+                int leaveRequest = selectedLeave.LeaveRequestId;
+                BusinessObjects.LeaveRequest leaveRequestDetail = leaveRepository.getLeaveRequest(leaveRequest);
+                if(leaveRequestDetail != null)
+                {
+                    contentTypeEdit.Text =  leaveRequestDetail.LeaveType;
+                    startDateEdit.SelectedDate = leaveRequestDetail.StartDate.ToDateTime(TimeOnly.MinValue);
+                    endDateEdit.SelectedDate = leaveRequestDetail.StartDate.ToDateTime(TimeOnly.MinValue);
+
+                }
+            }
+        }
     }
 }

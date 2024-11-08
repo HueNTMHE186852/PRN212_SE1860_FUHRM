@@ -16,13 +16,13 @@
             <StackPanel>
                 <TextBlock Text="Tạo đơn xin nghỉ phép" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
 
-                <Label Content="Leave Type:"/>
+                <Label Content="Lý do: "/>
                 <TextBox x:Name="LeaveType" Margin="0,0,0,10" Height="20" Background="#FFF0F0F0" BorderBrush="#FFCCCCCC" BorderThickness="1" />
 
-                <Label Content="Start Date"/>
+                <Label Content="Ngày bắt đầu:"/>
                 <DatePicker x:Name="StartDate" Margin="0,0,0,10" Height="24" Background="#FFF0F0F0" BorderBrush="#FFCCCCCC" BorderThickness="1"/>
 
-                <Label Content="End Date:"/>
+                <Label Content="Ngày kết thúc:"/>
                 <DatePicker x:Name="EndDate" Margin="0,0,0,10" Height="23" Background="#FFF0F0F0" BorderBrush="#FFCCCCCC" BorderThickness="1"/>
 
 

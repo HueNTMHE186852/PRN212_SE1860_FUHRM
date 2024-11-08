@@ -19,12 +19,12 @@
             <DataGrid Margin="0,10,0,0" x:Name="LeaveRequestDataGrid" AutoGenerateColumns="False" Height="150"
                       SelectionChanged="LeaveRequestDataGrid_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Leave Request ID" Binding="{Binding LeaveRequestId}"/>
-                    <DataGridTextColumn Width="*" Header="Employee ID" Binding="{Binding EmployeeId}"/>
-                    <DataGridTextColumn Width="*" Header="Leave Type" Binding="{Binding LeaveType}"/>
-                    <DataGridTextColumn Width="*" Header="Start Date" Binding="{Binding StartDate}"/>
-                    <DataGridTextColumn Width="*" Header="End Date" Binding="{Binding EndDate}"/>
-                    <DataGridTextColumn Width="*" Header="Status" Binding="{Binding Status}"/>
+                    <DataGridTextColumn Width="*" Header="Mã Đơn Nghỉ" Binding="{Binding LeaveRequestId}"/>
+                    <DataGridTextColumn Width="*" Header="Mã Nhân Viên" Binding="{Binding EmployeeId}"/>
+                    <DataGridTextColumn Width="*" Header="Lý do" Binding="{Binding LeaveType}"/>
+                    <DataGridTextColumn Width="*" Header="Ngày bắt đầu" Binding="{Binding StartDate}"/>
+                    <DataGridTextColumn Width="*" Header="Ngày kết thúc" Binding="{Binding EndDate}"/>
+                    <DataGridTextColumn Width="*" Header="Trạng thái" Binding="{Binding Status}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Margin="0,10,0,0" Height="308">
