@@ -35,14 +35,16 @@
                 VerticalAlignment="Top" Height="25" Width="175" Click="Button_Click"/>
 
         <!-- Leave Request DataGrid -->
-        <DataGrid Grid.Column="1" x:Name="ViewLeaveRequest" Margin="20,65,20,120" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="1" x:Name="ViewLeaveRequest" Margin="20,65,20,330" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Employee ID" Binding="{Binding Employee.EmployeeId}" Width="*"/>
-                <DataGridTextColumn Header="Leave Type" Binding="{Binding LeaveType}" Width="*"/>
-                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="*"/>
-                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="*"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+                <DataGridTextColumn Header="ID Nhân Viên" Binding="{Binding Employee.EmployeeId}" Width="*"/>
+                <DataGridTextColumn Header="Lý do" Binding="{Binding LeaveType}" Width="*"/>
+                <DataGridTextColumn Header="Ngày bắt đầu" Binding="{Binding StartDate}" Width="*"/>
+                <DataGridTextColumn Header="Ngày kết thúc" Binding="{Binding EndDate}" Width="*"/>
+                <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+      
+
     </Grid>
 </Window>
