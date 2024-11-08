@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
-        Title="AccountManagement" Height="592" Width="936" WindowState="Maximized">
+        Title="Quản lý tài khoản" Height="592" Width="936" WindowState="Maximized">
+        Title="AccountManagement" Height="592" Width="987" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -13,28 +14,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar Section -->
-        <StackPanel Grid.Column="0" Background="#4A90E2">
-            <!-- Header Section -->
-            <StackPanel Margin="10" VerticalAlignment="Top">
-                <TextBlock Text="Quản Lý Tài Khoản" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Margin="0,10,0,20"/>
-            </StackPanel>
-
-            <!-- Navigation Buttons Section -->
-            <StackPanel VerticalAlignment="Top">
-                <Button Content="Trang Chủ" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Tài khoản" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Nhân viên" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Bộ phận" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Vị trí" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Chấm công" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Bảng lương" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-                <Button Content="Nghỉ phép" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200" Click="NavigateButton_Click"/>
-            </StackPanel>
-
-            <!-- Logout Button Section -->
-            <Button Content="Đăng xuất" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="200"
-                    VerticalAlignment="Bottom" Click="LogoutButton_Click"/>
-        </StackPanel>
+        <local:SideMenu Grid.Column="0"></local:SideMenu>
 
         <!-- Main Content Section -->
         <StackPanel Grid.Column="1" Margin="20,10">
@@ -44,28 +24,28 @@
                       Margin="0,10,0,0" CanUserAddRows="False" Width="687"
                       Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1" SelectionChanged="AccountDataGrid_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Account ID" Binding="{Binding AccountId}" Width="*"/>
-                    <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="*"/>
-                    <DataGridTextColumn Header="Role" Binding="{Binding Role.RoleName}" Width="*"/>
+                    <DataGridTextColumn Header="ID Tài khoản" Binding="{Binding AccountId}" Width="*"/>
+                    <DataGridTextColumn Header="Tên đăng nhập" Binding="{Binding Username}" Width="*"/>
+                    <DataGridTextColumn Header="Vai trò" Binding="{Binding Role.RoleName}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <!-- Account Details Section -->
             <StackPanel Margin="0,10,0,0" Width="686">
-                <TextBlock Text="Account ID:"/>
+                <TextBlock Text="ID Tài khoản:"/>
                 <TextBox x:Name="AccountIdTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
-                <TextBlock Text="Username:"/>
+                <TextBlock Text="Tên đăng nhập:"/>
                 <TextBox x:Name="UsernameTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
-                <TextBlock Text="Password:"/>
+                <TextBlock Text="Mật khẩu:"/>
                 <TextBox x:Name="PasswordTextBox" Background="#F0F0F0"/>
-                <TextBlock Text="Role:"/>
+                <TextBlock Text="Vai trò:"/>
                 <ComboBox x:Name="RoleCombobox" Height="28" Width="704"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-                    <Button Content="Reset" Width="100" Margin="0,0,10,0" Background="DarkGray" Foreground="White" Click="Button_Click"/>
-                    <Button x:Name="AddAccount" Content="Add" Width="100" Margin="0,0,10,0" Background="LightGreen" Foreground="White" Height="26" Click="AddAccount_Click"/>
-                    <Button x:Name="EditAccount" Content="Edit" Width="100" Margin="0,0,10,0" Background="#4A90E2" Foreground="White" Height="26" Click="EditAccount_Click"/>
-                    <Button x:Name="DeleteAccount" Content="Delete" Width="100" Background="#E94E77" Foreground="White" Click="DeleteAccount_Click"/>
+                    <Button Content="Làm mới" Width="100" Margin="0,0,10,0" Background="DarkGray" Foreground="White" Click="Button_Click"/>
+                    <Button x:Name="AddAccount" Content="Thêm" Width="100" Margin="0,0,10,0" Background="LightGreen" Foreground="White" Height="26" Click="AddAccount_Click"/>
+                    <Button x:Name="EditAccount" Content="Sửa" Width="100" Margin="0,0,10,0" Background="#4A90E2" Foreground="White" Height="26" Click="EditAccount_Click"/>
+                    <Button x:Name="DeleteAccount" Content="Xóa" Width="100" Background="#E94E77" Foreground="White" Click="DeleteAccount_Click"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

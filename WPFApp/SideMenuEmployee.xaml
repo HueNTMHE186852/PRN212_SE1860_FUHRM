@@ -14,20 +14,20 @@
         </Grid.RowDefinitions>
 
         <!-- Header Section -->
-        <StackPanel Grid.Row="0" Margin="10">
-            <TextBlock Text="{Binding CurrentWindowName}" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Margin="0,10,0,20"/>
+        <StackPanel Grid.Row="0" Margin="10" HorizontalAlignment="Center">
+            <TextBlock Text="TRANG CHỦ" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF" Margin="0,10,0,20"/>
         </StackPanel>
 
         <!-- Navigation Buttons Section -->
         <StackPanel Grid.Row="1" VerticalAlignment="Top">
-            <Button Content="Home" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
-            <Button Content="Take Attendance" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
-            <Button Content="Notifications" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
-            <Button Content="Leave Request" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+            <Button Content="Trang chủ" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+            <Button Content="Chấm công" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+            <Button Content="Thông báo" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+            <Button Content="Báo nghỉ" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
         </StackPanel>
 
         <!-- Logout Button Section -->
-        <Button Content="Logout" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10" Width="180"
+        <Button Content="ĐĂNG XUẤT" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10" Width="180"
                 Grid.Row="2" VerticalAlignment="Bottom" Click="LogoutButton_Click"/>
     </Grid>
 </UserControl>
