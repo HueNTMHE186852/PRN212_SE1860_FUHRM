@@ -63,7 +63,7 @@
                     <TextBlock Text="Số điện thoại:"/>
                     <TextBox x:Name="PhoneNumberTextBox" Height="30" Background="#F0F0F0"/>
                     <TextBlock Text="Phòng ban:"/>
-                    <ComboBox x:Name="DepartmentComboBox" Height="30" DisplayMemberPath="DepartmentName" SelectedValuePath="DepartmentID" Background="#F0F0F0"/>
+                    <ComboBox x:Name="DepartmentComboBox" Height="30" DisplayMemberPath="DepartmentName" SelectedValuePath="DepartmentID" Background="#F0F0F0" IsReadOnly="true"/>
                     <TextBlock Text="Vị trí:"/>
                     <ComboBox x:Name="PositionComboBox" Height="30" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" Background="#F0F0F0"/>
                     <TextBlock Text="Vai trò:"/>
