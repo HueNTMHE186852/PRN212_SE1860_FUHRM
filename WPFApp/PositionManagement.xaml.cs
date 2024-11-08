@@ -149,6 +149,39 @@ namespace WPFApp
                 }
             }
         }
+        private void DeletePositionButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (PositionDataGrid.SelectedItem is Position selectedPosition)
+            {
+                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa chức vụ này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        _positionRepository.DeletePosition(selectedPosition.PositionId);
+
+                  
+                        LoadPositions();
+
+                     
+                        PositionIdTextBox.Text = string.Empty;
+                        PositionNameTextBox.Text = string.Empty;
+
+                      
+                        MessageBox.Show("Chức vụ đã được xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Có lỗi xảy ra khi xóa chức vụ: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một chức vụ để xóa!", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {

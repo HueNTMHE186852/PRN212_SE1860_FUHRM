@@ -32,6 +32,9 @@ namespace Repositories
         {
             _positionDAO.UpdatePosition(position);
         }
-
+        public void DeletePosition(int positionId)
+        {
+            _positionDAO.DeletePosition(positionId);
+        }
     }
 }
