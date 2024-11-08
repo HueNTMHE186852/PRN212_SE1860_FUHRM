@@ -16,6 +16,7 @@ namespace WPFApp
         {
             InitializeComponent();
             _salaryRepository = new SalaryRepository();
+            ProcessMonthlySalaries();
             LoadSalaries();
         }
 
@@ -23,6 +24,34 @@ namespace WPFApp
         {
             var salaries = _salaryRepository.GetSalaries();
             SalaryDataGrid.ItemsSource = salaries;
+        }
+
+        private void ProcessMonthlySalaries()
+        {
+            var salaries = _salaryRepository.GetSalaries();
+            DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
+
+            foreach (var salary in salaries)
+            {
+                if (salary.PaymentDate.AddDays(1) == currentDate)
+                {
+                    // Process salary payment
+                    PaySalary(salary);
+                }
+            }
+        }
+
+        private void PaySalary(Salary salary)
+        {
+            // Reset bonus and penalty
+            salary.Bonus = 0;
+            salary.Penalty = 0;
+
+            // Update payment date to next month
+            salary.PaymentDate = salary.PaymentDate.AddMonths(1);
+
+            // Update the salary record in the repository
+            _salaryRepository.UpdateSalary(salary);
         }
 
         private void SalaryDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -115,61 +144,6 @@ namespace WPFApp
             }
         }
 
-        private void NavigateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button)
-            {
-                Window currentWindow = Window.GetWindow(this);
-
-                switch (button.Content.ToString())
-                {
-                    // Uncomment and implement the HomeView navigation if needed
-                    case "Trang Chủ":
-                        var homeView = new AdminDashboard();
-                        homeView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Tài khoản":
-                        var account = new AccountManagement();
-                        account.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Nhân viên":
-                        var employeeView = new EmployeeWindow();
-                        employeeView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Bộ phận":
-                        var departmentView = new DepartmentManagement();
-                        departmentView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Vị trí":
-                        var position = new PositionManagement();
-                        position.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Chấm công":
-                        var attendanceView = new AttendanceView();
-                        attendanceView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Bảng lương":
-                        var salaryView = new SalaryView();
-                        salaryView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Nghỉ phép":
-                        var leaveView = new LeaveRequestView();
-                        leaveView.Show();
-                        currentWindow.Close();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             // Clear the session
@@ -182,6 +156,5 @@ namespace WPFApp
             // Close the current window
             Window.GetWindow(this).Close();
         }
-
     }
 }
