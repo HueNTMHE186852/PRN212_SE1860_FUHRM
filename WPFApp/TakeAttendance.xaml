@@ -15,20 +15,20 @@
         <local:SideMenuEmployee Grid.Column="0"/>
 
         <StackPanel Grid.Column="1" Margin="20,20,20,0">
-            <TextBlock Text="Take Attendance" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4A90E2"/>
+            <TextBlock Text="Chấm công" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4A90E2"/>
             <TextBlock Text="Employee ID:"/>
             <TextBox x:Name="EmployeeIdTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
 
-            <TextBlock Text="Full Name:"/>
+            <TextBlock Text="Tên đầy đủ:"/>
             <TextBox x:Name="EmployeeNameTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
 
-            <TextBlock Text="Attendance Date:"/>
+            <TextBlock Text="Ngày chấm công:"/>
             <TextBox x:Name="AttendanceDateTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
 
-            <TextBlock Text="Status:"/>
+            <TextBlock Text="Trạng thái:"/>
             <TextBox x:Name="StatusTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
 
-            <Button Content="Take Attendance" Width="150" Margin="0,10,0,0" Click="SaveAttendanceButton_Click" Background="LightGreen" Foreground="White" Height="30" HorizontalAlignment="Center"/>
+            <Button Content="Chấm công" Width="150" Margin="0,10,0,0" Click="SaveAttendanceButton_Click" Background="LightGreen" Foreground="White" Height="30" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Window>

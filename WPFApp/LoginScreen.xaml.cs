@@ -54,17 +54,17 @@ namespace WPFApp
                     }
                     else
                     {
-                        System.Windows.MessageBox.Show("Incorrect password");
+                        System.Windows.MessageBox.Show("Sai mật khẩu");
                     }
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("Incorrect username");
+                    System.Windows.MessageBox.Show("Sai tên đăng nhập");
                 }
             }
             else
             {
-                System.Windows.MessageBox.Show("Please enter username and password");
+                System.Windows.MessageBox.Show("Điền thông tin đăng nhập");
             }
         }
 

@@ -38,7 +38,27 @@ namespace DataAccessObjects
             _context.Positions.Add(position);
             _context.SaveChanges();
         }
+        public void DeletePosition(int positionId)
+        {
+            var position = _context.Positions.Find(positionId);
+            if (position != null)
+            {
+                
+                var employeesWithPosition = _context.Employees
+                                                    .Where(e => e.PositionId == positionId)
+                                                    .ToList();
+                if (employeesWithPosition.Any())
+                {
+                    _context.Employees.RemoveRange(employeesWithPosition);
 
-     
+                    _context.SaveChanges(); 
+                }
+                _context.Positions.Remove(position);
+                _context.SaveChanges(); 
+            }
+        }
+
+
+
     }
 }

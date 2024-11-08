@@ -54,9 +54,9 @@
                     <DatePicker x:Name="DateOfBirthDatePicker" Height="30"/>
                     <TextBlock Text="Giới tính:"/>
                     <ComboBox x:Name="GenderComboBox" Height="30" Background="#F0F0F0">
-                        <ComboBoxItem Content="Male"/>
-                        <ComboBoxItem Content="Female"/>
-                        <ComboBoxItem Content="Other"/>
+                        <ComboBoxItem Content="Nam"/>
+                        <ComboBoxItem Content="Nữ"/>
+                        <ComboBoxItem Content="Khác"/>
                     </ComboBox>
                     <TextBlock Text="Địa chỉ:"/>
                     <TextBox x:Name="AddressTextBox" Height="30" Background="#F0F0F0"/>
@@ -67,7 +67,16 @@
                     <TextBlock Text="Vị trí:"/>
                     <ComboBox x:Name="PositionComboBox" Height="30" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" Background="#F0F0F0"/>
                     <TextBlock Text="Vai trò:"/>
-                    <ComboBox x:Name="RoleComboBox" Height="30" IsEditable="False" DisplayMemberPath="RoleName" SelectedValuePath="RoleID" Background="#F0F0F0" IsReadOnly="True"/>
+                    <ComboBox x:Name="RoleComboBox" Height="30" 
+          IsEditable="False" 
+          DisplayMemberPath="RoleName" 
+          SelectedValuePath="RoleID" 
+          Background="#F0F0F0" 
+          IsReadOnly="True" 
+          IsDropDownOpen="False" 
+          IsEnabled="False" />
+
+
                     <TextBlock Text="Ngày tham gia:"/>
                     <DatePicker x:Name="CreateDatePicker" Height="30"/>
                     <TextBlock Text="Lương:"/>

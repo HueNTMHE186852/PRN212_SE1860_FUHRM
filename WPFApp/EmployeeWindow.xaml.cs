@@ -43,17 +43,17 @@ namespace WPFApp
         {
             using (var context = new FuhrmContext())
             {
-         
                 DepartmentComboBox.ItemsSource = context.Departments.ToList();
                 PositionComboBox.ItemsSource = context.Positions.ToList();
                 RoleComboBox.ItemsSource = context.Roles.ToList();
 
-                
-                DepartmentComboBox.SelectedValuePath = "DepartmentId"; 
-                PositionComboBox.SelectedValuePath = "PositionId"; 
-                RoleComboBox.SelectedValuePath = "RoleId"; 
+
+                DepartmentComboBox.SelectedValuePath = "DepartmentId";
+                PositionComboBox.SelectedValuePath = "PositionId";
+                RoleComboBox.SelectedValuePath = "RoleId";
             }
         }
+
 
         private void DisplayEmployeeDetails(Employee employee)
         {
