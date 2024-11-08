@@ -9,6 +9,7 @@ namespace Repositories
         Position GetPosition(int positionId);
         void AddPosition(Position position); // Thêm phương thức AddPosition
         void UpdatePosition(Position position);
+        void DeletePosition(int positionId);
 
     }
 }

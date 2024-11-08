@@ -54,9 +54,9 @@
                     <DatePicker x:Name="DateOfBirthDatePicker" Height="30"/>
                     <TextBlock Text="Giới tính:"/>
                     <ComboBox x:Name="GenderComboBox" Height="30" Background="#F0F0F0">
-                        <ComboBoxItem Content="Male"/>
-                        <ComboBoxItem Content="Female"/>
-                        <ComboBoxItem Content="Other"/>
+                        <ComboBoxItem Content="Nam"/>
+                        <ComboBoxItem Content="Nữ"/>
+                        <ComboBoxItem Content="Khác"/>
                     </ComboBox>
                     <TextBlock Text="Địa chỉ:"/>
                     <TextBox x:Name="AddressTextBox" Height="30" Background="#F0F0F0"/>
