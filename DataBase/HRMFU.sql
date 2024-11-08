@@ -147,3 +147,4 @@ VALUES (N'Cập nhật quy định', N'Đừng quên cập nhật các quy đị
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
 VALUES (N'Bảo trì hệ thống', N'Hệ thống sẽ tiến hành bảo trì vào cuối tuần này.', 3, '2024-11-13 11:00:00');
 
+select * from Accounts
