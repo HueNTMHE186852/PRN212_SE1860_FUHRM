@@ -45,14 +45,29 @@ namespace WPFApp
         {
             try
             {
+                int employeeId = int.Parse(EmployeeIdTextBox.Text);
+                DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
+
+                // Check if attendance already exists for the current date
+                var existingAttendance = _attendanceRepository.GetAttendances()
+                    .FirstOrDefault(a => a.EmployeeId == employeeId && a.Date == currentDate);
+
+                if (existingAttendance != null)
+                {
+                    MessageBox.Show("Attendance for today has already been recorded.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 var attendance = new Attendance
                 {
-                    EmployeeId = int.Parse(EmployeeIdTextBox.Text),
-                    Date = DateOnly.FromDateTime(DateTime.Now),
+                    EmployeeId = employeeId,
+                    Date = currentDate,
                     Status = "Present"
                 };
+
                 _attendanceRepository.AddAttendance(attendance);
                 MessageBox.Show("Attendance recorded successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 HomeEmployee homeEmployee = new HomeEmployee();
                 homeEmployee.Show();
                 this.Close();
