@@ -98,24 +98,24 @@ INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee2', 'employee
 INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee3', 'employee3', 2);
 
 -- Chèn dữ liệu vào bảng Departments
-INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('Human Resources', GETDATE());
-INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('Finance', GETDATE());
+INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('HR', GETDATE());
+INSERT INTO Departments (DepartmentName, CreateDate) VALUES (N'Tài chính', GETDATE());
 INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('IT', GETDATE());
 
 -- Chèn dữ liệu vào bảng Positions
-INSERT INTO Positions (PositionName) VALUES ('HR Manager');
-INSERT INTO Positions (PositionName) VALUES ('Finance Manager');
-INSERT INTO Positions (PositionName) VALUES ('IT Specialist');
+INSERT INTO Positions (PositionName) VALUES ('HR');
+INSERT INTO Positions (PositionName) VALUES (N'Tài chính');
+INSERT INTO Positions (PositionName) VALUES ('IT');
 
 -- Chèn dữ liệu vào bảng Employees
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES ('John Doe', '1985-05-15', 'Male', '123 Main St', '123-456-7890', 1, 1, 2, 50000, '2020-01-01', 'john_doe.jpg');
+VALUES (N'Minh Huệ', '1985-05-15', N'Nữ', '123 Main St', '123-456-7890', 1, 1, 2, 50000, '2020-01-01', 'hue.jpg');
 
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES ('Jane Smith', '1990-07-20', 'Female', '456 Elm St', '987-654-3210', 2, 2, 3, 60000, '2021-02-01', 'jane_smith.jpg');
+VALUES (N'Đức Vũ', '1990-07-20', N'Nam', '456 Elm St', '987-654-3210', 2, 2, 3, 60000, '2021-02-01', 'vu.jpg');
 
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES ('Alice Johnson', '1992-03-10', 'Female', '789 Oak St', '555-666-7777', 3, 3, 4, 55000, '2022-03-01', 'alice_johnson.jpg');
+VALUES (N'Việt An', '1992-03-10', N'Nam', '789 Oak St', '555-666-7777', 3, 3, 4, 55000, '2022-03-01', 'an.jpg');
 
 -- Chèn dữ liệu vào bảng Salaries
 INSERT INTO Salaries (EmployeeID, BaseSalary, Allowance, Bonus, Penalty, PaymentDate) 
@@ -139,11 +139,11 @@ VALUES (3, '2023-01-01', 'Absent', 0);
 
 -- Chèn dữ liệu vào bảng Notifications
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
-VALUES ('Meeting Reminder', 'Don''t forget about the meeting tomorrow at 10 AM.', 1, '2023-01-01 09:00:00');
+VALUES ('Họp', 'Cuộc họp bắt đầu lúc 10:00.', 1, '2024-11-11 09:00:00');
 
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
-VALUES ('Policy Update', 'Please review the updated company policies.', 2, '2023-01-02 10:00:00');
+VALUES ('Cập nhật quy định', 'Đừng quên cập nhật các quy định mới.', 2, '2024-11-12 10:00:00');
 
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
-VALUES ('System Maintenance', 'The IT system will be down for maintenance this weekend.', 3, '2023-01-03 11:00:00');
+VALUES ('Bảo trì hệ thống', 'Hệ thống sẽ tiến hành bảo trì vào cuối tuần này.', 3, '2024-11-13 11:00:00');
 
