@@ -13,7 +13,7 @@
             <ColumnDefinition Width="374*"/>
         </Grid.ColumnDefinitions>
 
-        <local:SideMenuEmployee Grid.Column="1"/>
+        <local:SideMenuEmployee Grid.Column="1" Loaded="SideMenuEmployee_Loaded"/>
 
         <TextBlock x:Name="WelcomeTextBlock" Grid.Column="2" TextWrapping="Wrap" Text="Nhân viên: p" FontWeight="Bold" FontSize="20" Margin="10,10,303,552"/>
         <StackPanel Grid.Column="2" Margin="10,61,10,10">

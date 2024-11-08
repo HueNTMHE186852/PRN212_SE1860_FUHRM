@@ -58,5 +58,10 @@ namespace WPFApp
         {
 
         }
+
+        private void SideMenuEmployee_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
