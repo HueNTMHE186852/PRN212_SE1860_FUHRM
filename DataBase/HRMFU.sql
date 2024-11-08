@@ -103,9 +103,9 @@ INSERT INTO Departments (DepartmentName, CreateDate) VALUES (N'Tài chính', GET
 INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('IT', GETDATE());
 
 -- Chèn dữ liệu vào bảng Positions
-INSERT INTO Positions (PositionName) VALUES ('HR');
-INSERT INTO Positions (PositionName) VALUES (N'Tài chính');
-INSERT INTO Positions (PositionName) VALUES ('IT');
+INSERT INTO Positions (PositionName) VALUES (N'Trưởng ban');
+INSERT INTO Positions (PositionName) VALUES (N'Phó ban');
+INSERT INTO Positions (PositionName) VALUES ('Thành viên');
 
 -- Chèn dữ liệu vào bảng Employees
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
@@ -139,11 +139,11 @@ VALUES (3, '2023-01-01', 'Absent', 0);
 
 -- Chèn dữ liệu vào bảng Notifications
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
-VALUES ('Họp', 'Cuộc họp bắt đầu lúc 10:00.', 1, '2024-11-11 09:00:00');
+VALUES (N'Họp', N'Cuộc họp bắt đầu lúc 10:00.', 1, '2024-11-11 09:00:00');
 
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
-VALUES ('Cập nhật quy định', 'Đừng quên cập nhật các quy định mới.', 2, '2024-11-12 10:00:00');
+VALUES (N'Cập nhật quy định', N'Đừng quên cập nhật các quy định mới.', 2, '2024-11-12 10:00:00');
 
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
-VALUES ('Bảo trì hệ thống', 'Hệ thống sẽ tiến hành bảo trì vào cuối tuần này.', 3, '2024-11-13 11:00:00');
+VALUES (N'Bảo trì hệ thống', N'Hệ thống sẽ tiến hành bảo trì vào cuối tuần này.', 3, '2024-11-13 11:00:00');
 
