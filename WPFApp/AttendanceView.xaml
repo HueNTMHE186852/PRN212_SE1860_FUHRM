@@ -22,9 +22,9 @@
                       SelectionChanged="AttendanceDataGrid_SelectionChanged"
                       Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID CHấm công" Binding="{Binding AttendanceId}" Width="*"/>
+                    <DataGridTextColumn Header="ID Chấm công" Binding="{Binding AttendanceId}" Width="*"/>
                     <DataGridTextColumn Header="Tên Nhân Viên" Binding="{Binding Employee.FullName}" Width="*"/>
-                    <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" Width="*"/>
+                    <DataGridTextColumn Header="ID Nhân Viên" Binding="{Binding EmployeeId}" Width="*"/>
                     <DataGridTextColumn Header="Ngày Chấm Công" Binding="{Binding Date}" Width="*"/>
                     <DataGridTextColumn Header="Trạng Thái" Binding="{Binding Status}" Width="*"/>
                 </DataGrid.Columns>
@@ -37,7 +37,7 @@
                 <TextBlock Text="Tên Nhân Viên:"/>
                 <TextBox x:Name="EmployeeNameTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
 
-                <TextBlock Text="Employee ID:"/>
+                <TextBlock Text="ID Nhân viên:"/>
                 <TextBox x:Name="EmployeeIdTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
 
                 <TextBlock Text="Ngày Chấm Công:"/>
