@@ -121,23 +121,23 @@ VALUES (N'Việt An', '1992-03-10', N'Nam', '789 Oak St', '555-666-7777', 3, 3, 
 
 -- Chèn dữ liệu vào bảng Salaries
 INSERT INTO Salaries (EmployeeID, BaseSalary, Allowance, Bonus, Penalty, PaymentDate) 
-VALUES (1, 50000, 5000, 2000, 500, '2023-01-31');
+VALUES (1, 50000, 5000, 2000, 500, '2024-11-11');
 
 INSERT INTO Salaries (EmployeeID, BaseSalary, Allowance, Bonus, Penalty, PaymentDate) 
-VALUES (2, 60000, 6000, 2500, 600, '2023-01-31');
+VALUES (2, 60000, 6000, 2500, 600, '2024-11-11');
 
 INSERT INTO Salaries (EmployeeID, BaseSalary, Allowance, Bonus, Penalty, PaymentDate) 
-VALUES (3, 55000, 5500, 2200, 550, '2023-01-31');
+VALUES (3, 55000, 5500, 2200, 550, '2024-11-11');
 
 -- Chèn dữ liệu vào bảng Attendances
 INSERT INTO Attendances (EmployeeID, Date, Status, OvertimeHours) 
-VALUES (1, '2023-01-01', 'Present', 2);
+VALUES (1, '2024-10-11', 'Present', 2);
 
 INSERT INTO Attendances (EmployeeID, Date, Status, OvertimeHours) 
-VALUES (2, '2023-01-01', 'Present', 1);
+VALUES (2, '2024-10-11', 'Present', 1);
 
 INSERT INTO Attendances (EmployeeID, Date, Status, OvertimeHours) 
-VALUES (3, '2023-01-01', 'Absent', 0);
+VALUES (3, '2024-09-11', 'Present', 0);
 
 -- Chèn dữ liệu vào bảng Notifications
 INSERT INTO Notifications (Title, Content, DepartmentID, CreatedDate) 
