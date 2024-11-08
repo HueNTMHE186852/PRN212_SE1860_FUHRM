@@ -107,7 +107,7 @@ namespace WPFApp
             }
             else
             {
-                if (accountRepository.GetAccountByUserName(UsernameTextBox.Text) != null)
+                if (accountRepository.GetAccountByUserNameEx(UsernameTextBox.Text) != null)
                 {
                     MessageBox.Show("Username already exists");
                     return;

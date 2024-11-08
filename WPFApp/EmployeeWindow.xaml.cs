@@ -47,8 +47,8 @@ namespace WPFApp
                 DepartmentComboBox.ItemsSource = context.Departments.ToList();
                 PositionComboBox.ItemsSource = context.Positions.ToList();
                 RoleComboBox.ItemsSource = context.Roles.ToList();
+                RoleComboBox.IsDropDownOpen = false;
 
-                
                 DepartmentComboBox.SelectedValuePath = "DepartmentId"; 
                 PositionComboBox.SelectedValuePath = "PositionId"; 
                 RoleComboBox.SelectedValuePath = "RoleId"; 
