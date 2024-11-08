@@ -29,6 +29,7 @@ namespace Repositories
         public List<LeaveRequest> GetLeaveRequestsByEmployeeID(int employeeId)
        => leaveRequestDAO.GetLeaveRequestsByEmployeeID((int)employeeId);
 
-
+        public void RemoveLeaveRequest(LeaveRequest leaveRequest)
+        =>leaveRequestDAO.RemoveLeaveRequest(leaveRequest);
     }
 }

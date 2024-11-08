@@ -78,6 +78,27 @@ namespace DataAccessObjects
         using var _context = new FuhrmContext();
             return _context.Employees.FirstOrDefault(e => e.AccountId == accountId);
         }
+        public void RemoveLeaveRequest(LeaveRequest leaveRequest)
+        {
+            try
+            {
+                using var _context = new FuhrmContext();
+                var requestToDelete = _context.LeaveRequests.FirstOrDefault(l => l.LeaveRequestId == leaveRequest.LeaveRequestId);
+                if(requestToDelete != null)
+                {
+                    _context.LeaveRequests.Remove(requestToDelete);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Room not found.");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Error while deleting room: {e.Message}");
+            }
+        }
 
     }
 }

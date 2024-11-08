@@ -42,6 +42,13 @@
                 <DataGridTextColumn Header="Ngày bắt đầu" Binding="{Binding StartDate}" Width="*"/>
                 <DataGridTextColumn Header="Ngày kết thúc" Binding="{Binding EndDate}" Width="*"/>
                 <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*"/>
+                <DataGridTemplateColumn Header="Actions" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="🗑️" Width="30" Margin="2"  Background="#FFFF4500" Click="DeleteLeaveRequest_Click" Foreground="White" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -58,7 +65,7 @@
                 <DatePicker x:Name="endDateEdit" Margin="5"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
                     <Button Content="Edit" Height="26" Width="84" Margin="5" Click="Button_Click_1"/>
-                    <Button Content="Reset" Width="84" Margin="5"/>
+                    <Button Content="Reset" Width="84" Margin="5" Click="Button_Click_2"/>
                 </StackPanel>
             </StackPanel>
         </Border>

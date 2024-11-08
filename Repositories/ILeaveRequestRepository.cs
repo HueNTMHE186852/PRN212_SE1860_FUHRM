@@ -16,5 +16,6 @@ namespace Repositories
         void AddLeaveRequest(LeaveRequest leaveRequest);
         Employee GetEmployeeByAccountId(int accountId);
         List<LeaveRequest> GetLeaveRequestsByEmployeeID(int employeeId);
+        void RemoveLeaveRequest(LeaveRequest leaveRequest);
     }
 }

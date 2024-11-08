@@ -45,19 +45,36 @@ namespace WPFApp
 
             var leaveRequestRepo = new LeaveRequestRepository();
 
-            if (_employeeID != 0)  // Adjusted null check for int type
+            if (_employeeID != 0)
             {
-                // Create a new leave request object with form data
+                DateOnly startDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value);
+                DateOnly endDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value);
+
+                bool hasOverlap = leaveRequestRepo.GetLeaveRequestsByEmployeeID(_employeeID).Any(lr =>
+                    lr.Status == "Pending" &&
+                    (
+                        (startDate <= lr.EndDate && startDate >= lr.StartDate) ||
+                        (endDate <= lr.EndDate && endDate >= lr.StartDate) ||
+                        (startDate <= lr.StartDate && endDate >= lr.EndDate)
+                    )
+                );
+
+                if (hasOverlap)
+                {
+                    MessageBox.Show("Không thể tạo yêu cầu nghỉ phép vì đã có đơn nghỉ phép khác trong khoảng thời gian này.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+
                 var leaveRequest = new LeaveRequest
                 {
-                    EmployeeId = _employeeID, // Use employee ID
+                    EmployeeId = _employeeID,
                     LeaveType = LeaveType.Text,
-                    StartDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value),
-                    EndDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value),
+                    StartDate = startDate,
+                    EndDate = endDate,
                     Status = "Pending"
                 };
 
-                // Call method to add leave request
                 leaveRequestRepo.AddLeaveRequest(leaveRequest);
 
                 MessageBox.Show("Yêu cầu nghỉ phép đã được gửi thành công!");
@@ -70,6 +87,7 @@ namespace WPFApp
                 MessageBox.Show("Không tìm thấy thông tin nhân viên cho tài khoản hiện tại.");
             }
         }
+
 
     }
 

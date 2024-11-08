@@ -50,6 +50,16 @@ namespace WPFApp
                 }
             }
         }
+        private void clearForm()
+        {
+            EmployeeNameText.Text = string.Empty;
+            DepartmentNameText.Text = string.Empty;
+            LeaveTypeText.Text = string .Empty;
+            StartDateText.Text  = string.Empty;
+            EndDateText.Text = string.Empty;
+            StatusText.Clear();
+
+        }
         private void ChangeStatus_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -64,6 +74,8 @@ namespace WPFApp
                 {
                     dao.ChangeStatus(leaveRequestId, newStatus);
                     MessageBox.Show($"Status changed to {newStatus}");
+                    LoadLeaveRequest();
+                    clearForm();
                 }
 
                 catch (Exception ex)
