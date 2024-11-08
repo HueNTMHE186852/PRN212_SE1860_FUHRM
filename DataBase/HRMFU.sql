@@ -93,9 +93,9 @@ INSERT INTO Roles (RoleName) VALUES ('Employee');
 
 -- Chèn dữ liệu vào bảng Accounts
 INSERT INTO Accounts (Username, Password, RoleID) VALUES ('admin', 'admin123', 1);
-INSERT INTO Accounts (Username, Password, RoleID) VALUES ('it1', 'it2', 2);
-INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee2', 'employee2', 2);
-INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee3', 'employee3', 2);
+INSERT INTO Accounts (Username, Password, RoleID) VALUES ('ts1', 'ts1', 2);
+INSERT INTO Accounts (Username, Password, RoleID) VALUES ('kt1', 'kt1', 2);
+INSERT INTO Accounts (Username, Password, RoleID) VALUES ('it1', 'it1', 2);
 
 -- Chèn dữ liệu vào bảng Departments
 INSERT INTO Departments (DepartmentName, CreateDate) VALUES (N'Tuyển sinh', GETDATE());

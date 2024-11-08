@@ -77,16 +77,6 @@ namespace WPFApp
                 LoadDepartments();
             }
         }
-
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            var searchText = SearchTextBox.Text.ToLower();
-            var filteredDepartments = _departmentRepository.GetDepartments()
-                .Where(d => d.DepartmentName.ToLower().Contains(searchText))
-                .ToList();
-            DepartmentDataGrid.ItemsSource = filteredDepartments;
-        }
-
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button)
