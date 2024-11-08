@@ -99,23 +99,23 @@ INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee3', 'employee
 
 -- Chèn dữ liệu vào bảng Departments
 INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('HR', GETDATE());
-INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('Tài chính', GETDATE());
+INSERT INTO Departments (DepartmentName, CreateDate) VALUES (N'Tài chính', GETDATE());
 INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('IT', GETDATE());
 
 -- Chèn dữ liệu vào bảng Positions
-INSERT INTO Positions (PositionName) VALUES ('HR Manager');
-INSERT INTO Positions (PositionName) VALUES ('Tài chính');
+INSERT INTO Positions (PositionName) VALUES ('HR');
+INSERT INTO Positions (PositionName) VALUES (N'Tài chính');
 INSERT INTO Positions (PositionName) VALUES ('IT');
 
 -- Chèn dữ liệu vào bảng Employees
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES (N'Minh Huệ', '1985-05-15', 'Nữ', '123 Main St', '123-456-7890', 1, 1, 2, 50000, '2020-01-01', 'hue.jpg');
+VALUES (N'Minh Huệ', '1985-05-15', N'Nữ', '123 Main St', '123-456-7890', 1, 1, 2, 50000, '2020-01-01', 'hue.jpg');
 
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES (N'Đức Vũ', '1990-07-20', 'Nam', '456 Elm St', '987-654-3210', 2, 2, 3, 60000, '2021-02-01', 'vu.jpg');
+VALUES (N'Đức Vũ', '1990-07-20', N'Nam', '456 Elm St', '987-654-3210', 2, 2, 3, 60000, '2021-02-01', 'vu.jpg');
 
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES (N'Việt An', '1992-03-10', 'Nam', '789 Oak St', '555-666-7777', 3, 3, 4, 55000, '2022-03-01', 'an.jpg');
+VALUES (N'Việt An', '1992-03-10', N'Nam', '789 Oak St', '555-666-7777', 3, 3, 4, 55000, '2022-03-01', 'an.jpg');
 
 -- Chèn dữ liệu vào bảng Salaries
 INSERT INTO Salaries (EmployeeID, BaseSalary, Allowance, Bonus, Penalty, PaymentDate) 
