@@ -23,8 +23,9 @@ namespace WPFApp
         private void LoadDashboardData()
         {
             LoadDepartmentBarChart();
-            LoadAttendanceLineChart();
+            LoadAttendanceBarChart(); // Updated method name
         }
+
         private void LoadDepartmentBarChart()
         {
             var plotModel = new PlotModel { Title = "Số Nhân Viên Theo Phòng Ban" };
@@ -70,14 +71,16 @@ namespace WPFApp
             DepartmentBarChart.Model = plotModel;
         }
 
-
-        private void LoadAttendanceLineChart()
+        private void LoadAttendanceBarChart()
         {
             var plotModel = new PlotModel { Title = "Thống Kê Điểm Danh Hàng Tháng" };
-            var lineSeries = new LineSeries
+
+            var barSeries = new BarSeries
             {
                 Title = "Điểm Danh",
-                MarkerType = MarkerType.Circle
+                LabelPlacement = LabelPlacement.Outside,
+                LabelFormatString = "{0}",
+                IsStacked = false // Ensures bars are independent, not stacked
             };
 
             var attendanceData = _context.Attendances
@@ -86,84 +89,31 @@ namespace WPFApp
                 .OrderBy(a => a.Month)
                 .ToList();
 
+            // Adding data points
             foreach (var data in attendanceData)
             {
-                lineSeries.Points.Add(new DataPoint(data.Month, data.Count));
+                barSeries.Items.Add(new BarItem { Value = data.Count });
             }
 
+            // Adjusting the CategoryAxis for vertical alignment
             plotModel.Axes.Add(new CategoryAxis
             {
-                Position = AxisPosition.Bottom,
-                Key = "MonthAxis",
+                Position = AxisPosition.Left, // Places month names on the left for a vertical layout
                 ItemsSource = attendanceData.Select(a => $"Tháng {a.Month}").ToList(),
-                Title = "Tháng",
-                Angle = 45,
-                IsTickCentered = true
+                Title = "Tháng"
             });
 
+            // Adding a LinearAxis for the number of attendances
             plotModel.Axes.Add(new LinearAxis
             {
-                Position = AxisPosition.Left,
+                Position = AxisPosition.Bottom, // Values appear on the bottom, in horizontal orientation
                 Title = "Số Lần Điểm Danh",
-                Minimum = 0
+                MinimumPadding = 0.1,
+                MaximumPadding = 0.1
             });
 
-            plotModel.Series.Add(lineSeries);
-            AttendanceLineChart.Model = plotModel;
-        }
-
-        private void NavigateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button)
-            {
-                Window currentWindow = Window.GetWindow(this);
-
-                switch (button.Content.ToString())
-                {
-                    case "Trang Chủ":
-                        var homeView = new AdminDashboard();
-                        homeView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Tài khoản":
-                        var account = new AccountManagement();
-                        account.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Nhân viên":
-                        var employeeView = new EmployeeWindow();
-                        employeeView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Bộ phận":
-                        var departmentView = new DepartmentManagement();
-                        departmentView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Vị trí":
-                        var position = new PositionManagement();
-                        position.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Chấm công":
-                        var attendanceView = new AttendanceView();
-                        attendanceView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Bảng lương":
-                        var salaryView = new SalaryView();
-                        salaryView.Show();
-                        currentWindow.Close();
-                        break;
-                    case "Nghỉ phép":
-                        var leaveView = new LeaveRequestView();
-                        leaveView.Show();
-                        currentWindow.Close();
-                        break;
-                    default:
-                        break;
-                }
-            }
+            plotModel.Series.Add(barSeries);
+            AttendanceBarChart.Model = plotModel;
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
