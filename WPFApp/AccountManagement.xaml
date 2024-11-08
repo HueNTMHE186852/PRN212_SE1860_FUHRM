@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
         Title="Quản lý tài khoản" Height="592" Width="936" WindowState="Maximized">
-        Title="AccountManagement" Height="592" Width="987" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>

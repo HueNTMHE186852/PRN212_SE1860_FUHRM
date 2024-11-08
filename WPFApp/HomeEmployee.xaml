@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:WPFApp"
         mc:Ignorable="d"
         Title="Trang chủ nhân viên" Height="687" Width="896" WindowState="Maximized">
-        Title="HomeEmployee" Height="687" Width="954" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
