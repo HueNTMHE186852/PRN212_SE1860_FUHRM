@@ -31,37 +31,46 @@ namespace WPFApp
 
         private void btnSubmitLeaveRequest_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy EmployeeId dựa trên AccountId
+            if (StartDate.SelectedDate == null || EndDate.SelectedDate == null)
+            {
+                MessageBox.Show("Vui lòng chọn ngày bắt đầu và ngày kết thúc hợp lệ.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (StartDate.SelectedDate > EndDate.SelectedDate)
+            {
+                MessageBox.Show("Ngày bắt đầu không được lớn hơn ngày kết thúc.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var leaveRequestRepo = new LeaveRequestRepository();
 
-
-            if (_employeeID != null)
+            if (_employeeID != 0)  // Adjusted null check for int type
             {
-                // Lấy thông tin từ các trường trong form
+                // Create a new leave request object with form data
                 var leaveRequest = new LeaveRequest
                 {
-                    EmployeeId = _employeeID, // Sử dụng EmployeeID
+                    EmployeeId = _employeeID, // Use employee ID
                     LeaveType = LeaveType.Text,
                     StartDate = DateOnly.FromDateTime(StartDate.SelectedDate.Value),
                     EndDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value),
-
                     Status = "Pending"
                 };
 
-            // Gọi phương thức thêm yêu cầu nghỉ phép từ DAO
-            var leave = new LeaveRequestRepository();
-                leave.AddLeaveRequest(leaveRequest);
+                // Call method to add leave request
+                leaveRequestRepo.AddLeaveRequest(leaveRequest);
 
-                MessageBox.Show("Leave request submitted successfully!");
+                MessageBox.Show("Yêu cầu nghỉ phép đã được gửi thành công!");
                 MainWindow mainWindow = new MainWindow(_employeeID);
                 mainWindow.Show();
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Employee not found for the current account.");
+                MessageBox.Show("Không tìm thấy thông tin nhân viên cho tài khoản hiện tại.");
             }
         }
+
     }
 
 }
