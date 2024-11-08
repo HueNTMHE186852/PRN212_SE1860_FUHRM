@@ -30,7 +30,7 @@
         <local:SideMenuEmployee Grid.Column="0" Grid.RowSpan="3" VerticalAlignment="Stretch"/>
 
         <!-- Add Leave Request Button in Header -->
-        <Button Grid.Column="1" Grid.Row="0" Content="Add Leave Request" HorizontalAlignment="Left" Margin="20,10,0,10"
+        <Button Grid.Column="1" Grid.Row="0" Content="Thêm Đơn xin nghỉ" HorizontalAlignment="Left" Margin="20,10,0,10"
                 VerticalAlignment="Top" Height="30" Width="175" Click="Button_Click"/>
 
         <!-- Leave Request DataGrid -->
@@ -64,8 +64,8 @@
                 <TextBlock Text="Ngày kết thúc" Margin="5"/>
                 <DatePicker x:Name="endDateEdit" Margin="5"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
-                    <Button Content="Edit" Height="26" Width="84" Margin="5" Click="Button_Click_1"/>
-                    <Button Content="Reset" Width="84" Margin="5" Click="Button_Click_2"/>
+                    <Button Content="Sửa" Height="31" Width="92" Margin="5" Click="Button_Click_1"/>
+                    <Button Content="Tải lại" Width="84" Margin="5" Click="Button_Click_2"/>
                 </StackPanel>
             </StackPanel>
         </Border>

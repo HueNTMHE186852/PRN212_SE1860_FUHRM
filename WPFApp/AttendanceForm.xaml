@@ -27,7 +27,7 @@
 
 
                 <!-- Nút chỉnh sửa -->
-                <Button Content="Gửi đơn" Width="120" Height="20" Margin="0,20,0,0" Background="#FF32CD32" Foreground="White" Click="btnSubmitLeaveRequest_Click"/>
+                <Button Content="Gửi đơn" Width="120" Height="29" Margin="0,20,0,0" Background="#FF32CD32" Foreground="White" Click="btnSubmitLeaveRequest_Click"/>
             </StackPanel>
         </Border>
     </Grid>
