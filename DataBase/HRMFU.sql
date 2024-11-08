@@ -93,19 +93,21 @@ INSERT INTO Roles (RoleName) VALUES ('Employee');
 
 -- Chèn dữ liệu vào bảng Accounts
 INSERT INTO Accounts (Username, Password, RoleID) VALUES ('admin', 'admin123', 1);
-INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee1', 'employee1', 2);
+INSERT INTO Accounts (Username, Password, RoleID) VALUES ('it1', 'it2', 2);
 INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee2', 'employee2', 2);
 INSERT INTO Accounts (Username, Password, RoleID) VALUES ('employee3', 'employee3', 2);
 
 -- Chèn dữ liệu vào bảng Departments
-INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('HR', GETDATE());
-INSERT INTO Departments (DepartmentName, CreateDate) VALUES (N'Tài chính', GETDATE());
+INSERT INTO Departments (DepartmentName, CreateDate) VALUES (N'Tuyển sinh', GETDATE());
+INSERT INTO Departments (DepartmentName, CreateDate) VALUES (N'Kế toán', GETDATE());
 INSERT INTO Departments (DepartmentName, CreateDate) VALUES ('IT', GETDATE());
+INSERT INTO Departments (DepartmentName, CreateDate) VALUES (N'Giảng viên', GETDATE());
 
 -- Chèn dữ liệu vào bảng Positions
-INSERT INTO Positions (PositionName) VALUES (N'Trưởng ban');
-INSERT INTO Positions (PositionName) VALUES (N'Phó ban');
-INSERT INTO Positions (PositionName) VALUES ('Thành viên');
+INSERT INTO Positions (PositionName) VALUES (N'Trưởng phòng');
+INSERT INTO Positions (PositionName) VALUES (N'Phó phòng');
+INSERT INTO Positions (PositionName) VALUES (N'Nhân viên');
+INSERT INTO Positions (PositionName) VALUES (N'Trưởng bộ môn');
 
 -- Chèn dữ liệu vào bảng Employees
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 

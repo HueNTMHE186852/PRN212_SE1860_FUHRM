@@ -28,7 +28,10 @@
             <Button Content="Chấm công" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
             <Button Content="Bảng lương" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
             <Button Content="Nghỉ phép" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+            <Button Content="Thông báo" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10,5" Width="180" Click="NavigateButton_Click"/>
+
         </StackPanel>
+        
 
         <!-- Logout Button Section -->
         <Button Content="Đăng xuất" Foreground="#FFFFFF" Background="Transparent" Height="40" Margin="10" Width="180"

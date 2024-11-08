@@ -1,15 +1,7 @@
 ﻿<Window x:Class="WPFApp.NotificationManagement"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:WPFApp"
-        Title="Quản lý thông báo" Height="500" Width="900" WindowState="Maximized"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-     TextElement.FontWeight="Regular"
-     TextElement.FontSize="13"
-     TextOptions.TextFormattingMode="Ideal"
-     TextOptions.TextRenderingMode="Auto"
-     Background="{DynamicResource MaterialDesignPaper}"
-     FontFamily="{DynamicResource MaterialDesignFont}">
+        Title="Quản lý thông báo" Height="500" Width="900" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -64,12 +56,7 @@
                           DisplayMemberPath="DepartmentName" SelectedValuePath="DepartmentId"/>
 
                 <TextBlock Text="Ngày:"/>
-                <DatePicker
-  Width="100"
-  materialDesign:HintAssist.Hint="Pick Date"
-  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 <DatePicker x:Name="CreatedDatePicker" Margin="0,0,0,10"/>
-                
 
                 <!-- Action Buttons -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
