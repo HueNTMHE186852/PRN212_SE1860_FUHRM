@@ -98,6 +98,11 @@ namespace WPFApp
                         leaveView.Show();
                         currentWindow.Close();
                         break;
+                    case "Thông báo":
+                        var notifyView = new NotificationManagement();
+                        notifyView.Show();
+                        currentWindow.Close();
+                        break;
                     default:
                         break;
                 }
