@@ -175,10 +175,15 @@ namespace WPFApp
                 selectedEmployee.PhoneNumber = PhoneNumberTextBox.Text;
                 selectedEmployee.DepartmentId = (int)DepartmentComboBox.SelectedValue;
                 selectedEmployee.PositionId = (int)PositionComboBox.SelectedValue;
-                selectedEmployee.Salary = Double.Parse(SalaryTextBox.Text);
+                //selectedEmployee.Salary = Double.Parse(SalaryTextBox.Text);
                 selectedEmployee.StartDate = CreateDatePicker.SelectedDate.GetValueOrDefault();
                 selectedEmployee.ProfilePicture = ProfilePictureUrlTextBlock.Text;
-
+                if (string.IsNullOrWhiteSpace(SalaryTextBox.Text) || !double.TryParse(SalaryTextBox.Text, out double parsedSalary) || parsedSalary <= 0)
+                {
+                    MessageBox.Show("Lương phải là một số hợp lệ lớn hơn 0", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                selectedEmployee.Salary = parsedSalary;
                 try
                 {
                     if (selectedEmployee.Salary <= 0)
@@ -186,6 +191,7 @@ namespace WPFApp
                         MessageBox.Show("Nhập lương lớn hơn 0");
                         return;
                     }
+                   
                     else if (selectedEmployee.DateOfBirth >= DateTime.Today)
                     {
                         MessageBox.Show("Lỗi ngày sinh lớn hơn ngày hiện tại", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
