@@ -111,23 +111,24 @@ INSERT INTO Positions (PositionName) VALUES (N'Trưởng bộ môn');
 
 -- Chèn dữ liệu vào bảng Employees
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES (N'Minh Huệ', '1985-05-15', N'Nữ', '123 Main St', '123-456-7890', 1, 1, 2, 50000, '2020-01-01', 'hue.jpg');
+VALUES (N'Minh Huệ', '1985-05-15', N'Nữ', N'Phú Thọ', '1234567890', 1, 1, 2, 5000000, '2020-01-01', 'hue.jpg');
 
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES (N'Đức Vũ', '1990-07-20', N'Nam', '456 Elm St', '987-654-3210', 2, 2, 3, 60000, '2021-02-01', 'vu.jpg');
+VALUES (N'Đức Vũ', '1990-07-20', N'Nam', N'Quảng Ninh', '9876543210', 2, 2, 3, 6000000, '2021-02-01', 'vu.jpg');
 
 INSERT INTO Employees (FullName, DateOfBirth, Gender, Address, PhoneNumber, DepartmentID, PositionID, AccountID, Salary, StartDate, ProfilePicture) 
-VALUES (N'Việt An', '1992-03-10', N'Nam', '789 Oak St', '555-666-7777', 3, 3, 4, 55000, '2022-03-01', 'an.jpg');
+VALUES (N'Việt An', '1992-03-10', N'Nam', N'Nghệ An', '5556667777', 3, 3, 4, 5500000, '2022-03-01', 'an.jpg');
 
 -- Chèn dữ liệu vào bảng Salaries
 INSERT INTO Salaries (EmployeeID, BaseSalary, Allowance, Bonus, Penalty, PaymentDate) 
-VALUES (1, 50000, 5000, 2000, 500, '2024-11-11');
+VALUES (1, 500000, 5000, 2000, 500, '2024-11-11');
 
 INSERT INTO Salaries (EmployeeID, BaseSalary, Allowance, Bonus, Penalty, PaymentDate) 
-VALUES (2, 60000, 6000, 2500, 600, '2024-11-11');
+VALUES (2, 600000, 6000, 2500, 600, '2024-11-11');
 
 INSERT INTO Salaries (EmployeeID, BaseSalary, Allowance, Bonus, Penalty, PaymentDate) 
-VALUES (3, 55000, 5500, 2200, 550, '2024-11-11');
+VALUES (3, 550000, 5500, 2200, 550, '2024-11-11');
+
 
 -- Chèn dữ liệu vào bảng Attendances
 INSERT INTO Attendances (EmployeeID, Date, Status, OvertimeHours) 

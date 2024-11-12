@@ -192,7 +192,7 @@ namespace WPFApp
                         return;
                     }
                    
-                    else if (selectedEmployee.DateOfBirth >= DateTime.Today)
+                    else if (selectedEmployee.DateOfBirth > DateTime.Today)
                     {
                         MessageBox.Show("Lỗi ngày sinh lớn hơn ngày hiện tại", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
@@ -202,7 +202,7 @@ namespace WPFApp
                         MessageBox.Show("Nhân viên phải trên 18 tủi", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                    else if (selectedEmployee.StartDate >= DateTime.Today)
+                    else if (selectedEmployee.StartDate > DateTime.Today)
                     {
                         MessageBox.Show("Ngày tham gia không được lớn hơn ngày hiện tại", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;

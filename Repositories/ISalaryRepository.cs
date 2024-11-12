@@ -9,5 +9,7 @@ namespace Repositories
         List<Salary>? SearchSalary(string employeeName);
         void RemoveSalary(Salary salary);
         void UpdateSalary(Salary salary);
+        void DeleteSalary(Salary salary);
+        Salary GetSalaryByEmployeeId(int employeeId);
     }
 }
