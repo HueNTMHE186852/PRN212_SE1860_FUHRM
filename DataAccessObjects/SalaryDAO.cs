@@ -52,5 +52,15 @@ namespace DataAccessObjects
                 context.SaveChanges();
             }
         }
+
+        public static Salary GetSalaryByEmployeeId(int employeeId)
+        {
+            using (var context = new FuhrmContext())
+            {
+                return context.Salaries
+                    .Include(s => s.Employee)
+                    .FirstOrDefault(s => s.EmployeeId == employeeId);
+            }
+        }
     }
 }

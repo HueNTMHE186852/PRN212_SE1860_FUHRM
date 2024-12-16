@@ -20,5 +20,9 @@ namespace Repositories
 
         public List<Salary> GetSalaries()
             => SalaryDAO.GetSalaries();
+        public void DeleteSalary(Salary salary)
+            => SalaryDAO.RemoveSalary(salary);
+        public Salary GetSalaryByEmployeeId(int employeeId)
+            => SalaryDAO.GetSalaryByEmployeeId(employeeId);
     }
 }
