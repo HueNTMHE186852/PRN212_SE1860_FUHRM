@@ -51,7 +51,7 @@ namespace WPFApp
                 DateOnly endDate = DateOnly.FromDateTime(EndDate.SelectedDate.Value);
 
                 bool hasOverlap = leaveRequestRepo.GetLeaveRequestsByEmployeeID(_employeeID).Any(lr =>
-                    lr.Status == "Pending" &&
+                    lr.Status == "Pending123" &&
                     (
                         (startDate <= lr.EndDate && startDate >= lr.StartDate) ||
                         (endDate <= lr.EndDate && endDate >= lr.StartDate) ||
@@ -59,11 +59,7 @@ namespace WPFApp
                     )
                 );
 
-                if (hasOverlap)
-                {
-                    MessageBox.Show("Không thể tạo yêu cầu nghỉ phép vì đã có đơn nghỉ phép khác trong khoảng thời gian này.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+             
 
 
                 var leaveRequest = new LeaveRequest

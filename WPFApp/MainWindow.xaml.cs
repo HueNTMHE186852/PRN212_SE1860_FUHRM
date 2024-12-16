@@ -10,7 +10,7 @@ namespace WPFApp
     public partial class MainWindow : Window
     {
         private readonly int employeeID;
-        public BusinessObjects.LeaveRequest LoggedInEmployee { get; set; }
+     
         public MainWindow(int employeeId)
         {
             InitializeComponent();
